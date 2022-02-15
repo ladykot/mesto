@@ -14,8 +14,7 @@
 
 @media screen and (min-width: 768px) {
     .profile__add-button {
-        align-self: flex-end;
         max-width: 150px;
-        x
+        justify-self: flex-end;
     }
 }
