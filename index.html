@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto</title>
+  <link rel="stylesheet" href="./pages/index.css">
+
+</head>
+
+<body class="root">
+  <div class="page">
+    <header class="header">
+      <img class="header__logo" src="/images/logo.svg" alt="логотип Место">
+      <!--- border-bottom-->
+    </header>
+
+    <main class="content">
+      <section class="profile">
+        <img class="profile__pic" src="./images/avatar.jpg" alt="фото профиля">
+        <div class="profile__info">
+          <div class="profile__name">Жак-Ив Кусто</div>
+          <!-- Кнопка редактирования - псевдоэлемент :after-->
+          <div class="profile__description">Исследователь океана</div>
+        </div>
+        <button class="profile__add-button"></button>
+      </section>
+
+      <section class="cards">
+        <div class="cards__item">
+          <img src="./images/karachaevsk.jpg" alt="город Карачаевск">
+          <div class="cards__title">Карачаевск</div>
+          <div class="cards__union cards__union_disabled"></div>
+        </div>
+        <div class="cards__item">
+          <img src="./images/elbrus.jpg" alt="гора Эльбрус">
+          <div class="cards__title">Гора Эльбрус</div>
+          <div class="cards__union cards__union_disabled"></div>
+        </div>
+        <div class="cards__item">
+          <img src="./images/dombai.jpg" alt="Домбай">
+          <div class="cards__title">Домбай</div>
+          <div class="cards__union cards__union_disabled"></div>
+        </div>
+        <div class="cards__item">
+          <img src="./images/nalchik.jpg" alt="город Нальчик">
+          <div class="cards__title">Нальчик</div>
+          <div class="cards__union cards__union_disabled"></div>
+        </div>
+        <div class="cards__item">
+          <img src="./images/krasnodarskiy.jpg" alt="">
+          <div class="cards__title">Краснодарский край</div>
+          <div class="cards__union cards__union_disabled"></div>
+        </div>
+        <div class="cards__item">
+          <img src="./images/dagestan.jpg" alt="Дагестан">
+          <div class="cards__title">Дагестан</div>
+          <div class="cards__union cards__union_disabled"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p class="footer__description">© 2020 Mesto Russia</p>
+    </footer>
+  </div>
+
+</body>
+</html>
