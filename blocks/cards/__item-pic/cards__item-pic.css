@@ -1,0 +1,7 @@
+.cards__item-pic {
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 282px;
+    overflow: hidden;
+    border-radius: 10px 10px 0 0;
+}

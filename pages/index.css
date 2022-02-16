@@ -18,3 +18,7 @@
 
 @import url(/blocks/cards/cards.css);
 @import url(/blocks/cards/__item/cards__item.css);
+@import url(/blocks/cards/__item-pic/cards__item-pic.css);
+@import url(/blocks/cards/__item-group/cards__item-group.css);
+@import url(/blocks/cards/__title/cards__title.css);
+@import url(/blocks/cards/__union/cards__union.css);
