@@ -1,15 +1,21 @@
 .profile__info {
-    display: flex;
-    width: 100%;
-    max-width: 336px;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 26px;
+    margin: 26px 0 0 0;
+    display: grid;
+    grid-template-columns: auto 18px;
+    gap: 8px;
 }
+
 
 @media screen and (min-width: 768px) {
     .profile__info {
-        justify-content: flex-start;
-        align-items: center;
+        grid-template-columns: auto 18px;
+        margin: 0;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .profile__info {
+        column-gap: 18px;
+        row-gap: 10px;
     }
 }

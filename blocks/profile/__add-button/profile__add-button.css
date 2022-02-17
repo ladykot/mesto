@@ -1,8 +1,8 @@
 .profile__add-button {
     height: 50px;
+    margin: 36px 0 36px 0;
     max-width: 282px;
     width: 100%;
-    margin: 36px 0;
     border: 2px solid #FFFFFF;
     box-sizing: border-box;
     border-radius: 2px;
@@ -14,7 +14,7 @@
 
 @media screen and (min-width: 768px) {
     .profile__add-button {
-        max-width: 150px;
-        justify-self: flex-end;
+        width: 150px;
+        justify-self: end;
     }
 }
