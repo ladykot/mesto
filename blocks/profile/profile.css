@@ -2,14 +2,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  padding: 0 19px;
+  box-sizing: border-box;
 }
 
 @media screen and (min-width: 768px) {
   .profile {
     display: grid;
     grid-template-columns: 150px max-content auto;
-    
   }
 }
 

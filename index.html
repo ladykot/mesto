@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
   <link rel="stylesheet" href="./pages/index.css">
-
 </head>
 
 <body class="root">
@@ -21,11 +20,11 @@
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто </h1>
           <button class="profile__edit-button"></button>
-          <p class="profile__description">Исследователь океана</p>
-          
+          <p class="profile__description">Исследователь океана</p>       
         </div>
         <button class="profile__add-button"></button>
       </section>
+
 
       <section class="cards">
         <div class="cards__item">
@@ -77,6 +76,21 @@
         </div>
       </section>
     </main>
+
+    <section class="popup">
+      <div class="popup__container">
+        <button class="popup__button-close"></button>
+        <div class="popup__form">
+          <h3 class="popup__title">Редактировать профиль</h3>
+          <fieldset>
+            <input type="text" class="popup__form-name">
+            <input type="text" class="popup__form-description">
+          </fieldset>
+          <input type="submit" class="popup__button-save"></input>
+        </div>
+        
+      </div>
+    </section>
 
     <footer class="footer">
       <p class="footer__description">© 2020 Mesto Russia</p>
