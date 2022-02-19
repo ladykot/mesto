@@ -8,7 +8,6 @@
 
 @media screen and (min-width: 768px) {
     .profile__info {
-        grid-template-columns: auto 18px;
         margin: 0;
     }
 }
