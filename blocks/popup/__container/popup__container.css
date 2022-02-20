@@ -9,6 +9,12 @@
 
 @media screen and (min-width: 768px) {
     .popup__container {
+        padding: 120px 19px 0 59px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .popup__container {
         padding: 155px 19px 0 59px;
     }
 }
