@@ -20,8 +20,15 @@ const closePopup = function() {
     popup.classList.remove('popup_is-opened');
 }
 
-profileButtonEditElement.addEventListener('click', openPopup);
+const closePopupClickOverlay = function(event) {
+    if(event.target !== event.currentTarget) {
+        return;
+    }
+    closePopup(); 
+}
 
+profileButtonEditElement.addEventListener('click', openPopup);
 popupButtonCloseElement.addEventListener('click', closePopup);
+popupElement.addEventListener('click', closePopupClickOverlay);
 
 
