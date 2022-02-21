@@ -1,3 +1,8 @@
 .cards__union {
-    
+    transition: opacity 0.2s linear;
+}
+
+.cards__union:hover {
+    opacity: 0.5;
+    cursor: pointer;
 }

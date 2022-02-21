@@ -9,15 +9,15 @@ console.log(popupElement);
 console.log(popupButtonCloseElement);
 
 const togglePopupVisibility = function() {
-    popup.classList.toggle('popup_is-opened');
+    popup.classList.toggle('popup_opened');
 }
 
 const openPopup = function() {
-    popup.classList.add('popup_is-opened');
+    popup.classList.add('popup_opened');
 }
 
 const closePopup = function() {
-    popup.classList.remove('popup_is-opened');
+    popup.classList.remove('popup_opened');
 }
 
 const closePopupClickOverlay = function(event) {
@@ -29,6 +29,5 @@ const closePopupClickOverlay = function(event) {
 
 profileButtonEditElement.addEventListener('click', openPopup);
 popupButtonCloseElement.addEventListener('click', closePopup);
+popup.addEventListener('click', closePopupClickOverlay);
 popupElement.addEventListener('click', closePopupClickOverlay);
-
-
