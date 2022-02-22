@@ -7,7 +7,7 @@
     box-sizing: border-box;
     border-radius: 2px;
     background: transparent;
-    background-image: url(/images/add-button-plus.svg);
+    background-image: url(../../../images/add-button-plus.svg);
     background-repeat: no-repeat;
     background-position: center;
 }
