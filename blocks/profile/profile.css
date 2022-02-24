@@ -8,7 +8,6 @@
 
 @media screen and (min-width: 768px) {
   .profile {
-
     display: grid;
     grid-template-columns: 150px max-content auto;
   }

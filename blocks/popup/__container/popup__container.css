@@ -1,20 +1,12 @@
 .popup__container {
     display: flex;
     flex-direction: column;
-    padding: 87px 19px 0;
-    min-height: 370px;
-    margin: auto;
-    max-width: 470px;
-}
-
-@media screen and (min-width: 768px) {
-    .popup__container {
-        padding: 120px 19px 0 59px;
-    }
+    margin: 87px auto 0;
 }
 
 @media screen and (min-width: 1280px) {
     .popup__container {
-        padding: 155px 19px 0 59px;
+        width: 510px;
+        margin: 155px auto 0;
     }
 }

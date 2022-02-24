@@ -17,20 +17,19 @@
       <section class="profile">
         <img class="profile__pic" src="./images/avatar.jpg" alt="фото профиля">
         <div class="profile__info">
-          <h1 class="profile__name">Жак-Ив Кусто </h1>
-          <button class="profile__edit-button hover"></button>
+          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <button class="profile__edit-button hover" aria-label="Редактировать"></button>
           <p class="profile__description">Исследователь океана</p>       
         </div>
-        <button class="profile__add-button hover"></button>
+        <button type="button" class="profile__add-button hover" aria-label="Добавить"></button>
       </section>
-
 
       <section class="cards">
         <div class="cards__item">
           <img class="cards__item-pic" src="./images/karachaevsk.jpg" alt="город Карачаевск">
           <div class="cards__item-group">
             <h2 class="cards__title">Карачаевск</h2>
-            <img class="cards__union" src="./images/heard_disabled.svg" alt="лайк">
+            <button class="cards__union" src="./images/heard_disabled.svg" alt="лайк"></button>
           </div>
         </div>
 
@@ -38,7 +37,7 @@
           <img class="cards__item-pic" src="./images/elbrus.jpg" alt="гора Эльбрус">
           <div class="cards__item-group">
             <h2 class="cards__title">Гора Эльбрус</h2>
-            <img class="cards__union" src="./images/heard_disabled.svg" alt="лайк">
+            <button class="cards__union" src="./images/heard_disabled.svg" alt="лайк"></button>
           </div>
         </div>
 
@@ -46,7 +45,7 @@
           <img class="cards__item-pic" src="./images/dombai.jpg" alt="Домбай">
           <div class="cards__item-group">
             <h2 class="cards__title">Домбай</h2>
-            <img class="cards__union" src="./images/heard_disabled.svg" alt="лайк">
+            <button type="button" class="cards__union" src="./images/heard_disabled.svg" alt="лайк"></button>
           </div>
         </div>
 
@@ -54,7 +53,7 @@
           <img class="cards__item-pic" src="./images/nalchik.jpg" alt="город Нальчик">
           <div class="cards__item-group">
             <h2 class="cards__title">Нальчик</h2>
-            <img class="cards__union " src="./images/heard_disabled.svg" alt="лайк">
+            <button type="button" class="cards__union " src="./images/heard_disabled.svg" alt="лайк"></button>
           </div>
         </div>
 
@@ -62,7 +61,7 @@
           <img class="cards__item-pic" src="./images/krasnodarskiy.jpg" alt="Краснодарский край">
           <div class="cards__item-group">
             <h2 class="cards__title">Краснодарский край</h2>
-            <img class="cards__union" src="./images/heard_disabled.svg" alt="лайк">
+            <button type="button" class="cards__union" src="./images/heard_disabled.svg" alt="лайк"></button>
           </div>
         </div>
 
@@ -70,7 +69,7 @@
           <img class="cards__item-pic" src="./images/dagestan.jpg" alt="Дагестан">
           <div class="cards__item-group">
             <h2 class="cards__title">Дагестан</h2>
-            <img class="cards__union" src="./images/heard_disabled.svg" alt="лайк">
+            <button type="button" class="cards__union" src="./images/heard_disabled.svg" alt="лайк"></button>
           </div>
         </div>
       </section>
@@ -78,16 +77,16 @@
 
     <section class="popup">
       <div class="popup__container">
-        <button class="popup__button-close hover"></button>
-        <form class="popup__form">
+        <button type="button" class="popup__button-close hover"></button>
+        <form name="edit-profile" class="popup__form">
           <h3 class="popup__title">Редактировать профиль</h3>
           <fieldset class="popup__inputs">
-            <input type="text" name="name" placeholder="Жак-Ив Кусто" class="popup__inputs-item-name" >
+            <input type="text" name="name" value="Жак-Ив Кусто" class="popup__inputsitem popup__inputsitem_type_name" >
             <div class="popup__line"></div>
-            <input type="text" name="description" placeholder="Исследователь океана" class="popup__inputs-item-description" required>
+            <input type="text" name="description" value="Исследователь океана" class="popup__inputsitem popup__inputsitem_type_description" required>
             <div class="popup__line"></div>
           </fieldset>
-          <button type="submit" class="popup__button-save">Сохранить</button>
+          <button type="submit" class="popup__button-save" aria-label="Сохранить">Сохранить</button>
         </form>
       </div>
     </section>

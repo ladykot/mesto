@@ -7,16 +7,10 @@ let profileInfo = profile.querySelector('.profile__info')
 const profileButtonEditElement = profile.querySelector('.profile__edit-button'); 
 
 let formElement = popupElement.querySelector('.popup__form');
-let nameInput = formElement.querySelector('.popup__inputs-item-name');
-let jobInput = formElement.querySelector('.popup__inputs-item-description');
+let nameInput = formElement.querySelector('.popup__inputsitem_type_name');
+let jobInput = formElement.querySelector('.popup__inputsitem_type_description');
 
-// Получите значение полей jobInput и nameInput из свойства value
-let nameInputValue = nameInput.value;
-let jobInputValue = jobInput.value;
 
-// Выберите элементы, куда должны быть вставлены значения полей
-let nameProfileValue = profileInfo.querySelector('.profile__name');
-let jobProfileValue = profileInfo.querySelector('.profile__description');
 
 const togglePopupVisibility = function() {
     popup.classList.toggle('popup_opened');
@@ -45,6 +39,14 @@ popupElement.addEventListener('click', closePopupClickOverlay);
 
 function formSubmitHandler (event) {
     event.preventDefault();
+    // Получите значение полей jobInput и nameInput из свойства value
+    let nameInputValue = nameInput.value;
+    let jobInputValue = jobInput.value;
+
+    // Выберите элементы, куда должны быть вставлены значения полей
+    let nameProfileValue = profileInfo.querySelector('.profile__name');
+    let jobProfileValue = profileInfo.querySelector('.profile__description');
+
     // Вставьте новые значения с помощью textContent
     nameProfileValue.textContent = nameInputValue;
     jobProfileValue.textContent = jobInputValue;
@@ -54,5 +56,4 @@ function formSubmitHandler (event) {
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
-
 
