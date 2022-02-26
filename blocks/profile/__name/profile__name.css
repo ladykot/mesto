@@ -4,17 +4,18 @@
   font-weight: 500;
   font-size: 27px;
   line-height: 33px;
+  justify-self: center;
   margin: 0;
-  text-align: center;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  max-width: 300px;
 }
 
 @media screen and (min-width: 768px) {
   .profile__name {
-    text-align: left;
+    justify-self: start;
+    font-size: 32px;
+    line-height: 38px;
   }
 }
 

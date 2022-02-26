@@ -18,8 +18,8 @@
         <img class="profile__pic" src="./images/avatar.jpg" alt="фото профиля">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button class="profile__edit-button hover" aria-label="Редактировать"></button>
-          <p class="profile__description">Исследователь океана</p>
+          <button type="button" class="profile__edit-button hover" aria-label="Редактировать"></button>
+          <p class="profile__description">Исследователь океана Исследователь океана Исследователь океана</p>
         </div>
         <button type="button" class="profile__add-button hover" aria-label="Добавить"></button>
       </section>
@@ -29,7 +29,7 @@
           <img class="cards__item-pic" src="./images/karachaevsk.jpg" alt="город Карачаевск">
           <div class="cards__item-group">
             <h2 class="cards__title">Карачаевск</h2>
-            <button class="cards__union" aria-label="лайк"></button>
+            <button type="button" class="cards__union" aria-label="лайк"></button>
           </div>
         </div>
 
@@ -37,7 +37,7 @@
           <img class="cards__item-pic" src="./images/elbrus.jpg" alt="гора Эльбрус">
           <div class="cards__item-group">
             <h2 class="cards__title">Гора Эльбрус</h2>
-            <button class="cards__union" aria-label="лайк"></button>
+            <button type="button" class="cards__union" aria-label="лайк"></button>
           </div>
         </div>
 
@@ -81,10 +81,8 @@
         <form name="edit-profile" class="popup__form">
           <h3 class="popup__title">Редактировать профиль</h3>
           <fieldset class="popup__inputs">
-            <input type="text" name="name" value="Жак-Ив Кусто" class="popup__inputsitem popup__inputsitem_type_name" >
-            <div class="popup__line"></div>
-            <input type="text" name="description" value="Исследователь океана" class="popup__inputsitem popup__inputsitem_type_description" required>
-            <div class="popup__line"></div>
+            <input type="text" name="name" value="Жак-Ив Кусто" class="popup__inputs-item popup__inputs-item_type_name" required>
+            <input type="text" name="description" value="Исследователь океана" class="popup__inputs-item popup__inputs-item_type_description" required>
           </fieldset>
           <button type="submit" class="popup__button-save" aria-label="Сохранить">Сохранить</button>
         </form>
