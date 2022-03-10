@@ -2,17 +2,26 @@ const popup = document.querySelector('.popup');
 const popupElement = popup.querySelector('.popup__container');
 const popupButtonCloseElement = popupElement.querySelector('.popup__button-close');
 
+// находим на странице profile и его элементы
 let profile = document.querySelector('.profile');
-let profileInfo = profile.querySelector('.profile__info')
-const profileButtonEditElement = profile.querySelector('.profile__edit-button'); 
+let profileInfo = profile.querySelector('.profile__info');
+const profileButtonEditElement = profile.querySelector('.profile__edit-button');
+const profileButtonCreateCard = profile.querySelector('.profile__add-button');
 
+
+// находим на странице popup и его поля Редактирования
 let formElement = popupElement.querySelector('.popup__form');
 let nameInput = formElement.querySelector('.popup__inputs-item_type_name');
 let jobInput = formElement.querySelector('.popup__inputs-item_type_description');
 
-// Выберите элементы, куда должны быть вставлены значения полей
+// Выберите элементы, куда должны быть вставлены значения полей формы Редактирования
 let nameProfileValue = profileInfo.querySelector('.profile__name');
 let jobProfileValue = profileInfo.querySelector('.profile__description');
+
+// Находим popup Добавления карточки и его поля
+let titleInput = formElement.querySelector('.popup__inputs-item_type_title');
+let linkInput = formElement.querySelector('.popup__inputs-item_type_link');
+
 
 const openPopup = function() {
     popup.classList.add('popup_opened');
@@ -22,6 +31,7 @@ const openPopup = function() {
     nameInputValue = nameProfileValue.textContent;
     jobInputValue = jobProfileValue.textContent;
 }
+
 
 const closePopup = function() {
     popup.classList.remove('popup_opened');
