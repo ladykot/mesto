@@ -24,7 +24,21 @@
         <button type="button" class="profile__add-button hover" aria-label="Добавить"></button>
       </section>
 
+      <template id="template-card">
+
+        <div class="cards__item">
+          <img class="cards__item-pic">
+          <div class="cards__item-group">
+            <h2 class="cards__title"></h2>
+            <button type="button" class="cards__union" aria-label="лайк"></button>
+          </div>
+        </div>
+
+      </template>
+
+
       <section class="cards">
+        <!-- 
         <div class="cards__item">
           <img class="cards__item-pic" src="./images/karachaevsk.jpg" alt="город Карачаевск">
           <div class="cards__item-group">
@@ -72,11 +86,11 @@
             <button type="button" class="cards__union" aria-label="лайк"></button>
           </div>
         </div>
-      </section>
+      </section>  -->
     </main>
 
       <!-- попап редактирования данных профиля -->    
-    <section class="popup">
+    <section class="popup popup_type_edit-profile">
       <div class="popup__container">
         <button type="button" class="popup__button-close hover"></button>
         <form name="edit-profile" class="popup__form">
@@ -91,7 +105,7 @@
     </section>
 
     <!-- попап для создания карточки -->
-    <section class="popup">
+    <section class="popup popup_type_create-card">
       <div class="popup__container">
         <button type="button" class="popup__button-close hover"></button>
         <form name="create-card" class="popup__form">
@@ -102,6 +116,14 @@
           </fieldset>
           <button type="submit" class="popup__button-save" aria-label="Создать">Создать</button>
         </form>
+      </div>
+    </section>
+
+    <!-- попап для большого фото -->
+    <section class="popup popup_type_big-image">
+      <div class="popup__container">
+        <button type="button" class="popup__button-close hover"></button>
+        <img src=" " alt=" " class="popup__form">
       </div>
     </section>
 

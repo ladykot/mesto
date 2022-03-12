@@ -1,4 +1,4 @@
-const popup = document.querySelector('.popup');
+const popup = document.querySelector('.popup_type_edit-profile');
 const popupElement = popup.querySelector('.popup__container');
 const popupButtonCloseElement = popupElement.querySelector('.popup__button-close');
 
@@ -7,7 +7,6 @@ let profile = document.querySelector('.profile');
 let profileInfo = profile.querySelector('.profile__info');
 const profileButtonEditElement = profile.querySelector('.profile__edit-button');
 const profileButtonCreateCard = profile.querySelector('.profile__add-button');
-
 
 // находим на странице popup и его поля Редактирования
 let formElement = popupElement.querySelector('.popup__form');
@@ -18,11 +17,10 @@ let jobInput = formElement.querySelector('.popup__inputs-item_type_description')
 let nameProfileValue = profileInfo.querySelector('.profile__name');
 let jobProfileValue = profileInfo.querySelector('.profile__description');
 
-// Находим popup Добавления карточки и его поля
-let titleInput = formElement.querySelector('.popup__inputs-item_type_title');
-let linkInput = formElement.querySelector('.popup__inputs-item_type_link');
 
 
+
+// функция открытия попапа редактирования
 const openPopup = function() {
     popup.classList.add('popup_opened');
     // Получите значение полей jobInput и nameInput из свойства value
@@ -31,7 +29,6 @@ const openPopup = function() {
     nameInputValue = nameProfileValue.textContent;
     jobInputValue = jobProfileValue.textContent;
 }
-
 
 const closePopup = function() {
     popup.classList.remove('popup_opened');
@@ -62,7 +59,71 @@ function formSubmitHandler (event) {
     closePopup();
 }
 
-// Прикрепляем обработчик к форме:
+// Прикрепляем обработчик к форме Редактирования:
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
+
+
+// Прикрепить обработчик к форме Создания карточки
+
+
+const initialCards = [
+    {
+      name: 'Архыз',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+      name: 'Челябинская область',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+      name: 'Иваново',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+      name: 'Камчатка',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+      name: 'Холмогорский район',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+      name: 'Байкал',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+];
+
+
+
+const popupCreateCard = document.querySelector('.popup_type_edit-profile');
+
+const cardsSection = document.querySelector('.cards');
+
+// функция добавления карточек через template
+function renderCard(card) {
+    const templateCard = document.querySelector('#template-card').content;
+    const cardItem = templateCard.querySelector('.cards__item').cloneNode(true);
+    cardItem.querySelector('.cards__title').textContent = card.name;
+    cardItem.querySelector('.cards__item-pic').src = card.link;
+    cardsSection.append(cardItem);
+}
+
+// функция рендеринга списка с наименованиями карточек
+function renderInitialCards(initialCards) {
+    initialCards.forEach(renderCard);
+}
+
+renderInitialCards(initialCards);
+
+
+
+// Выбрать элементы для вставки значений карточек
+
+// Находим popup Добавления карточки и его поля
+let titleInput = formElement.querySelector('.popup__inputs-item_type_title');
+let linkInput = formElement.querySelector('.popup__inputs-item_type_link');
+
+
+
 
