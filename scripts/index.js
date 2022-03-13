@@ -18,8 +18,6 @@ let nameProfileValue = profileInfo.querySelector('.profile__name');
 let jobProfileValue = profileInfo.querySelector('.profile__description');
 
 
-
-
 // функция открытия попапа редактирования
 const openPopup = function() {
     popup.classList.add('popup_opened');
@@ -95,9 +93,6 @@ const initialCards = [
 ];
 
 
-
-const popupCreateCard = document.querySelector('.popup_type_edit-profile');
-
 const cardsSection = document.querySelector('.cards');
 
 // функция добавления карточек через template
@@ -108,21 +103,54 @@ function renderCard(card) {
     cardItem.querySelector('.cards__item-pic').src = card.link;
     cardsSection.append(cardItem);
 }
-
 // функция рендеринга списка с наименованиями карточек
 function renderInitialCards(initialCards) {
     initialCards.forEach(renderCard);
 }
-
+// вызываем функцию добавления карточек при загрузке страницы
 renderInitialCards(initialCards);
 
+//----------------------------------------------------------
 
+
+// Создать карточку
+
+const popupCreateCard = document.querySelector('.popup_type_create-card');
+const popupCreateElement = popupCreateCard.querySelector('.popup__container');
+const popupCreateButtonClose = popupCreateElement.querySelector('.popup__button-close');
+let titleInput = formElement.querySelector('.popup__inputs-item_type_title');
+let linkInput = formElement.querySelector('.popup__inputs-item_type_link');
+
+const openCreatePopup = function() {
+  popupCreateCard.classList.add('popup_opened');
+}
+
+const closeCreatePopup = function() {
+  popupCreateCard.classList.remove('popup_opened')
+}
+
+profileButtonCreateCard.addEventListener('click', openCreatePopup);
+popupCreateButtonClose.addEventListener('click', closeCreatePopup);
+
+function formCreateSubmitHandler(event) {
+  event.preventDefault();
+
+}
+
+function formSubmitHandler (event) {
+  event.preventDefault();
+  // Получите значение полей jobInput и nameInput из свойства value
+  let nameInputValue = nameInput.value;
+  let jobInputValue = jobInput.value;
+
+  // Вставьте новые значения с помощью textContent
+  nameProfileValue.textContent = nameInputValue;
+  jobProfileValue.textContent = jobInputValue;
+  closePopup();
+}
 
 // Выбрать элементы для вставки значений карточек
 
-// Находим popup Добавления карточки и его поля
-let titleInput = formElement.querySelector('.popup__inputs-item_type_title');
-let linkInput = formElement.querySelector('.popup__inputs-item_type_link');
 
 
 
