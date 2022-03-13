@@ -18,7 +18,6 @@ let nameProfileValue = profileInfo.querySelector('.profile__name');
 let jobProfileValue = profileInfo.querySelector('.profile__description');
 
 
-// функция открытия попапа редактирования
 const openPopup = function() {
     popup.classList.add('popup_opened');
     // Получите значение полей jobInput и nameInput из свойства value
@@ -62,9 +61,6 @@ function formSubmitHandler (event) {
 formElement.addEventListener('submit', formSubmitHandler);
 
 
-// Прикрепить обработчик к форме Создания карточки
-
-
 const initialCards = [
     {
       name: 'Архыз',
@@ -101,25 +97,30 @@ function renderCard(card) {
     const cardItem = templateCard.querySelector('.cards__item').cloneNode(true);
     cardItem.querySelector('.cards__title').textContent = card.name;
     cardItem.querySelector('.cards__item-pic').src = card.link;
+    cardItem.querySelector('.cards__union').addEventListener('click', likeHandler);
     cardsSection.append(cardItem);
 }
+
 // функция рендеринга списка с наименованиями карточек
 function renderInitialCards(initialCards) {
     initialCards.forEach(renderCard);
 }
+
 // вызываем функцию добавления карточек при загрузке страницы
 renderInitialCards(initialCards);
+
 
 //----------------------------------------------------------
 
 
-// Создать карточку
+// Создать новую карточку
 
 const popupCreateCard = document.querySelector('.popup_type_create-card');
 const popupCreateElement = popupCreateCard.querySelector('.popup__container');
+let formCreateElement = popupCreateElement.querySelector('.popup__form');
 const popupCreateButtonClose = popupCreateElement.querySelector('.popup__button-close');
-let titleInput = formElement.querySelector('.popup__inputs-item_type_title');
-let linkInput = formElement.querySelector('.popup__inputs-item_type_link');
+let titleInput = formCreateElement.querySelector('.popup__inputs-item_type_title');
+let linkInput = formCreateElement.querySelector('.popup__inputs-item_type_link');
 
 const openCreatePopup = function() {
   popupCreateCard.classList.add('popup_opened');
@@ -132,26 +133,29 @@ const closeCreatePopup = function() {
 profileButtonCreateCard.addEventListener('click', openCreatePopup);
 popupCreateButtonClose.addEventListener('click', closeCreatePopup);
 
-function formCreateSubmitHandler(event) {
-  event.preventDefault();
+function CreateCard () {
+  // Получите значение полей titleInput и linkInput из свойства value
+  let titleInputValue = titleInput.value;
+  let linkInputValue = linkInput.value;
 
+  // Вставить значения в шаблон
+  const templateCard = document.querySelector('#template-card').content;
+  const cardItem = templateCard.querySelector('.cards__item').cloneNode(true);
+  cardItem.querySelector('.cards__title').textContent = titleInputValue;
+  cardItem.querySelector('.cards__item-pic').src = linkInputValue;
+  cardItem.querySelector('.cards__union').addEventListener('click',likeHandler);
+  cardsSection.prepend(cardItem);
+  closeCreatePopup();
 }
 
-function formSubmitHandler (event) {
+function formCreateSubmitHandler (event) {
   event.preventDefault();
-  // Получите значение полей jobInput и nameInput из свойства value
-  let nameInputValue = nameInput.value;
-  let jobInputValue = jobInput.value;
-
-  // Вставьте новые значения с помощью textContent
-  nameProfileValue.textContent = nameInputValue;
-  jobProfileValue.textContent = jobInputValue;
-  closePopup();
+  CreateCard();
 }
 
-// Выбрать элементы для вставки значений карточек
+formCreateElement.addEventListener('submit', formCreateSubmitHandler);
 
-
-
-
-
+// обработка лайка 
+function likeHandler(evt) {
+  evt.target.classList.toggle('cards__union_active');
+};
