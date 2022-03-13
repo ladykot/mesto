@@ -155,7 +155,12 @@ function formCreateSubmitHandler (event) {
 
 formCreateElement.addEventListener('submit', formCreateSubmitHandler);
 
-// обработка лайка 
+// обработка лайка
 function likeHandler(evt) {
   evt.target.classList.toggle('cards__union_active');
 };
+
+// удаление карточки
+const deleteCard = function() {
+  
+}
