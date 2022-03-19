@@ -75,7 +75,9 @@ function openPopup(element) {
 }
 
 function closePopup(element) {
+  console.log("в функции closePopup:", element, popupButtonCloseElement);
   element.classList.remove('popup_opened');
+  
 }
 
 function closePopupClickOverlay(event) {
@@ -85,14 +87,16 @@ function closePopupClickOverlay(event) {
     closePopup();
 }
 
-// функция слушателя для кнопки edit.
-function editListener() {
-  profileButtonEditElement.addEventListener('click', openPopup(popup));
-}
+// слушатель для кнопки Edit
+profileButtonEditElement.addEventListener('click', function() { 
+  openPopup(popup);
+});
 
+// слушатель для Крестика Edit
+popupButtonCloseElement.addEventListener('click', function() { 
+  closePopup(popup);
+});
 
-// profileButtonEditElement.addEventListener('click', openPopup);
-popupButtonCloseElement.addEventListener('click', closePopup);
 popup.addEventListener('click', closePopupClickOverlay);
 popupElement.addEventListener('click', closePopupClickOverlay);
 
@@ -104,7 +108,6 @@ function formSubmitHandler(event) {
 }
 
 // Прикрепляем обработчик к форме Редактирования:
-// он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
 
 
