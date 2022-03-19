@@ -56,15 +56,13 @@ const titleInput = formCreateElement.querySelector('.popup__inputs-item_type_tit
 const linkInput = formCreateElement.querySelector('.popup__inputs-item_type_link');
 
 
-// Получить значение полей jobInput и nameInput из свойства value и вставить в попап
+// Получить значение полей jobInput и nameInput из свойства value и вставить в попап при открытии
 function inputDataProfile() {
   let nameInputValue = nameInput.value;
   let jobInputValue = jobInput.value;
   nameInputValue = nameProfileValue.textContent;
   jobInputValue = jobProfileValue.textContent;
 }
-
-// ToDo: написать функции открытия/закрытия любого попапа
 
 function openPopup(element) {
   element.classList.add('popup_opened');
@@ -75,24 +73,22 @@ function openPopup(element) {
 }
 
 function closePopup(element) {
-  console.log("в функции closePopup:", element, popupButtonCloseElement);
   element.classList.remove('popup_opened');
-  
 }
 
 function closePopupClickOverlay(event) {
     if(event.target !== event.currentTarget) {
       return;
     }
-    closePopup();
+    closePopup(popup);
 }
 
-// слушатель для кнопки Edit
+// слушатель для открытия попапа
 profileButtonEditElement.addEventListener('click', function() { 
   openPopup(popup);
 });
 
-// слушатель для Крестика Edit
+// слушатель для закрытия попапа
 popupButtonCloseElement.addEventListener('click', function() { 
   closePopup(popup);
 });
