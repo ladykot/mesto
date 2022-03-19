@@ -93,6 +93,7 @@ popupButtonCloseElement.addEventListener('click', function() {
   closePopup(popup);
 });
 
+// слушатели на клик рядом с попапом
 popup.addEventListener('click', closePopupClickOverlay);
 popupElement.addEventListener('click', closePopupClickOverlay);
 
@@ -109,21 +110,21 @@ formElement.addEventListener('submit', formSubmitHandler);
 
 // функция добавления карточек через template
 function renderCard(card) {
-    const templateCard = document.querySelector('#template-card').content;
-    const cardItem = templateCard.querySelector('.cards__item').cloneNode(true);
-    cardItem.querySelector('.cards__title').textContent = card.name;
-    cardItem.querySelector('.cards__item-pic').src = card.link;
-    cardItem.querySelector('.cards__union').addEventListener('click', likeHandler);
-    cardItem.querySelector('.cards__item-delete').addEventListener('click', deleteCardHandler);
-
-
-    cardsSection.append(cardItem);
-    //ToDo return
+  const templateCard = document.querySelector('#template-card').content;
+  const cardItem = templateCard.querySelector('.cards__item').cloneNode(true);
+  cardItem.querySelector('.cards__title').textContent = card.name;
+  cardItem.querySelector('.cards__item-pic').src = card.link;
+  cardItem.querySelector('.cards__union').addEventListener('click', likeHandler);
+  cardItem.querySelector('.cards__item-delete').addEventListener('click', deleteCardHandler);
+  return cardItem
 }
 
-// функция рендеринга списка с наименованиями карточек
+// функция рендеринга списка с наименованиями карточек и добавление карточек в вертску
 function renderInitialCards(initialCards) {
-    initialCards.forEach(renderCard);
+  initialCards.forEach((card) => {
+    const cardItem = renderCard(card)
+    cardsSection.prepend(cardItem)
+  })
 }
 
 // вызываем функцию добавления карточек при загрузке страницы
