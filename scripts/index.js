@@ -27,12 +27,17 @@ const initialCards = [
 
 const popup = document.querySelector('.popup_type_edit-profile');
 const popupCreateCard = document.querySelector('.popup_type_create-card');
-const popupBigFoto = document.querySelector('.popup_type_big-image')
+const popupBigImage = document.querySelector('.popup_type_big-image')
+const bigImage = popupBigImage.querySelector('.popup__big-image');
+const popupBigImageGroup = popupBigImage.querySelector('.popup__container');
+const popupBigImageTitle = document.querySelector('.popup__title-big-image')
+
 const popupElement = popup.querySelector('.popup__container');
 const popupButtonCloseElement = popupElement.querySelector('.popup__button-close_type_edit');
 const popupCreateButtonCloseElement = popupCreateCard.querySelector('.popup__button-close_type_create');
 
 const cardsSection = document.querySelector('.cards');
+
 
 // находим на странице profile и его элементы
 const profile = document.querySelector('.profile');
@@ -55,6 +60,9 @@ const formCreateElement = popupCreateElement.querySelector('.popup__form');
 const popupCreateButtonClose = popupCreateElement.querySelector('.popup__button-close');
 const titleInput = formCreateElement.querySelector('.popup__inputs-item_type_title');
 const linkInput = formCreateElement.querySelector('.popup__inputs-item_type_link');
+
+// открыть картинку в большом рамере
+
 
 
 function openPopup(element) {
@@ -97,6 +105,7 @@ popupCreateButtonCloseElement.addEventListener('click', function() {
   closePopup(popupCreateCard);
 });
 
+
 // слушатели на клик рядом с попапом
 popup.addEventListener('click', closePopupClickOverlay);
 popupElement.addEventListener('click', closePopupClickOverlay);
@@ -120,7 +129,8 @@ function renderCard(card) {
   cardItem.querySelector('.cards__item-pic').src = card.link;
   cardItem.querySelector('.cards__union').addEventListener('click', likeHandler);
   cardItem.querySelector('.cards__item-delete').addEventListener('click', deleteCardHandler);
-  return cardItem
+  cardItem.querySelector('.cards__item-pic').addEventListener('click', increaseFotoHandler);
+  return cardItem;
 }
 
 // функция рендеринга списка с наименованиями карточек и добавление карточек в вертску
@@ -158,5 +168,15 @@ function likeHandler(cardItem) {
 // обработка удаления карточки
 function deleteCardHandler(cardItem) {
   cardItem.target.closest('.cards__item').remove();
+}
+
+// обработка увеличения фото 
+function increaseFotoHandler(event) {
+  const item = event.target.closest('.cards__item');
+  const itemTitle = item.querySelector('.cards__title').textContent;
+  const itemPic = item.querySelector('.cards__item-pic').src;
+  bigImage.src = itemPic;
+  popupBigImageTitle.textContent = itemTitle;
+  openPopup(popupBigImage);
 }
 
