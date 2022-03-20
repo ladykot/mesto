@@ -61,8 +61,8 @@ const linkInput = formCreateElement.querySelector('.popup__inputs-item_type_link
 function inputDataProfile() {
   let nameInputValue = nameInput.value;
   let jobInputValue = jobInput.value;
-  nameInputValue = nameProfileValue.textContent;
-  jobInputValue = jobProfileValue.textContent;
+  nameProfileValue.textContent = nameInputValue;
+  jobProfileValue.textContent = jobInputValue;
 }
 
 function openPopup(element) {
@@ -84,9 +84,6 @@ function closePopupClickOverlay(event) {
     closePopup(popup);
 }
 
-
-// Todo: уничерсальный слушатель на открытие/закрытие
-// Параметр функции - кнопка
 
 // слушатель для открытия попапа Редактирования
 profileButtonEditElement.addEventListener('click', function() { 
@@ -113,11 +110,12 @@ popupCreateButtonCloseElement.addEventListener('click', function() {
 popup.addEventListener('click', closePopupClickOverlay);
 popupElement.addEventListener('click', closePopupClickOverlay);
 
-
+// submit для формы редактирования
 function formSubmitHandler(event) {
-    event.preventDefault();  // отмена отправки на сервер
-    inputDataProfile()
-    closePopup();
+  event.preventDefault();  // отмена отправки на сервер
+  nameProfileValue.textContent = nameInput.value;
+  jobProfileValue.textContent = jobInput.value;
+  closePopup(popup);
 }
 
 // Прикрепляем обработчик к форме Редактирования:
