@@ -29,7 +29,8 @@ const popup = document.querySelector('.popup_type_edit-profile');
 const popupCreateCard = document.querySelector('.popup_type_create-card');
 const popupBigFoto = document.querySelector('.popup_type_big-image')
 const popupElement = popup.querySelector('.popup__container');
-const popupButtonCloseElement = popupElement.querySelector('.popup__button-close');
+const popupButtonCloseElement = popupElement.querySelector('.popup__button-close_type_edit');
+const popupCreateButtonCloseElement = popupCreateCard.querySelector('.popup__button-close_type_create');
 
 const cardsSection = document.querySelector('.cards');
 
@@ -83,15 +84,30 @@ function closePopupClickOverlay(event) {
     closePopup(popup);
 }
 
-// слушатель для открытия попапа
+
+// Todo: уничерсальный слушатель на открытие/закрытие
+// Параметр функции - кнопка
+
+// слушатель для открытия попапа Редактирования
 profileButtonEditElement.addEventListener('click', function() { 
   openPopup(popup);
 });
 
-// слушатель для закрытия попапа
+// слушатель для открытия попапа Создания
+profileButtonCreateCard.addEventListener('click', function() { 
+  openPopup(popupCreateCard);
+});
+
+// слушатель для закрытия попапа Редактирования
 popupButtonCloseElement.addEventListener('click', function() { 
   closePopup(popup);
 });
+
+// слушатель для закрытия попапа Создания
+popupCreateButtonCloseElement.addEventListener('click', function() { 
+  closePopup(popupCreateCard);
+});
+
 
 // слушатели на клик рядом с попапом
 popup.addEventListener('click', closePopupClickOverlay);
@@ -123,30 +139,18 @@ function renderCard(card) {
 function renderInitialCards(initialCards) {
   initialCards.forEach((card) => {
     const cardItem = renderCard(card)
-    cardsSection.prepend(cardItem)
+    cardsSection.append(cardItem)
   })
 }
 
 // вызываем функцию добавления карточек при загрузке страницы
 renderInitialCards(initialCards);
 
-
+// функция создает карточку через попап и закрывает попап
 function CreateCard() {
-  // Получите значение полей titleInput и linkInput из свойства value
-  const titleInputValue = titleInput.value;
-  const linkInputValue = linkInput.value;
-
-
-  // ToDo: вставить функцию создания карточки renderCard(card) 
-  const templateCard = document.querySelector('#template-card').content;
-  const cardItem = templateCard.querySelector('.cards__item').cloneNode(true);
-  cardItem.querySelector('.cards__title').textContent = titleInputValue;
-  cardItem.querySelector('.cards__item-pic').src = linkInputValue;
-  cardItem.querySelector('.cards__union').addEventListener('click',likeHandler);
-  cardItem.querySelector('.cards__item-delete').addEventListener('click', deleteCardHandler);
-
+  const cardItem = renderCard()
   cardsSection.prepend(cardItem);
-  closeCreatePopup();
+  closePopup(popupCreateCard);
 }
 
 function formCreateSubmitHandler (event) {
