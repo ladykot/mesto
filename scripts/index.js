@@ -57,14 +57,6 @@ const titleInput = formCreateElement.querySelector('.popup__inputs-item_type_tit
 const linkInput = formCreateElement.querySelector('.popup__inputs-item_type_link');
 
 
-// Получить значение полей jobInput и nameInput из свойства value и вставить в попап при открытии
-function inputDataProfile() {
-  let nameInputValue = nameInput.value;
-  let jobInputValue = jobInput.value;
-  nameProfileValue.textContent = nameInputValue;
-  jobProfileValue.textContent = jobInputValue;
-}
-
 function openPopup(element) {
   element.classList.add('popup_opened');
 
@@ -105,7 +97,6 @@ popupCreateButtonCloseElement.addEventListener('click', function() {
   closePopup(popupCreateCard);
 });
 
-
 // слушатели на клик рядом с попапом
 popup.addEventListener('click', closePopupClickOverlay);
 popupElement.addEventListener('click', closePopupClickOverlay);
@@ -120,7 +111,6 @@ function formSubmitHandler(event) {
 
 // Прикрепляем обработчик к форме Редактирования:
 formElement.addEventListener('submit', formSubmitHandler);
-
 
 // функция добавления карточек через template
 function renderCard(card) {
@@ -146,12 +136,14 @@ renderInitialCards(initialCards);
 
 // функция создает карточку через попап и закрывает попап
 function CreateCard() {
-  const cardItem = renderCard()
+  userData = {name: titleInput.value,
+  link: linkInput.value};
+  const cardItem = renderCard(userData)
   cardsSection.prepend(cardItem);
   closePopup(popupCreateCard);
 }
 
-function formCreateSubmitHandler (event) {
+function formCreateSubmitHandler(event) {
   event.preventDefault();
   CreateCard();
 }
