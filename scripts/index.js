@@ -29,7 +29,6 @@ const popup = document.querySelector('.popup_type_edit-profile');
 const popupCreateCard = document.querySelector('.popup_type_create-card');
 const popupBigImage = document.querySelector('.popup_type_big-image')
 const bigImage = popupBigImage.querySelector('.popup__big-foto');
-const popupBigImageGroup = popupBigImage.querySelector('.popup__container');
 const popupBigImageTitle = document.querySelector('.popup__title-big-image')
 
 const popupElement = popup.querySelector('.popup__container');
