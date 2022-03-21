@@ -1,0 +1,22 @@
+.popup__big-foto {
+    min-width: 240px;
+    width: 100%;
+    top: 36px;
+    background:transparent;
+    margin: 0 59px 0 59px;
+    padding: 0 19px 0 19px;
+    box-sizing: border-box;
+}
+
+@media screen and (min-width: 768px) {
+    .popup__big-foto {
+    
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .popup__big-foto {
+        margin-right: 45px;
+        margin-left: 40px;
+    }
+}

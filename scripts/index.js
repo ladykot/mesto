@@ -28,13 +28,14 @@ const initialCards = [
 const popup = document.querySelector('.popup_type_edit-profile');
 const popupCreateCard = document.querySelector('.popup_type_create-card');
 const popupBigImage = document.querySelector('.popup_type_big-image')
-const bigImage = popupBigImage.querySelector('.popup__big-image');
+const bigImage = popupBigImage.querySelector('.popup__big-foto');
 const popupBigImageGroup = popupBigImage.querySelector('.popup__container');
 const popupBigImageTitle = document.querySelector('.popup__title-big-image')
 
 const popupElement = popup.querySelector('.popup__container');
 const popupButtonCloseElement = popupElement.querySelector('.popup__button-close_type_edit');
 const popupCreateButtonCloseElement = popupCreateCard.querySelector('.popup__button-close_type_create');
+const popupBigImageButtonClose = popupBigImage.querySelector('.popup__button-close_type_big-foto');
 
 const cardsSection = document.querySelector('.cards');
 
@@ -68,9 +69,10 @@ const linkInput = formCreateElement.querySelector('.popup__inputs-item_type_link
 function openPopup(element) {
   element.classList.add('popup_opened');
 
+/*
   if (element == popup) {
     inputDataProfile()
-  }
+  }*/
 }
 
 function closePopup(element) {
@@ -78,12 +80,18 @@ function closePopup(element) {
 }
 
 function closePopupClickOverlay(event) {
-    if(event.target !== event.currentTarget) {
-      return;
-    }
-    closePopup(popup);
+  if(event.target !== event.currentTarget) {
+    return;
+  }
+  closePopup(popup);
 }
 
+function closePopupBigClickOverlay(event) {
+  if(event.target !== event.currentTarget) {
+    return;
+  }
+  closePopup(popupBigImage);
+}
 
 // слушатель для открытия попапа Редактирования
 profileButtonEditElement.addEventListener('click', function() { 
@@ -105,10 +113,17 @@ popupCreateButtonCloseElement.addEventListener('click', function() {
   closePopup(popupCreateCard);
 });
 
+// слушатель для закрытия попапа с Большой фото
+popupBigImageButtonClose.addEventListener('click', function() { 
+  closePopup(popupBigImage);
+});
+
+
 
 // слушатели на клик рядом с попапом
 popup.addEventListener('click', closePopupClickOverlay);
 popupElement.addEventListener('click', closePopupClickOverlay);
+popupBigImage.addEventListener('.click', closePopupBigClickOverlay);
 
 // submit для формы редактирования
 function formSubmitHandler(event) {
