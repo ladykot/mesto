@@ -12,3 +12,16 @@
     font-size: 14px;
     line-height: 17px;
 }
+
+/* Стилизуем плейсхолдеры */
+.popup__inputs-item::-webkit-input-placeholder {
+    color: #C4C4C4;
+}
+
+.popup__inputs-item::-moz-placeholder {
+    color: #C4C4C4;
+}
+
+.popup__inputs-item::-ms-input-placeholder {
+    color: #C4C4C4;
+}
