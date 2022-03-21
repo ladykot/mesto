@@ -1,5 +1,5 @@
 .popup__big-foto {
-    min-width: 240px;
+    /* min-width: 240px; */
     width: 100%;
     top: 36px;
     background:transparent;
@@ -10,7 +10,7 @@
 
 @media screen and (min-width: 768px) {
     .popup__big-foto {
-    
+        padding: 0 40px 0 40px;
     }
 }
 
