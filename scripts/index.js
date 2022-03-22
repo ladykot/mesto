@@ -115,8 +115,10 @@ function closePopupBigClickOverlay(event) {
 
 // функция создает карточку через попап и закрывает попап
 function createCard() {
-  userData = {name: titleInput.value,
-  link: linkInput.value};
+  const userData = {
+    name: titleInput.value,
+    link: linkInput.value
+  };
   const cardItem = renderCard(userData)
   cardsSection.prepend(cardItem);
   closePopup(popupCreateCard);
@@ -133,6 +135,8 @@ function formSubmitHandler(event) {
 function formCreateSubmitHandler(event) {
   event.preventDefault();
   createCard();
+  // очистка формы после создания карточки
+  event.target.reset();
 }
 
 // обработка лайка
