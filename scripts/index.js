@@ -61,6 +61,7 @@ const popupCreateButtonClose = popupCreateElement.querySelector('.popup__button-
 const titleInput = formCreateElement.querySelector('.popup__inputs-item_type_title');
 const linkInput = formCreateElement.querySelector('.popup__inputs-item_type_link');
 
+
 // функция добавления карточек через template
 function renderCard(card) {
   const templateCard = document.querySelector('#template-card').content;
@@ -91,27 +92,15 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
-const popupActive = function closePopupClickOverlay(event) {
-  if(event.target !== event.currentTarget) {
-    return;
-  }
-  closePopup(popupEditProfile);
-}
-
-
 function closePopupClickOverlay(event) {
+  // кликнули в зону попапа
   if(event.target !== event.currentTarget) {
     return;
   }
-  closePopup(popupEditProfile);
+  const popupActive = document.querySelector('.popup_opened');
+  closePopup(popupActive);
 }
 
-function closePopupBigClickOverlay(event) {
-  if(event.target !== event.currentTarget) {
-    return;
-  }
-  closePopup(popupBigImage);
-}
 
 // функция создает карточку через попап и закрывает попап
 function createCard() {
@@ -190,7 +179,8 @@ popupBigImageButtonClose.addEventListener('click', function() {
 // слушатели на клик рядом с попапом
 popupEditProfile.addEventListener('click', closePopupClickOverlay);
 popupElement.addEventListener('click', closePopupClickOverlay);
-popupBigImage.addEventListener('.click', closePopupBigClickOverlay);
+popupCreateCard.addEventListener('click', closePopupClickOverlay);
+popupBigImage.addEventListener('.click', closePopupClickOverlay);
 
 // Прикрепляем обработчик к форме Редактирования:
 formElement.addEventListener('submit', formSubmitHandler);
