@@ -1,7 +1,6 @@
 const obj = {
     formSelector: '.popup__form',
     inputSelector: '.popup__inputs-item',
-    // inputSet: '.popup__inputs',
     buttonSelector: '.popup__button-save',
     errorClass: 'popup__inputs-error_active',
     buttonDisableClass: 'popup__button-save_disable',
@@ -43,12 +42,9 @@ const getButtonElement = (formElement) => {
 const setEventListeners = (formElement, inputSelector) => {
     const inputList = Array.from(formElement.querySelectorAll(inputSelector));
     const buttonElement = getButtonElement(formElement);
-
     toggleButtonState(inputList, buttonElement)
-    console.log('переключаю состояние кнопки')
     inputList.forEach(inputElement => {
         inputElement.addEventListener('input', evt => {
-            console.log("событие", evt.target)
             checkInputValidity(formElement, inputElement);
             toggleButtonState(inputList, buttonElement);
         })
@@ -57,7 +53,7 @@ const setEventListeners = (formElement, inputSelector) => {
 
 
 
-const enableValidation = ({formSelector, inputSelector}) => {
+const enableValidation = ({formSelector, inputSelector, ...rest}) => {
     // * запуск процесса валидации
     const formList = Array.from(document.querySelectorAll(formSelector));
 
@@ -79,6 +75,7 @@ const toggleButtonState = (inputList, buttonElement) => {
     const hasInvalidInput = inputElements.some((inputElement) => {
         return inputElement.validity.valid;
     });
+
     if(!hasInvalidInput) {
         buttonElement.classList.add('popup__button-save_disable');
         buttonElement.setAttribute('disabled', true);
