@@ -176,9 +176,6 @@ popupBigImageButtonClose.addEventListener('click', function() {
 });
 
 
-// слушатели на клик рядом с попапом
-// Написать универсальную функцию. Принимает массив из элементов.
-// Если хотя бы на одном есть клик - вызвать closePopupClickOverlay
 popupEditProfile.addEventListener('click', closePopupClickOverlay);
 popupElement.addEventListener('click', closePopupClickOverlay);
 popupCreateCard.addEventListener('click', closePopupClickOverlay);
