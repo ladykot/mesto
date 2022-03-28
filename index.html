@@ -18,16 +18,16 @@
       <section class="profile">
         <img class="profile__pic" src="./images/avatar.jpg" alt="фото профиля">
         <div class="profile__info">
-          <h1 class="profile__name">Жак-Ив Кустоооооооооо</h1>
+          <h1 class="profile__name">Жак-Ив Кусто Михайлович</h1>
           <button type="button" class="profile__edit-button hover" aria-label="Редактировать"></button>
-          <p class="profile__description">Исследователь океана Исследователь океана Исследователь океана</p>
+          <p class="profile__description">Исследователь океана - сследователь жизни</p>
         </div>
         <button type="button" class="profile__add-button hover" aria-label="Добавить"></button>
       </section>
 
       <template id="template-card">
         <div class="cards__item">
-          <img class="cards__item-pic">
+          <img class="cards__item-pic hover">
           <button type="button" class="cards__item-delete" aria-label="корзина"></button>
           <div class="cards__item-group">
             <h2 class="cards__title"></h2>
@@ -44,7 +44,7 @@
 
     <!-- попап редактирования данных профиля -->
     <section class="popup popup_type_edit-profile">
-      <div class="popup__container">
+      <div class="popup__container popup__container_edit-profile">
         <button type="button" class="popup__button-close popup__button-close_type_edit hover"></button>
 
         <form name="edit-profile" class="popup__form" novalidate>
@@ -65,7 +65,7 @@
 
     <!-- попап для создания карточки -->
     <section class="popup popup_type_create-card">
-      <div class="popup__container">
+      <div class="popup__container popup__container_create-card">
         <button type="button" class="popup__button-close popup__button-close_type_create hover"></button>
 
         <form name="create-card" class="popup__form" novalidate>
@@ -83,10 +83,10 @@
     </section>
 
     <!-- попап для большого фото -->
-    <section class="popup popup_dark popup_type_big-image">
-      <div class="popup__container">
+    <section class="popup popup_type_big-image popup_dark ">
+      <div class="popup__container popup__container_big-image">
         <button type="button" class="popup__button-close popup__button-close_type_big-foto hover"></button>
-        <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="случайное фото" class="popup__big-foto">
+        <img class="popup__big-foto" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="случайное фото" >
         <p class="popup__title-big-image">Новое место</p>
       </div>
     </section>
@@ -96,6 +96,7 @@
       <p class="footer__description">© 2020 Mesto Russia</p>
     </footer>
   </div>
+  <script src="./scripts/cards-data.js"></script>
   <script src="./scripts/index.js"></script>
   <script src="./scripts/validate.js"></script>
 </body>
