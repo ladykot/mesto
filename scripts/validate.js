@@ -67,9 +67,9 @@ const enableValidation = ({formSelector, inputSelector, ...rest}) => {
 const toggleButtonState = (inputList, buttonElement) => {
     const inputElements = Array.from(inputList);
     const hasInvalidInput = inputElements.some((inputElement) => {
-        return inputElement.validity.valid;
+        return !inputElement.validity.valid;
     });
-    if(!hasInvalidInput) {
+    if(hasInvalidInput) {
         buttonElement.classList.add('popup__button-save_disable');
         buttonElement.setAttribute('disabled', true);
     } else {

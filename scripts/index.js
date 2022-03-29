@@ -63,19 +63,15 @@ function renderInitialCards(initialCards) {
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  if (popup === popupEditProfile) {
-    nameInput.value = nameProfileValue.textContent;
-    jobInput.value = jobProfileValue.textContent;
-  }
+  document.addEventListener('keydown', closeByEscape);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeByEscape);
 }
 
 function closePopupClickOverlay(event) {
-
-  console.log(event.target, event.currentTarget);
   // кликнули в зону попапа
   if(event.target !== event.currentTarget) {
     return;
@@ -98,14 +94,14 @@ function createCard() {
 }
 
 // submit для формы редактирования
-function formSubmitHandler(event) {
+function handleProfileFormSubmit(event) {
   event.preventDefault();  // отмена отправки на сервер
   nameProfileValue.textContent = nameInput.value;
   jobProfileValue.textContent = jobInput.value;
   closePopup(popupEditProfile);
 }
 
-function formCreateSubmitHandler(event) {
+function handleAddCardFormSubmit(event) {
   event.preventDefault();
   createCard();
   // очистка формы после создания карточки
@@ -134,9 +130,15 @@ function increaseFotoHandler(event) {
   openPopup(popupBigImage);
 }
 
+function addValuesEditPopup() {
+  nameInput.value = nameProfileValue.textContent; 
+  jobInput.value = jobProfileValue.textContent;
+}
+
 // слушатель для открытия попапа Редактирования
 profileButtonEditElement.addEventListener('click', function() { 
   openPopup(popupEditProfile);
+  addValuesEditPopup();
 });
 
 // слушатель для открытия попапа Создания
@@ -160,16 +162,12 @@ popupBigImageButtonClose.addEventListener('click', function() {
 });
 
 
-function keyHandler(evt) {
+function closeByEscape(evt) {
   if (evt.key === "Escape") {
     const popupActive = document.querySelector('.popup_opened');
     closePopup(popupActive);
   }
 }
-
-// слушатель закрытия через Escape
-document.addEventListener('keydown', keyHandler);
-
 
 
 popupEditProfile.addEventListener('click', closePopupClickOverlay);
@@ -180,7 +178,7 @@ popupElementCreate.addEventListener('click', closePopupClickOverlay);
 popupElementBigImage.addEventListener('click', closePopupClickOverlay);
 
 
-formCreateElement.addEventListener('submit', formCreateSubmitHandler);
+formCreateElement.addEventListener('submit', handleAddCardFormSubmit);
 
 // вызываем функцию добавления карточек при загрузке страницы
 renderInitialCards(initialCards);
