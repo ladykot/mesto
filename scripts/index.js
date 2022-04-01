@@ -24,7 +24,7 @@ const profileButtonEditElement = profile.querySelector('.profile__edit-button');
 const profileButtonCreateCard = profile.querySelector('.profile__add-button');
 
 // находим на странице popup и его поля Редактирования
-const formElement = popupElementEdit.querySelector('.popup__form');
+const formElement = document.forms[0];
 const nameInput = formElement.querySelector('.popup__inputs-item_type_name');
 const jobInput = formElement.querySelector('.popup__inputs-item_type_description');
 
@@ -33,7 +33,8 @@ const nameProfileValue = profileInfo.querySelector('.profile__name');
 const jobProfileValue = profileInfo.querySelector('.profile__description');
 
 // Создать новую карточку
-const formCreateElement = popupElementCreate.querySelector('.popup__form');
+// const formCreateElement = popupElementCreate.querySelector('.popup__form');
+const formCreateElement = document.forms[1];
 const popupCreateButtonClose = popupElementCreate.querySelector('.popup__button-close');
 const titleInput = formCreateElement.querySelector('.popup__inputs-item_type_title');
 const linkInput = formCreateElement.querySelector('.popup__inputs-item_type_link');
@@ -96,6 +97,7 @@ function createCard() {
 // submit для формы редактирования
 function handleProfileFormSubmit(event) {
   event.preventDefault();  // отмена отправки на сервер
+  console.log(nameProfileValue)
   nameProfileValue.textContent = nameInput.value;
   jobProfileValue.textContent = jobInput.value;
   closePopup(popupEditProfile);
@@ -179,6 +181,7 @@ popupElementBigImage.addEventListener('click', closePopupClickOverlay);
 
 
 formCreateElement.addEventListener('submit', handleAddCardFormSubmit);
+formElement.addEventListener('submit', handleProfileFormSubmit);
 
 // вызываем функцию добавления карточек при загрузке страницы
 renderInitialCards(initialCards);
