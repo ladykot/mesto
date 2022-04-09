@@ -1,4 +1,4 @@
-
+import { FormValidator } from "./FormValidator.js";
 
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupCreateCard = document.querySelector('.popup_type_create-card');
@@ -14,6 +14,7 @@ const popupButtonCloseElement = popupElementEdit.querySelector('.popup__button-c
 const popupCreateButtonCloseElement = popupCreateCard.querySelector('.popup__button-close_type_create');
 const popupBigImageButtonClose = popupBigImage.querySelector('.popup__button-close_type_big-foto');
 
+// место для вставки карточек
 const cardsSection = document.querySelector('.cards');
 
 
@@ -35,12 +36,28 @@ const jobProfileValue = profileInfo.querySelector('.profile__description');
 // Создать новую карточку
 // const formCreateElement = popupElementCreate.querySelector('.popup__form');
 const formCreateElement = document.forms[1];
-const popupCreateButtonClose = popupElementCreate.querySelector('.popup__button-close');
+// const popupCreateButtonClose = popupElementCreate.querySelector('.popup__button-close');
 const titleInput = formCreateElement.querySelector('.popup__inputs-item_type_title');
 const linkInput = formCreateElement.querySelector('.popup__inputs-item_type_link');
-const templateCard = document.querySelector('#template-card');
+// const templateCard = document.querySelector('#template-card');
 
 const buttonSubmitElement = formCreateElement.querySelector('.popup__button-save');
+
+const Settings = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__inputs-item',
+  inputInvalidSelector: '.popup__inputs-item_invalid',
+  buttonSelector: '.popup__button-save',
+  errorClass: 'popup__inputs-error_active',
+  buttonDisableClass: 'popup__button-save_disable',
+}
+
+const editProfileValidator = new FormValidator(Settings, formElement);
+const createCardValidator = new FormValidator(Settings, formCreateElement);
+
+editProfileValidator.enableValidation();
+createCardValidator.enableValidation();
+
 
 // функция добавления карточек через template
 function renderCard(card) {

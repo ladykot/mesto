@@ -1,4 +1,4 @@
-const obj = {
+const settings = {
     formSelector: '.popup__form',
     inputSelector: '.popup__inputs-item',
     buttonSelector: '.popup__button-save',
