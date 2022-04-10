@@ -81,4 +81,4 @@ const toggleButtonState = (inputList, buttonElement) => {
 }
 
 
-enableValidation(obj);
+// enableValidation(obj);

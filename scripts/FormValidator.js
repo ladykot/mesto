@@ -4,14 +4,14 @@ export class FormValidator {
         this._settings = settings;
     }
 
-    _showInputError(inputElement, errorMessage) {
+    _showInputError = (inputElement, errorMessage) => {
         const errorElement = this._getErrorElement(inputElement);
         errorElement.textContent = errorMessage;
         errorElement.classList.add(this._settings.errorClass);
         inputElement.classList.add(this._settings.inputInvalidSelector);
     }
 
-    _getErrorElement (inputElement) {
+    _getErrorElement = (inputElement) => {
         return this._form.querySelector(`.${inputElement.id}-error`);
     }
 
@@ -34,31 +34,42 @@ export class FormValidator {
 
 
     // метод наложения обработчиков на поля формы
-    _setEventListeners () {
+    _setEventListeners = () => {
         this._inputList = Array.from(this._form.querySelectorAll(this._settings.inputSelector));
-        const buttonElement = this._form.querySelector(this._settings.buttonSelector);
-
-        this._toggleButtonState(buttonElement);
+        // const buttonElement = this._form.querySelector(this._settings.buttonSelector);
+        this._toggleButtonState(this._buttonElement);
         this._inputList.forEach(inputElement => {
             inputElement.addEventListener('input', evt => {
                 this._checkInputValidity(inputElement);
-                this._toggleButtonState(buttonElement);
+                this._toggleButtonState(this._buttonElement);
             })
         })
     }
 
-    _toggleButtonState(buttonElement) {
+    disableSubmitButton = () => {
+        this._buttonElement().classList.add(this._settings.buttonDisableClass);
+        this._buttonElement().disabled = true;
+    }
+
+    enableSubmitButton = () => {
+        this._buttonElement().classList.remove(this._settings.buttonDisableClass);
+        this._buttonElement().disabled = false;
+    }
+
+    _buttonElement = () => {
+        return this._form.querySelector(this._settings.buttonSelector);
+    }
+
+    _toggleButtonState = () => {
         console.log("this =>", this)
         const inputElements = Array.from(this._inputList);
         const hasInvalidInput = inputElements.some((inputElement) => {
             return !inputElement.validity.valid;
         });
         if(hasInvalidInput) {
-            buttonElement.classList.add(this._settings.buttonDisableClass);
-            buttonElement.disabled = true;
+            this.disableSubmitButton();
         } else {
-            buttonElement.classList.remove(this._settings.buttonDisableClass);
-            buttonElement.disabled = false;
+            this.enableSubmitButton();
             }
         }
 
@@ -69,6 +80,10 @@ export class FormValidator {
         });
         this._setEventListeners();
     };
+
+    resetInputs() {
+        this._form.reset();
+    }
 }
 
 

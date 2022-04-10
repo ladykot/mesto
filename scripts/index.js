@@ -161,7 +161,10 @@ profileButtonEditElement.addEventListener('click', function() {
 });
 
 // слушатель для открытия попапа Создания
-profileButtonCreateCard.addEventListener('click', function() { 
+profileButtonCreateCard.addEventListener('click', function(event) { 
+  createCardValidator.disableSubmitButton();
+  createCardValidator.resetInputs();
+  // event.target.reset();
   openPopup(popupCreateCard);
 });
 
