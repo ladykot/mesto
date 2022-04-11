@@ -140,7 +140,6 @@ profileButtonEditElement.addEventListener('click', function() {
 profileButtonCreateCard.addEventListener('click', function(event) { 
   createCardValidator.resetInputs();
   createCardValidator.toggleButtonState();
-  // event.target.reset();
   openPopup(popupCreateCard);
 });
 
