@@ -14,6 +14,7 @@ export class Card {
 
     _deleteCardHandler = () => {
         this._cardItem.remove();
+        this._cardItem = null;
     };
 
     _setEventListeners() {
@@ -22,11 +23,11 @@ export class Card {
         this._increaseFoto.addEventListener('click', this._increaseFotoHandler);
     };
 
-    _increaseFotoHandler = (event) => {
-        const item = event.target.closest('.cards__item');
-        const itemTitle = item.querySelector('.cards__title').textContent;
-        const itemPic = item.querySelector('.cards__item-pic').src;
-        const itemAlt = item.querySelector('.cards__item-pic').alt;
+    _increaseFotoHandler = () => {
+        const itemTitle = this._cardItem.querySelector('.cards__title').textContent;
+        const itemPicTemplate = this._cardItem.querySelector('.cards__item-pic');
+        const itemPic = itemPicTemplate.src;
+        const itemAlt = this._cardItem.querySelector('.cards__item-pic').alt;
         bigImage.src = itemPic;
         bigImage.alt = itemAlt;
         popupBigImageTitle.textContent = itemTitle;
@@ -35,12 +36,13 @@ export class Card {
 
     getCard() {
         this._cardItem = this._templateCard.cloneNode(true);
+        this._increaseFoto = this._cardItem.querySelector('.cards__item-pic');
         this._cardItem.querySelector('.cards__title').textContent = this._data.name;
-        this._cardItem.querySelector('.cards__item-pic').src = this._data.link;
-        this._cardItem.querySelector('.cards__item-pic').alt = this._data.name;
+        this._increaseFoto.src = this._data.link;
+        this._increaseFoto.alt = this._data.name;
         this._likeButton = this._cardItem.querySelector('.cards__union');
         this._deleteButton = this._cardItem.querySelector('.cards__item-delete');
-        this._increaseFoto = this._cardItem.querySelector('.cards__item-pic');
+        
 
         this._setEventListeners();
     

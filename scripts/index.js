@@ -89,8 +89,6 @@ function createCard() {
 
 // submit для формы редактирования
 function handleProfileFormSubmit(event) {
-  event.preventDefault();  // отмена отправки на сервер
-  console.log(nameProfileValue)
   nameProfileValue.textContent = nameInput.value;
   jobProfileValue.textContent = jobInput.value;
   closePopup(popupEditProfile);
@@ -101,28 +99,6 @@ function handleAddCardFormSubmit(event) {
   createCard();
   // очистка формы после создания карточки
   event.target.reset();
-}
-
-// обработка лайка
-function likeHandler(cardItem) {
-  cardItem.target.classList.toggle('cards__union_active');
-};
-
-// обработка удаления карточки
-function deleteCardHandler(cardItem) {
-  cardItem.target.closest('.cards__item').remove();
-}
-
-// обработка увеличения фото 
-function increaseFotoHandler(event) {
-  const item = event.target.closest('.cards__item');
-  const itemTitle = item.querySelector('.cards__title').textContent;
-  const itemPic = item.querySelector('.cards__item-pic').src;
-  const itemAlt = item.querySelector('.cards__item-pic').alt;
-  bigImage.src = itemPic;
-  bigImage.alt = itemAlt;
-  popupBigImageTitle.textContent = itemTitle;
-  openPopup(popupBigImage);
 }
 
 function addValuesEditPopup() {

@@ -61,7 +61,6 @@ export class FormValidator {
     }
 
     toggleButtonState = () => {
-        console.log("this =>", this)
         const inputElements = Array.from(this._inputList);
         const hasInvalidInput = inputElements.some((inputElement) => {
             return !inputElement.validity.valid;
