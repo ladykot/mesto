@@ -57,16 +57,15 @@ export class FormValidator {
     }
 
     toggleButtonState = () => {
-        const inputElements = Array.from(this._inputList);
-        const hasInvalidInput = inputElements.some((inputElement) => {
+        const hasInvalidInput = this._inputList.some((inputElement) => {
             return !inputElement.validity.valid;
         });
         if(hasInvalidInput) {
             this.disableSubmitButton();
         } else {
             this.enableSubmitButton();
-            }
         }
+    }
 
     enableValidation() {
         // запуск процесса валидации для одной формы
