@@ -36,7 +36,7 @@ export class FormValidator {
     // метод наложения обработчиков на поля формы
     _setEventListeners = () => {
         this._inputList = Array.from(this._form.querySelectorAll(this._settings.inputSelector));
-        // const buttonElement = this._form.querySelector(this._settings.buttonSelector);
+        this._buttonElement = this._form.querySelector(this._settings.buttonSelector);
         this.toggleButtonState(this._buttonElement);
         this._inputList.forEach(inputElement => {
             inputElement.addEventListener('input', evt => {
@@ -47,17 +47,13 @@ export class FormValidator {
     }
 
     disableSubmitButton = () => {
-        this._buttonElement().classList.add(this._settings.buttonDisableClass);
-        this._buttonElement().disabled = true;
+        this._buttonElement.classList.add(this._settings.buttonDisableClass);
+        this._buttonElement.disabled = true;
     }
 
     enableSubmitButton = () => {
-        this._buttonElement().classList.remove(this._settings.buttonDisableClass);
-        this._buttonElement().disabled = false;
-    }
-
-    _buttonElement = () => {
-        return this._form.querySelector(this._settings.buttonSelector);
+        this._buttonElement.classList.remove(this._settings.buttonDisableClass);
+        this._buttonElement.disabled = false;
     }
 
     toggleButtonState = () => {
