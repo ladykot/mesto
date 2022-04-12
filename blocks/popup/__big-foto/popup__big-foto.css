@@ -1,6 +1,7 @@
 .popup__big-foto {
     /* min-width: 240px; */
     width: 100%;
+    max-width: 75vw;
     top: 36px;
     background: transparent;
     padding: 0 19px 0 19px;

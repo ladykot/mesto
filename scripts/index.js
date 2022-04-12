@@ -108,6 +108,7 @@ function addValuesEditPopup() {
 
 // слушатель для открытия попапа Редактирования
 profileButtonEditElement.addEventListener('click', function() { 
+  
   openPopup(popupEditProfile);
   addValuesEditPopup();
 });
