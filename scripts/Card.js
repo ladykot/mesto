@@ -42,10 +42,7 @@ export class Card {
         this._increaseFoto.alt = this._data.name;
         this._likeButton = this._cardItem.querySelector('.cards__union');
         this._deleteButton = this._cardItem.querySelector('.cards__item-delete');
-        
-
         this._setEventListeners();
-    
         return this._cardItem;
     };
 };

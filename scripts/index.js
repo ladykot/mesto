@@ -1,7 +1,7 @@
 import { FormValidator } from "./FormValidator.js";
 import { Card } from "./Card.js";
 import { openPopup, closePopup } from "./utils.js";
-import { popupBigImage, bigImage, popupBigImageTitle } from "./constants.js";
+import { popupBigImage } from "./constants.js";
 import {initialCards } from "./cards-data.js";
 
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
@@ -53,13 +53,17 @@ const createCardValidator = new FormValidator(Settings, formCreateElement);
 editProfileValidator.enableValidation();
 createCardValidator.enableValidation();
 
+function getCardItem(data) {
+  const card = new Card(data, '#template-card');
+  // забираем дом-элемент:
+  const cardItem = card.getCard();
+  return cardItem;
+}
 
 // функция рендеринга списка с наименованиями карточек и добавление карточек в вертску c помощью класса Card
 function renderInitialCards(initialCards) {
   initialCards.forEach((data) => {
-    const card = new Card(data, '#template-card');
-    // забираем дом-элемент:
-    const cardItem = card.getCard();
+    const cardItem = getCardItem(data);
     cardsSection.append(cardItem);
   });
 }
@@ -75,13 +79,11 @@ function closePopupClickOverlay(event) {
 
 // функция создает карточку через попап и закрывает попап (c помощью класса Card)
 function createCard() {
-  const userData = {
+  const data = {
     name: titleInput.value,
     link: linkInput.value
   };
-  const card = new Card(userData, '#template-card');
-  // забираем дом-элемент:
-  const cardItem = card.getCard();
+  const cardItem = getCardItem(data);
   cardsSection.prepend(cardItem);
   createCardValidator.disableSubmitButton();
   closePopup(popupCreateCard);
@@ -108,16 +110,13 @@ function addValuesEditPopup() {
 
 // слушатель для открытия попапа Редактирования
 profileButtonEditElement.addEventListener('click', function() { 
-  
   openPopup(popupEditProfile);
   addValuesEditPopup();
 });
 
 // слушатель для открытия попапа Создания
 profileButtonCreateCard.addEventListener('click', function() { 
-  
   createCardValidator.disableSubmitButton();
-  // createCardValidator.hideInputError();
   openPopup(popupCreateCard);
 });
 
