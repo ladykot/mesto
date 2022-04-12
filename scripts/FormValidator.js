@@ -75,9 +75,6 @@ export class FormValidator {
         this._setEventListeners();
     };
 
-    resetInputs() {
-        this._form.reset();
-    }
 }
 
 

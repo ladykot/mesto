@@ -88,7 +88,7 @@ function createCard() {
 }
 
 // submit для формы редактирования
-function handleProfileFormSubmit(event) {
+function handleProfileFormSubmit() {
   nameProfileValue.textContent = nameInput.value;
   jobProfileValue.textContent = jobInput.value;
   closePopup(popupEditProfile);
@@ -114,9 +114,10 @@ profileButtonEditElement.addEventListener('click', function() {
 });
 
 // слушатель для открытия попапа Создания
-profileButtonCreateCard.addEventListener('click', function(event) { 
-  createCardValidator.resetInputs();
-  createCardValidator.toggleButtonState();
+profileButtonCreateCard.addEventListener('click', function() { 
+  
+  createCardValidator.disableSubmitButton();
+  // createCardValidator.hideInputError();
   openPopup(popupCreateCard);
 });
 
