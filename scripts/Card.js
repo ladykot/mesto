@@ -25,9 +25,8 @@ export class Card {
 
     _increaseFotoHandler = () => {
         const itemTitle = this._cardItem.querySelector('.cards__title').textContent;
-        const itemPicTemplate = this._cardItem.querySelector('.cards__item-pic');
-        const itemPic = itemPicTemplate.src;
-        const itemAlt = this._cardItem.querySelector('.cards__item-pic').alt;
+        const itemPic = this._increaseFoto.src;
+        const itemAlt = this._increaseFoto.alt;
         bigImage.src = itemPic;
         bigImage.alt = itemAlt;
         popupBigImageTitle.textContent = itemTitle;

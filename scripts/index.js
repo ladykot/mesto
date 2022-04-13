@@ -25,7 +25,7 @@ const profileButtonEditElement = profile.querySelector('.profile__edit-button');
 const profileButtonCreateCard = profile.querySelector('.profile__add-button');
 
 // находим на странице popup и его поля Редактирования
-const formElement = document.forms[0];
+const formElement = document.forms['edit-profile'];
 const nameInput = formElement.querySelector('.popup__inputs-item_type_name');
 const jobInput = formElement.querySelector('.popup__inputs-item_type_description');
 
@@ -34,7 +34,7 @@ const nameProfileValue = profileInfo.querySelector('.profile__name');
 const jobProfileValue = profileInfo.querySelector('.profile__description');
 
 // Создать новую карточку
-const formCreateElement = document.forms[1];
+const formCreateElement = document.forms['create-card'];
 const titleInput = formCreateElement.querySelector('.popup__inputs-item_type_title');
 const linkInput = formCreateElement.querySelector('.popup__inputs-item_type_link');
 
