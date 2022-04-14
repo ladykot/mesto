@@ -4,7 +4,10 @@ import {popupBigImage, bigImage, popupBigImageTitle} from './constants.js';
 export class Card {
     constructor(data, templateSelector) {// templateSelector = '#template-card'
         this._templateSelector = templateSelector;
-        this._templateCard = document.querySelector(this._templateSelector).content.querySelector('.cards__item');
+        this._templateCard = document
+            .querySelector(this._templateSelector)
+            .content
+            .querySelector('.cards__item');
         this._data = data;
     };
 
@@ -24,12 +27,9 @@ export class Card {
     };
 
     _increaseFotoHandler = () => {
-        const itemTitle = this._cardItem.querySelector('.cards__title').textContent;
-        const itemPic = this._increaseFoto.src;
-        const itemAlt = this._increaseFoto.alt;
-        bigImage.src = itemPic;
-        bigImage.alt = itemAlt;
-        popupBigImageTitle.textContent = itemTitle;
+        bigImage.src = this._data.link;
+        bigImage.alt = this._data.name;
+        popupBigImageTitle.textContent = this._data.name;
         openPopup(popupBigImage);
     };
 
