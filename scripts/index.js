@@ -53,6 +53,7 @@ const createCardValidator = new FormValidator(Settings, formCreateElement);
 editProfileValidator.enableValidation();
 createCardValidator.enableValidation();
 
+// функция возвращает разметку карточки
 function getCardItem(data) {
   const card = new Card(data, '#template-card');
   // забираем дом-элемент:
@@ -60,7 +61,7 @@ function getCardItem(data) {
   return cardItem;
 }
 
-// функция рендеринга списка с наименованиями карточек и добавление карточек в вертску c помощью класса Card
+// функция добавления карточек в вертску c помощью класса Card
 function renderInitialCards(initialCards) {
   initialCards.forEach((data) => {
     const cardItem = getCardItem(data);
@@ -79,6 +80,7 @@ function closePopupClickOverlay(event) {
 
 // функция создает карточку через попап и закрывает попап (c помощью класса Card)
 function createCard() {
+  // берем данные из ипутов
   const data = {
     name: titleInput.value,
     link: linkInput.value

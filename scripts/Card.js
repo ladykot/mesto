@@ -34,7 +34,9 @@ export class Card {
     };
 
     getCard() {
+        // клонируем шаблон из разметки
         this._cardItem = this._templateCard.cloneNode(true);
+        // находим и меняем содержмое карточки
         this._increaseFoto = this._cardItem.querySelector('.cards__item-pic');
         this._cardItem.querySelector('.cards__title').textContent = this._data.name;
         this._increaseFoto.src = this._data.link;
@@ -42,6 +44,7 @@ export class Card {
         this._likeButton = this._cardItem.querySelector('.cards__union');
         this._deleteButton = this._cardItem.querySelector('.cards__item-delete');
         this._setEventListeners();
+        // возвращаем разметку карточки
         return this._cardItem;
     };
 };

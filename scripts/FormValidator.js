@@ -32,7 +32,6 @@ export class FormValidator {
         }
     }
 
-
     // метод наложения обработчиков на поля формы
     _setEventListeners = () => {
         this._inputList = Array.from(this._form.querySelectorAll(this._settings.inputSelector));
