@@ -1,8 +1,14 @@
 import { FormValidator } from "./FormValidator.js";
 import { Card } from "./Card.js";
 import { openPopup, closePopup } from "./utils.js";
-import { popupBigImage } from "./constants.js";
-import {initialCards } from "./cards-data.js";
+import { 
+  popupBigImage,
+  cardsSection,
+  initialCards,
+  Settings,
+} from "./constants.js";
+
+import Section from "../components/Section.js";
 
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupCreateCard = document.querySelector('.popup_type_create-card');
@@ -15,8 +21,7 @@ const popupButtonCloseElement = popupElementEdit.querySelector('.popup__button-c
 const popupCreateButtonCloseElement = popupCreateCard.querySelector('.popup__button-close_type_create');
 const popupBigImageButtonClose = popupBigImage.querySelector('.popup__button-close_type_big-foto');
 
-// место для вставки карточек
-const cardsSection = document.querySelector('.cards');
+
 
 // находим на странице profile и его элементы
 const profile = document.querySelector('.profile');
@@ -38,20 +43,14 @@ const formCreateElement = document.forms['create-card'];
 const titleInput = formCreateElement.querySelector('.popup__inputs-item_type_title');
 const linkInput = formCreateElement.querySelector('.popup__inputs-item_type_link');
 
-const Settings = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__inputs-item',
-  inputInvalidSelector: '.popup__inputs-item_invalid',
-  buttonSelector: '.popup__button-save',
-  errorClass: 'popup__inputs-error_active',
-  buttonDisableClass: 'popup__button-save_disable',
-}
 
 const editProfileValidator = new FormValidator(Settings, formElement);
 const createCardValidator = new FormValidator(Settings, formCreateElement);
 
 editProfileValidator.enableValidation();
 createCardValidator.enableValidation();
+
+const defaultCardList = new Section({items, renderer}, cardsSection)
 
 // функция возвращает разметку карточки
 function getCardItem(data) {
@@ -61,7 +60,7 @@ function getCardItem(data) {
   return cardItem;
 }
 
-// функция добавления карточек в вертску c помощью класса Card
+// функция добавления карточек в вертску c помощью класса Card (должен делать класс Section)
 function renderInitialCards(initialCards) {
   initialCards.forEach((data) => {
     const cardItem = getCardItem(data);
@@ -150,7 +149,9 @@ formCreateElement.addEventListener('submit', handleAddCardFormSubmit);
 formElement.addEventListener('submit', handleProfileFormSubmit);
 
 // вызываем функцию добавления карточек при загрузке страницы
-renderInitialCards(initialCards);
+// renderInitialCards(initialCards);
+
+
 
 
 
