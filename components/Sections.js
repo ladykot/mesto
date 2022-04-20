@@ -5,10 +5,13 @@ export default class Sections {
         this._container = containerSelector
     }
 
-    // отрисовка всех карточек на странице
+    // отрисовка всех карточек
     renderItems() {
         this._renderItems.forEach(item => this.renderer(item))
     }
 
-
+    // добавление карточек на страницу
+    addItem(element) {
+        this._container.append(element);
+      }
 }
