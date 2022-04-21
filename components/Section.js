@@ -7,11 +7,13 @@ export default class Section {
 
     // отрисовка всех карточек
     renderItems() {
-        this._renderItems.forEach(item => this.renderer(item))
+        this._renderItems.forEach(item => {
+            this._renderer(item);
+        });
     }
 
     // добавление карточек на страницу
     addItem(element) {
         this._container.append(element);
-      }
+    }
 }

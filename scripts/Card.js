@@ -1,14 +1,15 @@
-import {openPopup} from './utils.js';
+// import {openPopup} from './utils.js';
 import {popupBigImage, bigImage, popupBigImageTitle} from './constants.js';
 
 export class Card {
-    constructor(data, templateSelector) {// templateSelector = '#template-card'
+    constructor({data, handleCardClick}, templateSelector) {// templateSelector = '#template-card'
         this._templateSelector = templateSelector;
         this._templateCard = document
             .querySelector(this._templateSelector)
             .content
             .querySelector('.cards__item');
         this._data = data;
+        this._handleCardClick = handleCardClick;
     };
 
     _likeHandler = () => {
@@ -23,15 +24,16 @@ export class Card {
     _setEventListeners() {
         this._likeButton.addEventListener('click', this._likeHandler);
         this._deleteButton.addEventListener('click', this._deleteCardHandler);
-        this._increaseFoto.addEventListener('click', this._increaseFotoHandler);
+        // this._increaseFoto.addEventListener('click', this._increaseFotoHandler);
+        // this._increaseFoto.addEventListener('click', this._handleCardClick({name: thi}));
     };
 
-    _increaseFotoHandler = () => {
-        bigImage.src = this._data.link;
-        bigImage.alt = this._data.name;
-        popupBigImageTitle.textContent = this._data.name;
-        openPopup(popupBigImage);
-    };
+    // _increaseFotoHandler = () => {
+    //     bigImage.src = this._data.link;
+    //     bigImage.alt = this._data.name;
+    //     popupBigImageTitle.textContent = this._data.name;
+    //     openPopup(popupBigImage);
+    // };
 
     getCard() {
         // клонируем шаблон из разметки

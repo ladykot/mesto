@@ -1,6 +1,6 @@
 import { FormValidator } from "./FormValidator.js";
 import { Card } from "./Card.js";
-import { openPopup, closePopup } from "./utils.js";
+// import { openPopup, closePopup } from "./utils.js";
 import { 
   popupBigImage,
   cardsSection,
@@ -50,11 +50,26 @@ const createCardValidator = new FormValidator(Settings, formCreateElement);
 editProfileValidator.enableValidation();
 createCardValidator.enableValidation();
 
-const defaultCardList = new Section({items, renderer}, cardsSection)
+const cardList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const card = new Card({data: item, handleCardClick: () => {}}, '#template-card');
+    const cardElement = card.getCard();
+    cardList.addItem(cardElement);
+}}, cardsSection)
+
+cardList.renderItems();
+
+
+
+
+
+
+
 
 // функция возвращает разметку карточки
 function getCardItem(data) {
-  const card = new Card(data, '#template-card');
+  const card = new Card({data, handleCardClick: () => {}}, '#template-card');
   // забираем дом-элемент:
   const cardItem = card.getCard();
   return cardItem;
