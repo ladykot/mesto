@@ -9,6 +9,8 @@ import {
 } from "./constants.js";
 
 import Section from "../components/Section.js";
+import Popup from "../components/Popup.js";
+import PopupBigImage from "../components/PopupWithImage.js";
 
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupCreateCard = document.querySelector('.popup_type_create-card');
@@ -47,41 +49,57 @@ const linkInput = formCreateElement.querySelector('.popup__inputs-item_type_link
 const editProfileValidator = new FormValidator(Settings, formElement);
 const createCardValidator = new FormValidator(Settings, formCreateElement);
 
+
+
 editProfileValidator.enableValidation();
 createCardValidator.enableValidation();
 
+// создаем карточку 
+const createCard = (item) => {
+  const card = new Card({data: item, handleCardClick: (item) => { // слушатель на картинку
+    const popupImage = new PopupBigImage(item, '.popup_type_big-image');
+    popupImage.open(); // получить фото по клику
+  }}, '#template-card');
+  return card.getCard();
+}
+
+// отрисовка всех карточек в разметке
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card({data: item, handleCardClick: () => {}}, '#template-card');
-    const cardElement = card.getCard();
-    cardList.addItem(cardElement);
+    cardList.addItem(createCard(item));
 }}, cardsSection)
+
 
 cardList.renderItems();
 
 
 
+const popup = new Popup(".popup_type_edit-profile");
 
 
 
 
 
-// функция возвращает разметку карточки
-function getCardItem(data) {
-  const card = new Card({data, handleCardClick: () => {}}, '#template-card');
-  // забираем дом-элемент:
-  const cardItem = card.getCard();
-  return cardItem;
-}
 
-// функция добавления карточек в вертску c помощью класса Card (должен делать класс Section)
-function renderInitialCards(initialCards) {
-  initialCards.forEach((data) => {
-    const cardItem = getCardItem(data);
-    cardsSection.append(cardItem);
-  });
-}
+
+
+
+// // функция возвращает разметку карточки
+// function getCardItem(data) {
+//   const card = new Card({data, handleCardClick: () => {}}, '#template-card');
+//   // забираем дом-элемент:
+//   const cardItem = card.getCard();
+//   return cardItem;
+// }
+
+// // функция добавления карточек в вертску c помощью класса Card (должен делать класс Section)
+// function renderInitialCards(initialCards) {
+//   initialCards.forEach((data) => {
+//     const cardItem = getCardItem(data);
+//     cardsSection.append(cardItem);
+//   });
+// }
 
 function closePopupClickOverlay(event) {
   // кликнули в зону попапа
@@ -92,18 +110,18 @@ function closePopupClickOverlay(event) {
   closePopup(popupActive);
 }
 
-// функция создает карточку через попап и закрывает попап (c помощью класса Card)
-function createCard() {
-  // берем данные из ипутов
-  const data = {
-    name: titleInput.value,
-    link: linkInput.value
-  };
-  const cardItem = getCardItem(data);
-  cardsSection.prepend(cardItem);
-  createCardValidator.disableSubmitButton();
-  closePopup(popupCreateCard);
-}
+// // функция создает карточку через попап и закрывает попап (c помощью класса Card)
+// function createCard() {
+//   // берем данные из ипутов
+//   const data = {
+//     name: titleInput.value,
+//     link: linkInput.value
+//   };
+//   const cardItem = getCardItem(data);
+//   cardsSection.prepend(cardItem);
+//   createCardValidator.disableSubmitButton();
+//   closePopup(popupCreateCard);
+// }
 
 // submit для формы редактирования
 function handleProfileFormSubmit() {
@@ -126,7 +144,7 @@ function addValuesEditPopup() {
 
 // слушатель для открытия попапа Редактирования
 profileButtonEditElement.addEventListener('click', function() { 
-  openPopup(popupEditProfile);
+  popup.open();
   addValuesEditPopup();
 });
 
@@ -136,9 +154,13 @@ profileButtonCreateCard.addEventListener('click', function() {
   openPopup(popupCreateCard);
 });
 
+
+
+// Слушатели закрытия попапа перенести в класс Popup
+
 // слушатель для закрытия попапа Редактирования
 popupButtonCloseElement.addEventListener('click', function() { 
-  closePopup(popupEditProfile);
+  popup.close();
 });
 
 // слушатель для закрытия попапа Создания

@@ -25,7 +25,7 @@ export class Card {
         this._likeButton.addEventListener('click', this._likeHandler);
         this._deleteButton.addEventListener('click', this._deleteCardHandler);
         // this._increaseFoto.addEventListener('click', this._increaseFotoHandler);
-        // this._increaseFoto.addEventListener('click', this._handleCardClick({name: thi}));
+        this._increaseFoto.addEventListener('click', () => this._handleCardClick(this._data));
     };
 
     // _increaseFotoHandler = () => {
