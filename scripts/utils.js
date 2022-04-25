@@ -11,7 +11,7 @@
 //     }
 // }
 
-export function closePopup(popup) {
-    popup.classList.remove('popup_opened');
-    document.removeEventListener('keydown', closeByEscape);
+// export function closePopup(popup) {
+//     popup.classList.remove('popup_opened');
+//     document.removeEventListener('keydown', closeByEscape);
   }

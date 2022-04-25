@@ -10,7 +10,7 @@ import {
 
 import Section from "../components/Section.js";
 import Popup from "../components/Popup.js";
-import PopupBigImage from "../components/PopupWithImage.js";
+import PopupWithImage from "../components/PopupWithImage.js";
 
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupCreateCard = document.querySelector('.popup_type_create-card');
@@ -45,23 +45,23 @@ const formCreateElement = document.forms['create-card'];
 const titleInput = formCreateElement.querySelector('.popup__inputs-item_type_title');
 const linkInput = formCreateElement.querySelector('.popup__inputs-item_type_link');
 
-
 const editProfileValidator = new FormValidator(Settings, formElement);
 const createCardValidator = new FormValidator(Settings, formCreateElement);
-
 
 
 editProfileValidator.enableValidation();
 createCardValidator.enableValidation();
 
-// создаем карточку 
+// создаем карточку
 const createCard = (item) => {
-  const card = new Card({data: item, handleCardClick: (item) => { // слушатель на картинку
-    const popupImage = new PopupBigImage(item, '.popup_type_big-image');
+  const card = new Card({data: item, handleCardClick: (item) => { // обработчик на картинку создает класс с большим фото
+    const popupImage = new PopupWithImage(item, '.popup_type_big-image');
     popupImage.open(); // получить фото по клику
+    popupImage.setEventListeners(); // закрыть по крестику
   }}, '#template-card');
   return card.getCard();
 }
+
 
 // отрисовка всех карточек в разметке
 const cardList = new Section({
@@ -75,7 +75,7 @@ cardList.renderItems();
 
 
 
-const popup = new Popup(".popup_type_edit-profile");
+// const popup = new Popup(".popup_type_edit-profile");
 
 
 
@@ -101,14 +101,7 @@ const popup = new Popup(".popup_type_edit-profile");
 //   });
 // }
 
-function closePopupClickOverlay(event) {
-  // кликнули в зону попапа
-  if(event.target !== event.currentTarget) {
-    return;
-  }
-  const popupActive = document.querySelector('.popup_opened');
-  closePopup(popupActive);
-}
+
 
 // // функция создает карточку через попап и закрывает попап (c помощью класса Card)
 // function createCard() {
@@ -159,9 +152,9 @@ profileButtonCreateCard.addEventListener('click', function() {
 // Слушатели закрытия попапа перенести в класс Popup
 
 // слушатель для закрытия попапа Редактирования
-popupButtonCloseElement.addEventListener('click', function() { 
-  popup.close();
-});
+// popupButtonCloseElement.addEventListener('click', function() { 
+//   popup.close();
+// });
 
 // слушатель для закрытия попапа Создания
 popupCreateButtonCloseElement.addEventListener('click', function() { 
@@ -169,17 +162,17 @@ popupCreateButtonCloseElement.addEventListener('click', function() {
 });
 
 // слушатель для закрытия попапа с Большой фото
-popupBigImageButtonClose.addEventListener('click', function() { 
-  closePopup(popupBigImage);
-});
+// popupBigImageButtonClose.addEventListener('click', function() { 
+//   closePopup(popupBigImage);
+// });
 
 
-popupEditProfile.addEventListener('click', closePopupClickOverlay);
-popupCreateCard.addEventListener('click', closePopupClickOverlay);
-popupBigImage.addEventListener('click', closePopupClickOverlay);
-popupElementEdit.addEventListener('click', closePopupClickOverlay);
-popupElementCreate.addEventListener('click', closePopupClickOverlay);
-popupElementBigImage.addEventListener('click', closePopupClickOverlay);
+// popupEditProfile.addEventListener('click', closePopupClickOverlay);
+// popupCreateCard.addEventListener('click', closePopupClickOverlay);
+// popupBigImage.addEventListener('click', closePopupClickOverlay);
+// popupElementEdit.addEventListener('click', closePopupClickOverlay);
+// popupElementCreate.addEventListener('click', closePopupClickOverlay);
+// popupElementBigImage.addEventListener('click', closePopupClickOverlay);
 
 
 formCreateElement.addEventListener('submit', handleAddCardFormSubmit);

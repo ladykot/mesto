@@ -1,6 +1,3 @@
-// import {openPopup} from './utils.js';
-import {popupBigImage, bigImage, popupBigImageTitle} from './constants.js';
-
 export class Card {
     constructor({data, handleCardClick}, templateSelector) {// templateSelector = '#template-card'
         this._templateSelector = templateSelector;
@@ -24,16 +21,8 @@ export class Card {
     _setEventListeners() {
         this._likeButton.addEventListener('click', this._likeHandler);
         this._deleteButton.addEventListener('click', this._deleteCardHandler);
-        // this._increaseFoto.addEventListener('click', this._increaseFotoHandler);
         this._increaseFoto.addEventListener('click', () => this._handleCardClick(this._data));
     };
-
-    // _increaseFotoHandler = () => {
-    //     bigImage.src = this._data.link;
-    //     bigImage.alt = this._data.name;
-    //     popupBigImageTitle.textContent = this._data.name;
-    //     openPopup(popupBigImage);
-    // };
 
     getCard() {
         // клонируем шаблон из разметки
