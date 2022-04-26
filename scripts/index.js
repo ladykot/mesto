@@ -84,6 +84,7 @@ const userInfo = new UserInfo({
 // создаем попап редактирования (при клике на кнопку редактирования)
 const popupEdit = new PopupWithForm({
   handelSubmitForm: (data) => {
+    userInfo.setUserInfo(data);  // запишем новые данные из инпутов в профиль
     popupEdit.close();
   }, popupSelector: '.popup_type_edit-profile'
 });
