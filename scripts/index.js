@@ -11,6 +11,8 @@ import {
 import Section from "../components/Section.js";
 import Popup from "../components/Popup.js";
 import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupCreateCard = document.querySelector('.popup_type_create-card');
@@ -70,14 +72,53 @@ const cardList = new Section({
     cardList.addItem(createCard(item));
 }}, cardsSection)
 
-
 cardList.renderItems();
 
 
+const userInfo = new UserInfo({
+  name: '.profile__name', 
+  description: '.profile__description'
+});
 
-// const popup = new Popup(".popup_type_edit-profile");
+
+// создаем попап редактирования (при клике на кнопку редактирования)
+const popupEdit = new PopupWithForm({
+  handelSubmitForm: (data) => {
+    popupEdit.close();
+  }, popupSelector: '.popup_type_edit-profile'
+});
+
+popupEdit.setEventListeners();
 
 
+
+// создаем попап добавления новой карточки (при клике на кнопку плюсик)
+const popupCreate = new PopupWithForm({
+  popupSelector: '.popup_type_create-card',
+  handelSubmitForm: (data) => { // обработчик создает новую карточку по данным пользователя
+    const card = createCard(data);
+    cardList.addItem(card); // добавляем карточку в разметку
+    popupCreate.close();
+  }} 
+);
+
+popupCreate.setEventListeners();
+
+// слушатель для открытия попапа Редактирования
+profileButtonEditElement.addEventListener('click', function() { 
+  const {name, description} = userInfo.getUserInfo(); // взять данные из профиля
+  nameInput.value = name; // записать в инпуты попапа
+  jobInput.value = description;
+  popupEdit.open();
+  
+  // addValuesEditPopup();
+});
+
+// слушатель для открытия попапа Создания
+profileButtonCreateCard.addEventListener('click', function() { 
+  createCardValidator.disableSubmitButton();
+  popupCreate.open();
+});
 
 
 
@@ -117,35 +158,24 @@ cardList.renderItems();
 // }
 
 // submit для формы редактирования
-function handleProfileFormSubmit() {
-  nameProfileValue.textContent = nameInput.value;
-  jobProfileValue.textContent = jobInput.value;
-  closePopup(popupEditProfile);
-}
+// function handleProfileFormSubmit() {
+//   nameProfileValue.textContent = nameInput.value;
+//   jobProfileValue.textContent = jobInput.value;
+//   closePopup(popupEditProfile);
+// }
 
-function handleAddCardFormSubmit(event) {
-  event.preventDefault();
-  createCard();
-  // очистка формы после создания карточки
-  event.target.reset();
-}
+// function handleAddCardFormSubmit(event) {
+//   event.preventDefault();
+//   createCard();
+//   // очистка формы после создания карточки
+//   event.target.reset();
+// }
 
-function addValuesEditPopup() {
-  nameInput.value = nameProfileValue.textContent; 
-  jobInput.value = jobProfileValue.textContent;
-}
+// function addValuesEditPopup() {
+//   nameInput.value = nameProfileValue.textContent; 
+//   jobInput.value = jobProfileValue.textContent;
+// }
 
-// слушатель для открытия попапа Редактирования
-profileButtonEditElement.addEventListener('click', function() { 
-  popup.open();
-  addValuesEditPopup();
-});
-
-// слушатель для открытия попапа Создания
-profileButtonCreateCard.addEventListener('click', function() { 
-  createCardValidator.disableSubmitButton();
-  openPopup(popupCreateCard);
-});
 
 
 
@@ -157,9 +187,9 @@ profileButtonCreateCard.addEventListener('click', function() {
 // });
 
 // слушатель для закрытия попапа Создания
-popupCreateButtonCloseElement.addEventListener('click', function() { 
-  closePopup(popupCreateCard);
-});
+// popupCreateButtonCloseElement.addEventListener('click', function() { 
+//   closePopup(popupCreateCard);
+// });
 
 // слушатель для закрытия попапа с Большой фото
 // popupBigImageButtonClose.addEventListener('click', function() { 
@@ -174,9 +204,9 @@ popupCreateButtonCloseElement.addEventListener('click', function() {
 // popupElementCreate.addEventListener('click', closePopupClickOverlay);
 // popupElementBigImage.addEventListener('click', closePopupClickOverlay);
 
+// сабмит на форму 
+// formCreateElement.addEventListener('submit', handleAddCardFormSubmit);
 
-formCreateElement.addEventListener('submit', handleAddCardFormSubmit);
-formElement.addEventListener('submit', handleProfileFormSubmit);
 
 // вызываем функцию добавления карточек при загрузке страницы
 // renderInitialCards(initialCards);

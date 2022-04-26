@@ -14,6 +14,4 @@ export default class PopupWithImage extends Popup {
         image.alt = this._name;
         super.open(); // добавляем модификатор '.popup_opend'
     }
-
-    
 }

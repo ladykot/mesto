@@ -33,13 +33,13 @@ export default class Popup {
         this.close();
     }
 
-    setEventListeners = () => {
+    setEventListeners () {
         this._buttonClose.addEventListener('click', () => this.close());
         Object.values(dataOverlay).forEach(item  => { // проходим по всем значениям селекторов
            const element = document.querySelector(item);
            element.addEventListener('click', (event) => {this._handleClickOverlay(event)} )
         });
-
     }
 }
+
 
