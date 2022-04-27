@@ -59,9 +59,10 @@ const createCard = (item) => {
   const card = new Card({data: item, handleCardClick: (item) => { // обработчик на картинку создает класс с большим фото
     const popupImage = new PopupWithImage(item, '.popup_type_big-image');
     popupImage.open(); // получить фото по клику
-    popupImage.setEventListeners(); // закрыть по крестику
+    popupImage.setEventListeners(); // закрытия
   }}, '#template-card');
-  return card.getCard();
+  const templateCard = card.getCard();
+  return templateCard;
 }
 
 
@@ -84,7 +85,7 @@ const userInfo = new UserInfo({
 // создаем попап редактирования (при клике на кнопку редактирования)
 const popupEdit = new PopupWithForm({
   handelSubmitForm: (data) => {
-    userInfo.setUserInfo(data);  // запишем новые данные из инпутов в профиль
+    userInfo.setUserInfo(data);  // запишем НОВЫЕ данные из инпутов в профиль
     popupEdit.close();
   }, popupSelector: '.popup_type_edit-profile'
 });
@@ -92,16 +93,14 @@ const popupEdit = new PopupWithForm({
 popupEdit.setEventListeners();
 
 
-
 // создаем попап добавления новой карточки (при клике на кнопку плюсик)
 const popupCreate = new PopupWithForm({
-  popupSelector: '.popup_type_create-card',
   handelSubmitForm: (data) => { // обработчик создает новую карточку по данным пользователя
-    const card = createCard(data);
+    const card = createCard(data);  // data должно = {name, link}
     cardList.addItem(card); // добавляем карточку в разметку
     popupCreate.close();
-  }} 
-);
+  }, popupSelector: '.popup_type_create-card'
+});
 
 popupCreate.setEventListeners();
 
@@ -111,7 +110,6 @@ profileButtonEditElement.addEventListener('click', function() {
   nameInput.value = name; // записать в инпуты попапа
   jobInput.value = description;
   popupEdit.open();
-  
   // addValuesEditPopup();
 });
 
@@ -120,10 +118,6 @@ profileButtonCreateCard.addEventListener('click', function() {
   createCardValidator.disableSubmitButton();
   popupCreate.open();
 });
-
-
-
-
 
 
 
