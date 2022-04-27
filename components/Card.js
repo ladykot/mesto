@@ -1,4 +1,4 @@
-export class Card {
+export default class Card {
     constructor({data, handleCardClick}, templateSelector) {// templateSelector = '#template-card'
         this._templateSelector = templateSelector;
         this._templateCard = document

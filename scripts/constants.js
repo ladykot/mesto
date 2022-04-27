@@ -1,7 +1,12 @@
-export const popupBigImage = document.querySelector('.popup_type_big-image');
-export const bigImage = popupBigImage.querySelector('.popup__big-foto');
-export const popupBigImageTitle = document.querySelector('.popup__title-big-image');
+export const profile = document.querySelector('.profile');
+export const profileButtonEditElement = profile.querySelector('.profile__edit-button');
+export const profileButtonCreateCard = profile.querySelector('.profile__add-button');
+export const formElement = document.forms['edit-profile'];
+export const nameInput = formElement.querySelector('.popup__inputs-item_type_name');
+export const jobInput = formElement.querySelector('.popup__inputs-item_type_description');
+export const formCreateElement = document.forms['create-card'];
 
+// данные для карточек
 export const initialCards = [
     {
       name: 'Архыз',
@@ -39,10 +44,11 @@ export const Settings = {
     buttonSelector: '.popup__button-save',
     errorClass: 'popup__inputs-error_active',
     buttonDisableClass: 'popup__button-save_disable',
-  }
+}
 
 export const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 
+// селекторы для обработки кликов по темной области за границей попапа
 export const dataOverlay = {
     popupBigImage: '.popup_type_big-image',
     popupEditProfile: '.popup_type_edit-profile',
