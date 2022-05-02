@@ -1,4 +1,4 @@
-import {dataOverlay} from "../scripts/constants.js"
+import {dataOverlay} from "../utils/constants.js"
 
 export default class Popup {
     constructor(popupSelector) {
