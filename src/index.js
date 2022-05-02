@@ -63,7 +63,6 @@ const popupEdit = new PopupWithForm({
 
 popupEdit.setEventListeners();
 
-
 // создаем попап добавления новой карточки (при клике на кнопку плюсик)
 const popupCreate = new PopupWithForm({
   handelSubmitForm: (data) => { // обработчик создает новую карточку по данным пользователя
