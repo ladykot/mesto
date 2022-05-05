@@ -67,12 +67,10 @@ export default class FormValidator {
     }
 
     enableValidation() {
-        // запуск процесса валидации для одной формы
-        this._form.addEventListener('submit', (event) => {
-            event.preventDefault();
-        });
         this._setEventListeners();
     };
+
+
 
 }
 
