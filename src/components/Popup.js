@@ -34,11 +34,10 @@ export default class Popup {
     }
 
     setEventListeners () {
-        this._buttonClose.addEventListener('click', () => this.close());
-        Object.values(dataOverlay).forEach(item  => { // проходим по всем значениям селекторов
-           const element = document.querySelector(item);
-           element.addEventListener('click', (event) => {this._handleClickOverlay(event)} )
-        });
+        this._buttonClose.addEventListener('click', () => this.close()); // слушатель на кнопку закрытия попапа
+        this._popupElement.addEventListener('click', (event) => {this._handleClickOverlay(event)});
+        const popupContainer = this._popupElement.querySelector('.popup__container');
+        popupContainer.addEventListener('click', (event) => {this._handleClickOverlay(event)});
     }
 }
 

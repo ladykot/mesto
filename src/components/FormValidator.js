@@ -67,10 +67,9 @@ export default class FormValidator {
     }
 
     enableValidation() {
+        // запуск процесса валидации для одной формы
         this._setEventListeners();
     };
-
-
 
 }
 
