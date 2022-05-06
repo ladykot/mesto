@@ -83,10 +83,12 @@ profileButtonEditElement.addEventListener('click', function() {
   nameInput.value = name; // записать в инпуты попапа
   jobInput.value = description;
   popupEdit.open();
+  editProfileValidator.resetErrors();
 });
 
 // слушатель для открытия попапа Создания
 profileButtonCreateCard.addEventListener('click', function() { 
   createCardValidator.disableSubmitButton();
   popupCreate.open();
+  createCardValidator.resetErrors();
 });
