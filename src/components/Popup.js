@@ -1,5 +1,3 @@
-import {dataOverlay} from "../utils/constants.js"
-
 export default class Popup {
     constructor(popupSelector) {
         this._popupSelector = popupSelector;

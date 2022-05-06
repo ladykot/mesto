@@ -47,13 +47,3 @@ export const Settings = {
 }
 
 export const popupEditProfile = document.querySelector('.popup_type_edit-profile');
-
-// селекторы для обработки кликов по темной области за границей попапа
-export const dataOverlay = {
-    popupBigImage: '.popup_type_big-image',
-    popupEditProfile: '.popup_type_edit-profile',
-    popupCreateCard: '.popup_type_create-card',
-    popupElementEdit: '.popup__container_edit-profile',
-    popupElementCreate: '.popup__container_create-card',
-    popupElementBigImage: '.popup__container_big-image',
-}

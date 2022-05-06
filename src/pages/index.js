@@ -25,17 +25,19 @@ const createCardValidator = new FormValidator(Settings, formCreateElement);
 editProfileValidator.enableValidation();
 createCardValidator.enableValidation();
 
+const popupImage = new PopupWithImage('.popup_type_big-image');
+
+
 // создаем карточку
 const createCard = (item) => {
   const card = new Card({data: item, handleCardClick: (item) => { // обработчик на картинку создает класс с большим фото
-    const popupImage = new PopupWithImage(item, '.popup_type_big-image');
-    popupImage.open(); // получить фото по клику
-    popupImage.setEventListeners(); // закрытия
+    popupImage.open(item); // получить фото по клику
   }}, '#template-card');
   const templateCard = card.getCard();
   return templateCard;
 }
 
+popupImage.setEventListeners();
 
 // отрисовка всех карточек в разметке
 const cardList = new Section({
