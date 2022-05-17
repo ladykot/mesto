@@ -41,14 +41,14 @@ popupImage.setEventListeners();
 
 // отрисовка всех карточек в разметке
 const cardList = new Section({
-  items: initialCards,
+  items: initialCards, // сюда записать другой способ отображения карточек (из объекта запроса)
   renderer: (item) => {
     cardList.addItem(createCard(item));
 }}, cardsSection)
 
 cardList.renderItems();
 
-// создаем класс с данными из профиля
+// создаем класс с данными из профиля (данные берем с сервера)
 const userInfo = new UserInfo({
   name: '.profile__name', 
   description: '.profile__description'
@@ -92,3 +92,24 @@ profileButtonCreateCard.addEventListener('click', function() {
   popupCreate.open();
   createCardValidator.resetErrors();
 });
+
+
+// Запросы на сервер
+
+
+fetch('https://mesto.nomoreparties.co/v1/cohort-40/cards ', {
+  headers: {
+    authorization: 'c054ddce-2ad7-4680-ba7d-e78ec8a6a9d8'
+  }
+})
+  .then(res => res.json())
+  .then((result) => {
+    console.log("Результат запроса:", result[0].name);
+  });
+
+
+// ToDo:
+// Функция, которая делает запрос на сервер (наверное, это Promise),
+// проходится по массиву,
+// берет из res значения name и link,
+// вставляет в функцию для отображения карточек

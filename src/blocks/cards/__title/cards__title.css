@@ -1,4 +1,6 @@
 .cards__title {
+    grid-row: 1/3;
+    
     color: black;
     font-style: normal;
     font-weight: 900;
