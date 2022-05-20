@@ -1,14 +1,16 @@
 export default class UserInfo {
-    constructor({name, description}) {
+    constructor({name, description, avatar}) {
         this._name = document.querySelector(name);
         this._description = document.querySelector(description);
+        this._avatar = document.querySelector(avatar);
     }
 
     getUserInfo() {
         // взять данные из профиля
         const userInfo = {
             name: this._name.textContent,
-            description: this._description.textContent
+            description: this._description.textContent,
+            avatar: this._avatar.src
         }
         return userInfo;
     }
@@ -17,6 +19,7 @@ export default class UserInfo {
         // новые данные подставить в профиль
         this._name.textContent = userInfo.name;
         this._description.textContent = userInfo.description;
+        this._avatar.src = userInfo.avatar
     }
 
 }

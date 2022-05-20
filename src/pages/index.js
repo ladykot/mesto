@@ -48,12 +48,35 @@ const cardList = new Section({
 
 cardList.renderItems();
 
-// создаем класс с данными из профиля (данные берем с сервера)
+
+// создаем класс с данными из профиля (переписать в функцию?)
+
 const userInfo = new UserInfo({
   name: '.profile__name', 
-  description: '.profile__description'
+  description: '.profile__description',
+  avatar: '.profile__pic'
 });
 
+
+// создать запрос на сервер для данных в профиль
+function getProfileData (userInfo) {
+  fetch('https://nomoreparties.co/v1/cohort-40/users/me', {
+    headers: {
+      authorization: 'c054ddce-2ad7-4680-ba7d-e78ec8a6a9d8'
+    }
+  })
+  .then((res) => res.json()) // разобрали ответ как JSON
+  .then((data) => {
+    const dataProfile = { // создать объект с данными для профиля
+      name: data.name,
+      description: data.about,
+      avatar: data.avatar
+    };
+    userInfo.setUserInfo(dataProfile) // вставим в профиль
+  })
+}
+
+getProfileData (userInfo);
 
 // создаем попап редактирования (при клике на кнопку редактирования)
 const popupEdit = new PopupWithForm({
@@ -104,7 +127,10 @@ fetch('https://mesto.nomoreparties.co/v1/cohort-40/cards ', {
 })
   .then(res => res.json())
   .then((result) => {
-    console.log("Результат запроса:", result[0].name);
+    return {
+      name: result[0].name,
+      link: result[0].link
+    }
   });
 
 
