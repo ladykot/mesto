@@ -6,6 +6,7 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
+import { api } from '../components/Api.js'; // импортируем экземпляр
 
 import { 
   cardsSection,
@@ -18,6 +19,8 @@ import {
   jobInput,
   formCreateElement,
 } from "../utils/constants.js";
+
+// import { resolve } from 'core-js/fn/promise';
 
 const editProfileValidator = new FormValidator(Settings, formElement);
 const createCardValidator = new FormValidator(Settings, formCreateElement);
@@ -39,6 +42,39 @@ const createCard = (item) => {
 
 popupImage.setEventListeners();
 
+
+// запрос на данные для карточек
+// function getDataCards () {
+//   fetch('https://mesto.nomoreparties.co/v1/cohort-44/cards', {
+//     headers: {
+//       authorization: 'ca203a3f-def8-4b98-b8c0-30f8a6e88919'
+//     }
+//   })
+//   .then((res) => {
+//     const response = res.json()
+//     console.log(response)
+//     return response
+//   })
+//   .then((data) => {
+//     const cardsObject = []
+//     data.forEach(element => {
+//       for (let i = 0; i <= data.length; i++) {
+//         cardsObject[i] = {
+//           name: element.name,
+//           link: element.link,
+//         }
+//       }
+//     });
+//     console.log("Карточки из функции", cardsObject)
+//     return cardsObject
+//   })
+//   // .then((data) => )
+// }
+
+// const cards = getDataCards()
+// console.log("Карточки",cards)
+
+
 // отрисовка всех карточек в разметке
 const cardList = new Section({
   items: initialCards, // сюда записать другой способ отображения карточек (из объекта запроса)
@@ -47,7 +83,6 @@ const cardList = new Section({
 }}, cardsSection)
 
 cardList.renderItems();
-
 
 // создаем класс с данными из профиля (переписать в функцию?)
 
@@ -58,25 +93,45 @@ const userInfo = new UserInfo({
 });
 
 
-// создать запрос на сервер для данных в профиль
-function getProfileData (userInfo) {
-  fetch('https://nomoreparties.co/v1/cohort-40/users/me', {
-    headers: {
-      authorization: 'c054ddce-2ad7-4680-ba7d-e78ec8a6a9d8'
-    }
-  })
-  .then((res) => res.json()) // разобрали ответ как JSON
-  .then((data) => {
-    const dataProfile = { // создать объект с данными для профиля
+// // создать запрос на сервер для данных в профиль (перенести в класс Api)
+// function getProfileData (userInfo) {
+//   fetch('https://mesto.nomoreparties.co/v1/cohort-44/users/me', {
+//     headers: {
+//       authorization: 'ca203a3f-def8-4b98-b8c0-30f8a6e88919'
+//     }
+//   })
+//   .then((res) => res.json()) // разобрали ответ как JSON
+//   .then((data) => { // ToDo: записать в функцию
+//     console.log("результат", data)
+//     const dataProfile = { // создать объект с данными для профиля
+//       name: data.name,
+//       description: data.about,
+//       avatar: data.avatar
+//     };
+//     userInfo.setUserInfo(dataProfile) // вставим в профиль
+//   })
+// }
+
+// getProfileData(userInfo);
+
+// вызываем метод класса Api 
+api.getProfileData()
+.then((data) => {
+  console.log("ответ", data)
+  const dataProfile = { 
+    // создать объект с данными для профиля
       name: data.name,
       description: data.about,
       avatar: data.avatar
-    };
-    userInfo.setUserInfo(dataProfile) // вставим в профиль
-  })
-}
+  };
+  userInfo.setUserInfo(dataProfile) // вставим в профиль)
+})
 
-getProfileData (userInfo);
+
+
+
+
+
 
 // создаем попап редактирования (при клике на кнопку редактирования)
 const popupEdit = new PopupWithForm({
@@ -125,13 +180,13 @@ fetch('https://mesto.nomoreparties.co/v1/cohort-40/cards ', {
     authorization: 'c054ddce-2ad7-4680-ba7d-e78ec8a6a9d8'
   }
 })
-  .then(res => res.json())
-  .then((result) => {
-    return {
-      name: result[0].name,
-      link: result[0].link
-    }
-  });
+.then(res => res.json())
+.then((result) => {
+  return {
+    name: result[0].name,
+    link: result[0].link
+  }
+});
 
 
 // ToDo:
