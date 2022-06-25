@@ -76,13 +76,15 @@ popupImage.setEventListeners();
 
 
 // отрисовка всех карточек в разметке
-const cardList = new Section({
-  items: initialCards, // сюда записать другой способ отображения карточек (из объекта запроса)
-  renderer: (item) => {
-    cardList.addItem(createCard(item));
-}}, cardsSection)
+// const cardList = new Section({
+//   items: initialCards, // сюда записать другой способ отображения карточек (из объекта запроса)
+//   renderer: (item) => {
+//     cardList.addItem(createCard(item));
+// }}, cardsSection)
 
-cardList.renderItems();
+// cardList.renderItems();
+
+
 
 // создаем класс с данными из профиля (переписать в функцию?)
 
@@ -93,28 +95,7 @@ const userInfo = new UserInfo({
 });
 
 
-// // создать запрос на сервер для данных в профиль (перенести в класс Api)
-// function getProfileData (userInfo) {
-//   fetch('https://mesto.nomoreparties.co/v1/cohort-44/users/me', {
-//     headers: {
-//       authorization: 'ca203a3f-def8-4b98-b8c0-30f8a6e88919'
-//     }
-//   })
-//   .then((res) => res.json()) // разобрали ответ как JSON
-//   .then((data) => { // ToDo: записать в функцию
-//     console.log("результат", data)
-//     const dataProfile = { // создать объект с данными для профиля
-//       name: data.name,
-//       description: data.about,
-//       avatar: data.avatar
-//     };
-//     userInfo.setUserInfo(dataProfile) // вставим в профиль
-//   })
-// }
-
-// getProfileData(userInfo);
-
-// вызываем метод класса Api 
+// вызываем метод класса Api для загрузки данных в профиль 
 api.getProfileData()
 .then((data) => {
   console.log("ответ", data)
@@ -127,8 +108,25 @@ api.getProfileData()
   userInfo.setUserInfo(dataProfile) // вставим в профиль)
 })
 
+// метод класса Api для загрузки карточек
+api.getInitialCards()
+.then((data) => {
+  console.log(data)
+  data.forEach(element => {
+    const card = createCard({
+      name: element.name,
+      link: element.link
+    })
+  cardList.addItem(card)
+  })
+})
 
-
+// создаем место для карточек (пока пустое)
+const cardList = new Section({
+  items: [], // сюда записать другой способ отображения карточек (из объекта запроса)
+  renderer: (item) => {
+    cardList.addItem(createCard(item));
+}}, cardsSection)
 
 
 

@@ -9,14 +9,15 @@ export class Api {
             headers: this._headers
         })
         .then(res => res.ok ? res.json() : Promise.reject(res.status)) // иначе выбрасывается ошибка и ловится с помощью cath
-        // .then(res => {
-        //     console.log("наш результат", res)
-        // })
         .catch(console.log())
     }
   
     getInitialCards() {
-      // ...
+        return fetch(`${this._baseUrl}/cards`, {
+            headers: this._headers
+        })
+        .then(res => res.ok ? res.json() : Promise.reject(res.status)) // иначе выбрасывается ошибка и ловится с помощью cath
+        .catch(console.log())
     }
   
     // другие методы работы с API
