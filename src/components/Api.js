@@ -11,14 +11,28 @@ export class Api {
         .then(res => res.ok ? res.json() : Promise.reject(res.status)) // иначе выбрасывается ошибка и ловится с помощью cath
         .catch(console.log())
     }
-  
+
     getInitialCards() {
         return fetch(`${this._baseUrl}/cards`, {
             headers: this._headers
         })
-        .then(res => res.ok ? res.json() : Promise.reject(res.status)) // иначе выбрасывается ошибка и ловится с помощью cath
+        .then(res => res.ok ? res.json() : Promise.reject(res.status))
         .catch(console.log())
     }
+
+    editProfileData(name, about) {
+        return fetch(`${this._baseUrl}/users/me`, {
+            method: "PATCH",
+            headers: this._headers,
+            body: JSON.stringify({
+                name,
+                about
+            })
+        })
+        .then(res => res.ok ? res.json() : Promise.reject(res.status))
+        .catch(console.log())
+    }
+
   
     // другие методы работы с API
   }

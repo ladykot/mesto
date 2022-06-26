@@ -20,7 +20,6 @@ import {
   formCreateElement,
 } from "../utils/constants.js";
 
-// import { resolve } from 'core-js/fn/promise';
 
 const editProfileValidator = new FormValidator(Settings, formElement);
 const createCardValidator = new FormValidator(Settings, formCreateElement);
@@ -98,7 +97,6 @@ const userInfo = new UserInfo({
 // вызываем метод класса Api для загрузки данных в профиль 
 api.getProfileData()
 .then((data) => {
-  console.log("ответ", data)
   const dataProfile = { 
     // создать объект с данными для профиля
       name: data.name,
@@ -111,7 +109,6 @@ api.getProfileData()
 // метод класса Api для загрузки карточек
 api.getInitialCards()
 .then((data) => {
-  console.log(data)
   data.forEach(element => {
     const card = createCard({
       name: element.name,
@@ -121,9 +118,9 @@ api.getInitialCards()
   })
 })
 
-// создаем место для карточек (пока пустое)
+// создаем место для карточек (пустое, чтобы загрузить данные с сервера)
 const cardList = new Section({
-  items: [], // сюда записать другой способ отображения карточек (из объекта запроса)
+  items: [],
   renderer: (item) => {
     cardList.addItem(createCard(item));
 }}, cardsSection)
@@ -134,7 +131,11 @@ const cardList = new Section({
 // создаем попап редактирования (при клике на кнопку редактирования)
 const popupEdit = new PopupWithForm({
   handelSubmitForm: (data) => {
-    userInfo.setUserInfo(data);  // запишем НОВЫЕ данные из инпутов в профиль
+    const {name, description} = data
+    api.editProfileData(name, description) // отправляем данные на сервер и ждем ответ
+      .then(res => {
+        userInfo.setUserInfo(name, description); // запишем НОВЫЕ данные из инпутов в профиль
+      })
     popupEdit.close();
   }, popupSelector: '.popup_type_edit-profile'
 });
@@ -168,27 +169,3 @@ profileButtonCreateCard.addEventListener('click', function() {
   popupCreate.open();
   createCardValidator.resetErrors();
 });
-
-
-// Запросы на сервер
-
-
-fetch('https://mesto.nomoreparties.co/v1/cohort-40/cards ', {
-  headers: {
-    authorization: 'c054ddce-2ad7-4680-ba7d-e78ec8a6a9d8'
-  }
-})
-.then(res => res.json())
-.then((result) => {
-  return {
-    name: result[0].name,
-    link: result[0].link
-  }
-});
-
-
-// ToDo:
-// Функция, которая делает запрос на сервер (наверное, это Promise),
-// проходится по массиву,
-// берет из res значения name и link,
-// вставляет в функцию для отображения карточек
