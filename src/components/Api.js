@@ -33,6 +33,18 @@ export class Api {
         .catch(console.log())
     }
 
+    addCard(name, link) {
+        return fetch(`${this._baseUrl}/cards`, {
+            method: "POST",
+            headers: this._headers,
+            body: JSON.stringify({
+                name,
+                link
+            })
+        })
+        .then(res => res.ok ? res.json() : Promise.reject(res.status))
+        .catch(console.log())
+    }
   
     // другие методы работы с API
   }

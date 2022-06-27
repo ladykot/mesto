@@ -42,33 +42,7 @@ const createCard = (item) => {
 popupImage.setEventListeners();
 
 
-// запрос на данные для карточек
-// function getDataCards () {
-//   fetch('https://mesto.nomoreparties.co/v1/cohort-44/cards', {
-//     headers: {
-//       authorization: 'ca203a3f-def8-4b98-b8c0-30f8a6e88919'
-//     }
-//   })
-//   .then((res) => {
-//     const response = res.json()
-//     console.log(response)
-//     return response
-//   })
-//   .then((data) => {
-//     const cardsObject = []
-//     data.forEach(element => {
-//       for (let i = 0; i <= data.length; i++) {
-//         cardsObject[i] = {
-//           name: element.name,
-//           link: element.link,
-//         }
-//       }
-//     });
-//     console.log("Карточки из функции", cardsObject)
-//     return cardsObject
-//   })
-//   // .then((data) => )
-// }
+
 
 // const cards = getDataCards()
 // console.log("Карточки",cards)
@@ -106,7 +80,7 @@ api.getProfileData()
   userInfo.setUserInfo(dataProfile) // вставим в профиль)
 })
 
-// метод класса Api для загрузки карточек
+// вызываем метод класса Api для загрузки карточек
 api.getInitialCards()
 .then((data) => {
   data.forEach(element => {
@@ -145,9 +119,16 @@ popupEdit.setEventListeners();
 // создаем попап добавления новой карточки (при клике на кнопку плюсик)
 const popupCreate = new PopupWithForm({
   handelSubmitForm: (data) => { // обработчик создает новую карточку по данным пользователя
-    const card = createCard(data);  // data должно = {name, link}
-    cardList.addItem(card); // добавляем карточку в разметку
-    popupCreate.close();
+    api.addCard(data.name, data.link)
+      .then(res => {
+        console.log("res", res)
+        const card = createCard({
+          name: res.name,
+          link: res.link
+        });
+      cardList.addItem(card);
+      popupCreate.close();
+      })
   }, popupSelector: '.popup_type_create-card'
 });
 
