@@ -5,8 +5,9 @@ import Card from "../components/Card.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithSubmit from "../components/PopupWithSubmit.js";
 import UserInfo from "../components/UserInfo.js";
-import { api } from '../components/Api.js'; // импортируем экземпляр
+import { Api } from '../components/Api.js'; // импортируем экземпляр
 
 import { 
   cardsSection,
@@ -29,6 +30,15 @@ createCardValidator.enableValidation();
 
 const popupImage = new PopupWithImage('.popup_type_big-image');
 
+// экземпляр класса для работы с удаленным сервером
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-44', // ссылка на бэкенд
+  headers: {
+    authorization: 'ca203a3f-def8-4b98-b8c0-30f8a6e88919',
+    'Content-Type': 'application/json'
+  }
+})
+
 
 // создаем карточку
 const createCard = (item) => {
@@ -43,19 +53,6 @@ popupImage.setEventListeners();
 
 
 
-
-// const cards = getDataCards()
-// console.log("Карточки",cards)
-
-
-// отрисовка всех карточек в разметке
-// const cardList = new Section({
-//   items: initialCards, // сюда записать другой способ отображения карточек (из объекта запроса)
-//   renderer: (item) => {
-//     cardList.addItem(createCard(item));
-// }}, cardsSection)
-
-// cardList.renderItems();
 
 
 
@@ -83,6 +80,7 @@ api.getProfileData()
 // вызываем метод класса Api для загрузки карточек
 api.getInitialCards()
 .then((data) => {
+  console.log(data)
   data.forEach(element => {
     const card = createCard({
       name: element.name,
@@ -150,3 +148,18 @@ profileButtonCreateCard.addEventListener('click', function() {
   popupCreate.open();
   createCardValidator.resetErrors();
 });
+
+// слушатель для открытия попапа Подтверждения Удаления
+
+
+// создать попап подтверждения удаления карточки
+const popupDeleteCard = new PopupWithSubmit({
+  handelSubmitDeleteForm: () => {},
+  popupSelector: 'popup_type_delete-card'
+})
+
+popupDeleteCard.setEventListeners();
+
+
+
+

@@ -7,7 +7,7 @@ export default class Popup {
         this._handleClickOverlay = this._handleClickOverlay.bind(this);
         this._buttonClose = this._popupElement.querySelector('.popup__button-close') // нашли кнопку закрытия попапа
     }
-
+ 
     open() {
         this._popupElement.classList.add('popup_opened');
         document.addEventListener('keydown', this._handleEscClose);

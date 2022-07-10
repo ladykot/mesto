@@ -49,10 +49,4 @@ export class Api {
     // другие методы работы с API
   }
   
-  export const api = new Api({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-44', // ссылка на бэкенд
-    headers: {
-      authorization: 'ca203a3f-def8-4b98-b8c0-30f8a6e88919',
-      'Content-Type': 'application/json'
-    }
-  });
+;

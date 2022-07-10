@@ -24,6 +24,11 @@ export default class Card {
         this._increaseFoto.addEventListener('click', () => this._handleCardClick(this._data));
     };
 
+    _setLikes() {
+        const likeCount = this._cardItem.querySelector('.cards__button-counter')
+        likeCount.textContent = 2;
+    }
+
     getCard() {
         // клонируем шаблон из разметки
         this._cardItem = this._templateCard.cloneNode(true);
@@ -35,6 +40,8 @@ export default class Card {
         this._likeButton = this._cardItem.querySelector('.cards__union');
         this._deleteButton = this._cardItem.querySelector('.cards__item-delete');
         this._setEventListeners();
+        this._setLikes();
+        
         // возвращаем разметку карточки
         return this._cardItem;
     };
