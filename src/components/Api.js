@@ -1,3 +1,5 @@
+const errorHandler = (res) => res.ok ? res.json() : Promise.reject("ошибочка вышла", res.status)
+
 export class Api {
     constructor({baseUrl, headers}) {
         this._headers = headers;
@@ -8,7 +10,7 @@ export class Api {
         return fetch(`${this._baseUrl}/users/me`, {
             headers: this._headers
         })
-        .then(res => res.ok ? res.json() : Promise.reject(res.status)) // иначе выбрасывается ошибка и ловится с помощью cath
+        .then(errorHandler) // иначе выбрасывается ошибка и ловится с помощью cath
         .catch(console.log())
     }
 
@@ -16,7 +18,7 @@ export class Api {
         return fetch(`${this._baseUrl}/cards`, {
             headers: this._headers
         })
-        .then(res => res.ok ? res.json() : Promise.reject(res.status))
+        .then(errorHandler)
         .catch(console.log())
     }
 
@@ -29,7 +31,7 @@ export class Api {
                 about
             })
         })
-        .then(res => res.ok ? res.json() : Promise.reject(res.status))
+        .then(errorHandler)
         .catch(console.log())
     }
 
@@ -42,10 +44,18 @@ export class Api {
                 link
             })
         })
-        .then(res => res.ok ? res.json() : Promise.reject(res.status))
+        .then(errorHandler)
         .catch(console.log())
     }
-  
+
+    deleteCard(id) {
+        return fetch(`${this._baseUrl}/cards/${id}`, {
+            method: "DELETE",
+            headers: this._headers,
+        })
+        .then(errorHandler)
+        .catch(console.log())
+    }
     // другие методы работы с API
   }
   

@@ -95,8 +95,11 @@
     <!-- попап подтверждения удаления-->
     <section class="popup popup_type_delete-card">
       <div class="popup__container">
-        <h3 class="popup__title"> Вы уверены?</h3>
-        <button type="submit" class="popup__button-save" aria-label="Удалить">Да</button>
+        <button type="button" class="popup__button-close hover"></button>
+        <form name="delete-card" class="popup__form" >
+          <h3 class="popup__title"> Вы уверены?</h3>
+          <button type="submit" class="popup__button-save" aria-label="Удалить">Да</button>
+        </form>
       </div>
     </section>
 

@@ -1,5 +1,5 @@
 export default class Card {
-    constructor({data, handleCardClick}, templateSelector) {// templateSelector = '#template-card'
+    constructor({data, handleCardClick, handleDeleteClick}, templateSelector) {// templateSelector = '#template-card'
         this._templateSelector = templateSelector;
         this._templateCard = document
             .querySelector(this._templateSelector)
@@ -7,6 +7,8 @@ export default class Card {
             .querySelector('.cards__item');
         this._data = data;
         this._handleCardClick = handleCardClick;
+        this._handleDeleteClick = handleDeleteClick;
+        this._likes = data.likes;
     };
 
     _likeHandler = () => {
@@ -20,13 +22,13 @@ export default class Card {
 
     _setEventListeners() {
         this._likeButton.addEventListener('click', this._likeHandler);
-        this._deleteButton.addEventListener('click', this._deleteCardHandler);
+        this._deleteButton.addEventListener('click', () => this._handleDeleteClick());
         this._increaseFoto.addEventListener('click', () => this._handleCardClick(this._data));
     };
 
     _setLikes() {
         const likeCount = this._cardItem.querySelector('.cards__button-counter')
-        likeCount.textContent = 2;
+        likeCount.textContent = this._likes.length;
     }
 
     getCard() {

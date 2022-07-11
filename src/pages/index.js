@@ -8,6 +8,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithSubmit from "../components/PopupWithSubmit.js";
 import UserInfo from "../components/UserInfo.js";
 import { Api } from '../components/Api.js'; // импортируем экземпляр
+ 
 
 import { 
   cardsSection,
@@ -42,9 +43,17 @@ const api = new Api({
 
 // создаем карточку
 const createCard = (item) => {
-  const card = new Card({data: item, handleCardClick: (item) => { // обработчик на картинку создает класс с большим фото
-    popupImage.open(item); // получить фото по клику
-  }}, '#template-card');
+  const card = new Card(
+  {
+    data: item,
+    handleCardClick: (item) => { // обработчик на картинку создает класс с большим фото
+      popupImage.open(item); // получить фото по клику
+    },
+    handleDeleteClick: () => { // обработчик клика на Иконку Удаления
+      popupDeleteCard.open()
+    }
+  }, '#template-card');
+
   const templateCard = card.getCard();
   return templateCard;
 }
@@ -82,9 +91,11 @@ api.getInitialCards()
 .then((data) => {
   console.log(data)
   data.forEach(element => {
+    
     const card = createCard({
       name: element.name,
-      link: element.link
+      link: element.link,
+      likes: element.likes
     })
   cardList.addItem(card)
   })
@@ -122,7 +133,8 @@ const popupCreate = new PopupWithForm({
         console.log("res", res)
         const card = createCard({
           name: res.name,
-          link: res.link
+          link: res.link,
+          likes: res.likes
         });
       cardList.addItem(card);
       popupCreate.close();
@@ -153,10 +165,17 @@ profileButtonCreateCard.addEventListener('click', function() {
 
 
 // создать попап подтверждения удаления карточки
-const popupDeleteCard = new PopupWithSubmit({
-  handelSubmitDeleteForm: () => {},
-  popupSelector: 'popup_type_delete-card'
-})
+const popupDeleteCard = new PopupWithSubmit(
+  () => {
+    console.log('если нажать Да')
+    api.deleteCard('62cc38d59fee030a87d4c17c')
+    .then(res => {
+      // debugger
+      console.log('удалилось?',res)
+    })
+  },
+  '.popup_type_delete-card'
+)
 
 popupDeleteCard.setEventListeners();
 

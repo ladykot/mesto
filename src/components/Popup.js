@@ -5,7 +5,10 @@ export default class Popup {
         this.close = this.close.bind(this)
         this._handleEscClose = this._handleEscClose.bind(this);
         this._handleClickOverlay = this._handleClickOverlay.bind(this);
+        
+
         this._buttonClose = this._popupElement.querySelector('.popup__button-close') // нашли кнопку закрытия попапа
+        
     }
  
     open() {
