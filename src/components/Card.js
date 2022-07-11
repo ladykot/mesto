@@ -9,20 +9,21 @@ export default class Card {
         this._handleCardClick = handleCardClick;
         this._handleDeleteClick = handleDeleteClick;
         this._likes = data.likes;
+        this._id = data.id;
     };
 
     _likeHandler = () => {
         this._likeButton.classList.toggle('cards__union_active');
     };
 
-    _deleteCardHandler = () => {
+    deleteCard = () => {
         this._cardItem.remove();
         this._cardItem = null;
     };
 
     _setEventListeners() {
         this._likeButton.addEventListener('click', this._likeHandler);
-        this._deleteButton.addEventListener('click', () => this._handleDeleteClick());
+        this._deleteButton.addEventListener('click', () => this._handleDeleteClick(this._id));
         this._increaseFoto.addEventListener('click', () => this._handleCardClick(this._data));
     };
 

@@ -46,11 +46,20 @@ const createCard = (item) => {
   const card = new Card(
   {
     data: item,
+    
     handleCardClick: (item) => { // обработчик на картинку создает класс с большим фото
       popupImage.open(item); // получить фото по клику
     },
-    handleDeleteClick: () => { // обработчик клика на Иконку Удаления
-      popupDeleteCard.open()
+    handleDeleteClick: (id) => { // обработчик клика на Иконку Удаления конкретной карточки (отложенная ф-ция)
+      popupDeleteCard.open();
+      popupDeleteCard.setSumbitHandler(() => {
+        api.deleteCard(id)
+        .then(res => {
+          popupDeleteCard.close()
+          card.deleteCard()
+        })
+      })
+
     }
   }, '#template-card');
 
@@ -81,7 +90,8 @@ api.getProfileData()
     // создать объект с данными для профиля
       name: data.name,
       description: data.about,
-      avatar: data.avatar
+      avatar: data.avatar,
+      id: data._id
   };
   userInfo.setUserInfo(dataProfile) // вставим в профиль)
 })
@@ -95,7 +105,8 @@ api.getInitialCards()
     const card = createCard({
       name: element.name,
       link: element.link,
-      likes: element.likes
+      likes: element.likes,
+      id: element._id
     })
   cardList.addItem(card)
   })
@@ -134,7 +145,8 @@ const popupCreate = new PopupWithForm({
         const card = createCard({
           name: res.name,
           link: res.link,
-          likes: res.likes
+          likes: res.likes,
+          id: res._id
         });
       cardList.addItem(card);
       popupCreate.close();
@@ -161,21 +173,10 @@ profileButtonCreateCard.addEventListener('click', function() {
   createCardValidator.resetErrors();
 });
 
-// слушатель для открытия попапа Подтверждения Удаления
 
 
 // создать попап подтверждения удаления карточки
-const popupDeleteCard = new PopupWithSubmit(
-  () => {
-    console.log('если нажать Да')
-    api.deleteCard('62cc38d59fee030a87d4c17c')
-    .then(res => {
-      // debugger
-      console.log('удалилось?',res)
-    })
-  },
-  '.popup_type_delete-card'
-)
+const popupDeleteCard = new PopupWithSubmit('.popup_type_delete-card')
 
 popupDeleteCard.setEventListeners();
 
