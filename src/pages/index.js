@@ -8,7 +8,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithSubmit from "../components/PopupWithSubmit.js";
 import UserInfo from "../components/UserInfo.js";
 import { Api } from '../components/Api.js'; // импортируем экземпляр
- 
+
 
 import { 
   cardsSection,
@@ -22,6 +22,7 @@ import {
   formCreateElement,
 } from "../utils/constants.js";
 
+let userId
 
 const editProfileValidator = new FormValidator(Settings, formElement);
 const createCardValidator = new FormValidator(Settings, formCreateElement);
@@ -31,11 +32,13 @@ createCardValidator.enableValidation();
 
 const popupImage = new PopupWithImage('.popup_type_big-image');
 
+
+
 // экземпляр класса для работы с удаленным сервером
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-44', // ссылка на бэкенд
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-45', // ссылка на бэкенд
   headers: {
-    authorization: 'ca203a3f-def8-4b98-b8c0-30f8a6e88919',
+    authorization: '96f24a59-2446-45e8-8a79-9c1dd75cac85',
     'Content-Type': 'application/json'
   }
 })
@@ -91,22 +94,23 @@ api.getProfileData()
       name: data.name,
       description: data.about,
       avatar: data.avatar,
-      id: data._id
+      // id: data._id
   };
   userInfo.setUserInfo(dataProfile) // вставим в профиль)
+  userId = data._id
 })
 
 // вызываем метод класса Api для загрузки карточек
 api.getInitialCards()
 .then((data) => {
-  console.log(data)
   data.forEach(element => {
-    
     const card = createCard({
       name: element.name,
       link: element.link,
       likes: element.likes,
-      id: element._id
+      id: element._id,
+      userId: userId,
+      ownerId: element.owner._id
     })
   cardList.addItem(card)
   })
@@ -141,12 +145,13 @@ const popupCreate = new PopupWithForm({
   handelSubmitForm: (data) => { // обработчик создает новую карточку по данным пользователя
     api.addCard(data.name, data.link)
       .then(res => {
-        console.log("res", res)
         const card = createCard({
           name: res.name,
           link: res.link,
           likes: res.likes,
-          id: res._id
+          id: res._id,
+          ownerId: res.owner._id,
+          userId: userId
         });
       cardList.addItem(card);
       popupCreate.close();

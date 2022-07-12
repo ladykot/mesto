@@ -9,7 +9,9 @@ export default class Card {
         this._handleCardClick = handleCardClick;
         this._handleDeleteClick = handleDeleteClick;
         this._likes = data.likes;
-        this._id = data.id;
+        this._id = data.id; // id карточки
+        this._userId = data.userId; // id пользователя из профиля
+        this._ownerId = data.ownerId // id того, кто добавил карточку
     };
 
     _likeHandler = () => {
@@ -44,9 +46,12 @@ export default class Card {
         this._deleteButton = this._cardItem.querySelector('.cards__item-delete');
         this._setEventListeners();
         this._setLikes();
-        
-        // возвращаем разметку карточки
-        return this._cardItem;
+
+
+        if (this._userId !== this._ownerId) { // сравниваем id пользователей карточек
+            this._deleteButton.style.display = 'none' // убираем иконку Удаления на чужих карточках
+        }
+        return this._cardItem; // возвращаем разметку карточки
     };
 };
 

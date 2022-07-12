@@ -2,11 +2,8 @@ import Popup from "./Popup.js";
 export default class PopupWithSubmit extends Popup {
     constructor(popupSelector) {
         super(popupSelector);
-        // this._handelSubmitDeleteForm = handelSubmitDeleteForm;
         this._formElement = document.querySelector(this._popupSelector);
         this._form = this._formElement.querySelector('.popup__form');
-        // this._deleteButton = this._form.querySelector('.popup__button-save')
-
     }
 
     setEventListeners() {
@@ -17,7 +14,7 @@ export default class PopupWithSubmit extends Popup {
         });
     }
 
-    setSumbitHandler(newhandelSubmitDeleteForm) { // публичный метод для 
+    setSumbitHandler(newhandelSubmitDeleteForm) {
         this._handelSubmitDeleteForm = newhandelSubmitDeleteForm;
     }
 }
