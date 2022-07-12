@@ -62,7 +62,12 @@ const createCard = (item) => {
           card.deleteCard()
         })
       })
-
+    },
+    handelLikeClick: (id) => { // обработчик клика на Лайк
+      api.addLike(id)
+      .then(res => {
+        console.log(res)
+      })
     }
   }, '#template-card');
 
