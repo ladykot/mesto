@@ -64,10 +64,21 @@ const createCard = (item) => {
       })
     },
     handelLikeClick: (id) => { // обработчик клика на Лайк
-      api.addLike(id)
-      .then(res => {
-        console.log(res)
+      if (card.isliked) {
+        api.deleteLike(id)
+        .then(res => {
+          console.log(res.likes)
+          card.setLikes(res.likes)
+        })
+      } else {
+        api.addLike(id)
+        .then(res => {
+        console.log(res.likes)
+        card.setLikes(res.likes)
       })
+      }
+      
+
     }
   }, '#template-card');
 

@@ -15,9 +15,9 @@ export default class Card {
         this._ownerId = data.ownerId // id того, кто добавил карточку
     };
 
-    // _likeHandler = () => {
-    //     this._likeButton.classList.toggle('cards__union_active');
-    // };
+    _likeHandler = () => {
+        this._likeButton.classList.toggle('cards__union_active');
+    };
 
     deleteCard = () => {
         this._cardItem.remove();
@@ -30,9 +30,19 @@ export default class Card {
         this._increaseFoto.addEventListener('click', () => this._handleCardClick(this._data));
     };
 
-    _setLikes() {
+    isliked = () => {
+        this._likes.some(like => { // если есть мой лайк в массиве лайков
+            return like._id = this._userId
+        })
+    }
+
+    setLikes(newLikes) { // метод ставит количество лайков
+        this._likes = newLikes //  обновляем количество лайков после клика на сердечко
         const likeCount = this._cardItem.querySelector('.cards__button-counter')
         likeCount.textContent = this._likes.length;
+        if (this.isliked()) {
+            this._likeHandler()
+        }
     }
 
     getCard() {
@@ -46,12 +56,15 @@ export default class Card {
         this._likeButton = this._cardItem.querySelector('.cards__union');
         this._deleteButton = this._cardItem.querySelector('.cards__item-delete');
         this._setEventListeners();
-        this._setLikes();
+        this.setLikes(this._likes);
 
 
         if (this._userId !== this._ownerId) { // сравниваем id пользователей карточек
             this._deleteButton.style.display = 'none' // убираем иконку Удаления на чужих карточках
         }
+
+
+
         return this._cardItem; // возвращаем разметку карточки
     };
 };
