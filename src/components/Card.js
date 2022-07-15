@@ -15,9 +15,13 @@ export default class Card {
         this._ownerId = data.ownerId // id того, кто добавил карточку
     };
 
-    _likeHandler = () => {
-        this._likeButton.classList.toggle('cards__union_active');
-    };
+    _addLike = () => {
+        this._likeButton.classList.add('cards__union_active')
+    }
+
+    _removeLike = () => {
+        this._likeButton.classList.remove('cards__union_active')
+    }
 
     deleteCard = () => {
         this._cardItem.remove();
@@ -27,12 +31,12 @@ export default class Card {
     _setEventListeners() {
         this._likeButton.addEventListener('click', () => this._handelLikeClick(this._id));
         this._deleteButton.addEventListener('click', () => this._handleDeleteClick(this._id));
-        this._increaseFoto.addEventListener('click', () => this._handleCardClick(this._data));
+        this._increaseFoto.addEventListener('click', () => this._handleCardClick(this._id)); // this._data
     };
 
-    isliked = () => {
-        this._likes.some(like => { // если есть мой лайк в массиве лайков
-            return like._id = this._userId
+    isliked() {
+        return this._likes.some(like => { // если есть мой лайк в массиве лайков
+            return like._id == this._userId
         })
     }
 
@@ -40,8 +44,11 @@ export default class Card {
         this._likes = newLikes //  обновляем количество лайков после клика на сердечко
         const likeCount = this._cardItem.querySelector('.cards__button-counter')
         likeCount.textContent = this._likes.length;
-        if (this.isliked()) {
-            this._likeHandler()
+        console.log(this.isliked())
+        if (this.isliked()) { // если есть мой лайк, то перекрасить, иначе - перекрасить
+            this._addLike();
+        } else {
+            this._removeLike();
         }
     }
 
@@ -58,12 +65,9 @@ export default class Card {
         this._setEventListeners();
         this.setLikes(this._likes);
 
-
         if (this._userId !== this._ownerId) { // сравниваем id пользователей карточек
             this._deleteButton.style.display = 'none' // убираем иконку Удаления на чужих карточках
         }
-
-
 
         return this._cardItem; // возвращаем разметку карточки
     };

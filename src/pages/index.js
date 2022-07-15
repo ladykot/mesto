@@ -64,7 +64,7 @@ const createCard = (item) => {
       })
     },
     handelLikeClick: (id) => { // обработчик клика на Лайк
-      if (card.isliked) {
+      if (card.isliked()) {
         api.deleteLike(id)
         .then(res => {
           console.log(res.likes)
