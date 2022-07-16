@@ -1,0 +1,14 @@
+.profile__icon {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    background: url(../../../images/Vector.svg);
+    top: 87px;
+    left: 73px;
+}
+
+@media screen and (min-width: 768px) {
+    .profile__icon {
+        left: 47px;
+    }
+}

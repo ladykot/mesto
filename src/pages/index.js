@@ -20,6 +20,7 @@ import {
   nameInput,
   jobInput,
   formCreateElement,
+  avatar,
 } from "../utils/constants.js";
 
 let userId
@@ -77,7 +78,6 @@ const createCard = (item) => {
         card.setLikes(res.likes)
       })
       }
-      
 
     }
   }, '#template-card');
@@ -115,6 +115,9 @@ api.getProfileData()
   userInfo.setUserInfo(dataProfile) // вставим в профиль)
   userId = data._id
 })
+
+
+// вызываем метод класса Api 
 
 // вызываем метод класса Api для загрузки карточек
 api.getInitialCards()
@@ -194,10 +197,17 @@ profileButtonCreateCard.addEventListener('click', function() {
   createCardValidator.resetErrors();
 });
 
+// слушатель для открытия попапа Смены Аватара
+avatar.addEventListener('click', function() {
+  console.log("аватар")
+})
 
 
 // создать попап подтверждения удаления карточки
 const popupDeleteCard = new PopupWithSubmit('.popup_type_delete-card')
+
+// cоздать попап смены аватара
+const popupChangeAvatar = new PopupWithForm('.popup_type_change-avatar')
 
 popupDeleteCard.setEventListeners();
 

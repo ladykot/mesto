@@ -1,6 +1,7 @@
 .popup__form {
     width: 282px;
-    height: 322px;
+    /* height: 322px; */
+    min-height: 181px;
     box-sizing: border-box;
     top: 36px;
     background: white;
@@ -16,7 +17,7 @@
 @media screen and (min-width: 768px) {
     .popup__form {
         width: 430px;
-        height: 330px;
+        /* height: 330px; */
         border-radius: 15px;
         margin-right: 40px;
         margin-left: 40px;

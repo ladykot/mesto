@@ -4,6 +4,7 @@ export default class PopupWithSubmit extends Popup {
         super(popupSelector);
         this._formElement = document.querySelector(this._popupSelector);
         this._form = this._formElement.querySelector('.popup__form');
+        // this._handelSubmitDeleteForm = handelSubmitDeleteForm
     }
 
     setEventListeners() {
