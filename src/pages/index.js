@@ -20,7 +20,7 @@ import {
   nameInput,
   jobInput,
   formCreateElement,
-  avatar,
+  avatarIcon,
 } from "../utils/constants.js";
 
 let userId
@@ -113,6 +113,7 @@ api.getProfileData()
       // id: data._id
   };
   userInfo.setUserInfo(dataProfile) // вставим в профиль)
+  userInfo.setUserAvatar(dataProfile.avatar)
   userId = data._id
 })
 
@@ -148,7 +149,7 @@ const cardList = new Section({
 // создаем попап редактирования (при клике на кнопку редактирования)
 const popupEdit = new PopupWithForm({
   handelSubmitForm: (data) => {
-    const {name, description} = data
+    const {name, description} = data;
     api.editProfileData(name, description) // отправляем данные на сервер и ждем ответ
       .then(res => {
         userInfo.setUserInfo(name, description); // запишем НОВЫЕ данные из инпутов в профиль
@@ -158,6 +159,26 @@ const popupEdit = new PopupWithForm({
 });
 
 popupEdit.setEventListeners();
+
+// создаем попап смены Аватара
+const popupChangeAvatar = new PopupWithForm({
+  handelSubmitForm: (data) => {
+    const avatar = data.link;
+    api.changeAvatar(avatar)
+      .then(res => {
+        const avatar = res.avatar;
+        userInfo.setUserAvatar(avatar); // передаем данные и ссылку на аватар
+    })
+    popupChangeAvatar.close();
+  }, popupSelector: '.popup_type_change-avatar'
+})
+
+popupChangeAvatar.setEventListeners();
+
+
+
+
+
 
 // создаем попап добавления новой карточки (при клике на кнопку плюсик)
 const popupCreate = new PopupWithForm({
@@ -198,16 +219,14 @@ profileButtonCreateCard.addEventListener('click', function() {
 });
 
 // слушатель для открытия попапа Смены Аватара
-avatar.addEventListener('click', function() {
-  console.log("аватар")
+avatarIcon.addEventListener('click', function() {
+  popupChangeAvatar.open()
 })
 
 
 // создать попап подтверждения удаления карточки
 const popupDeleteCard = new PopupWithSubmit('.popup_type_delete-card')
 
-// cоздать попап смены аватара
-const popupChangeAvatar = new PopupWithForm('.popup_type_change-avatar')
 
 popupDeleteCard.setEventListeners();
 

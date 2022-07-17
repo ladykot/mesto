@@ -1,4 +1,4 @@
-const errorHandler = (res) => res.ok ? res.json() : Promise.reject("ошибочка вышла", res.status)
+const errorHandler = (res) => res.ok ? res.json() : Promise.reject("ошибочка вышла", res.status) // перенести в utils?
 
 export class Api {
     constructor({baseUrl, headers}) {
@@ -74,6 +74,19 @@ export class Api {
         })
         .then(errorHandler)
         .catch(console.log())
+    }
+
+    changeAvatar = (avatar) => {
+        return fetch(`${this._baseUrl}/users/me/avatar`, {
+            method: "PATCH",
+            headers: this._headers,
+            body: JSON.stringify({
+                avatar,
+            })
+        })
+        .then(errorHandler)
+        .catch(console.log())
+    
     }
 
   }

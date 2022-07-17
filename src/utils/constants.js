@@ -5,7 +5,7 @@ export const formElement = document.forms['edit-profile'];
 export const nameInput = formElement.querySelector('.popup__inputs-item_type_name');
 export const jobInput = formElement.querySelector('.popup__inputs-item_type_description');
 export const formCreateElement = document.forms['create-card'];
-export const avatar = profile.querySelector('.profile__pic')
+export const avatarIcon = profile.querySelector('.profile__icon')
 
 // данные для карточек
 export const initialCards = [

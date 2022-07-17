@@ -6,6 +6,7 @@ export default class PopupWithForm extends Popup {
         this._formElement = document.querySelector(this._popupSelector);
         this._form = this._formElement.querySelector('.popup__form');
         this._inputList = this._form.querySelectorAll(".popup__inputs-item");
+        this._getInputValues = this._getInputValues.bind(this)
     }
 
     _getInputValues() {
@@ -20,6 +21,8 @@ export default class PopupWithForm extends Popup {
         super.setEventListeners();
         this._form.addEventListener('submit', (event) => {
             event.preventDefault();
+            console.log('подтвердить')
+            // debugger
             this._handelSubmitForm(this._getInputValues());
         });
     }

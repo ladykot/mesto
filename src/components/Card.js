@@ -32,7 +32,7 @@ export default class Card {
         this._likeButton.addEventListener('click', () => this._handelLikeClick(this._id));
         this._deleteButton.addEventListener('click', () => this._handleDeleteClick(this._id));
         this._increaseFoto.addEventListener('click', () => this._handleCardClick(this._id)); // this._data
-        
+
     };
 
     isliked() {
@@ -45,7 +45,6 @@ export default class Card {
         this._likes = newLikes //  обновляем количество лайков после клика на сердечко
         const likeCount = this._cardItem.querySelector('.cards__button-counter')
         likeCount.textContent = this._likes.length;
-        console.log(this.isliked())
         if (this.isliked()) { // если есть мой лайк, то перекрасить, иначе - перекрасить
             this._addLike();
         } else {

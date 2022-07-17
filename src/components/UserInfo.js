@@ -3,6 +3,7 @@ export default class UserInfo {
         this._name = document.querySelector(name);
         this._description = document.querySelector(description);
         this._avatar = document.querySelector(avatar);
+        this.setUserAvatar = this.setUserAvatar.bind(this)
     }
 
     getUserInfo() {
@@ -19,7 +20,11 @@ export default class UserInfo {
         // новые данные подставить в профиль
         this._name.textContent = userInfo.name;
         this._description.textContent = userInfo.description;
-        this._avatar.src = userInfo.avatar
+        
     }
 
+    setUserAvatar(link) {
+        this._avatar.src = link;
+        // debugger
+    }   
 }

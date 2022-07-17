@@ -1,5 +1,6 @@
 .profile__icon {
     position: absolute;
+    border: 0;
     width: 26px;
     height: 26px;
     background: url(../../../images/Vector.svg);
@@ -11,4 +12,8 @@
     .profile__icon {
         left: 47px;
     }
+}
+
+.profile__icon:hover {
+    cursor: pointer;
 }
