@@ -12,7 +12,6 @@ import { Api } from '../components/Api.js'; // импортируем экзем
 
 import { 
   cardsSection,
-  initialCards,
   Settings,
   profileButtonEditElement,
   profileButtonCreateCard,
@@ -21,15 +20,18 @@ import {
   jobInput,
   formCreateElement,
   avatarIcon,
+  formChangeAvatar
 } from "../utils/constants.js";
 
 let userId
 
 const editProfileValidator = new FormValidator(Settings, formElement);
 const createCardValidator = new FormValidator(Settings, formCreateElement);
+const editAvatarValidator = new FormValidator(Settings, formChangeAvatar);
 
 editProfileValidator.enableValidation();
 createCardValidator.enableValidation();
+editAvatarValidator.enableValidation();
 
 const popupImage = new PopupWithImage('.popup_type_big-image');
 
@@ -50,7 +52,6 @@ const createCard = (item) => {
   const card = new Card(
   {
     data: item,
-    
     handleCardClick: (item) => { // обработчик на картинку создает класс с большим фото
       popupImage.open(item); // получить фото по клику
     },
@@ -110,15 +111,13 @@ api.getProfileData()
       name: data.name,
       description: data.about,
       avatar: data.avatar,
-      // id: data._id
+      id: data._id
   };
   userInfo.setUserInfo(dataProfile) // вставим в профиль)
-  userInfo.setUserAvatar(dataProfile.avatar)
+  userInfo.setUserAvatar(dataProfile.avatar) // и в аватар
   userId = data._id
 })
 
-
-// вызываем метод класса Api 
 
 // вызываем метод класса Api для загрузки карточек
 api.getInitialCards()
@@ -136,6 +135,10 @@ api.getInitialCards()
   })
 })
 
+
+
+
+
 // создаем место для карточек (пустое, чтобы загрузить данные с сервера)
 const cardList = new Section({
   items: [],
@@ -145,11 +148,11 @@ const cardList = new Section({
 
 
 
-
 // создаем попап редактирования (при клике на кнопку редактирования)
 const popupEdit = new PopupWithForm({
   handelSubmitForm: (data) => {
     const {name, description} = data;
+    // функция изменения текста кнопки
     api.editProfileData(name, description) // отправляем данные на сервер и ждем ответ
       .then(res => {
         userInfo.setUserInfo(name, description); // запишем НОВЫЕ данные из инпутов в профиль

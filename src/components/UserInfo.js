@@ -20,11 +20,9 @@ export default class UserInfo {
         // новые данные подставить в профиль
         this._name.textContent = userInfo.name;
         this._description.textContent = userInfo.description;
-        
     }
 
     setUserAvatar(link) {
         this._avatar.src = link;
-        // debugger
     }   
 }

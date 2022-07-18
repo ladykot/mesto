@@ -101,10 +101,14 @@
     <section class="popup popup_type_delete-card">
       <div class="popup__container">
         <button type="button" class="popup__button-close hover"></button>
-        <form name="delete-card" class="popup__form" >
-          <h3 class="popup__title"> Вы уверены?</h3>
-          <button type="submit" class="popup__button-save" aria-label="Удалить">Да</button>
-        </form>
+        
+          <form name="delete-card" class="popup__form" >
+            <h3 class="popup__title"> Вы уверены?</h3>
+            <fieldset class="popup__inputs">
+            </fieldset>
+            <button type="submit" class="popup__button-save" aria-label="Удалить">Да</button>
+          </form>
+        
       </div>
     </section>
 
@@ -112,12 +116,16 @@
     <section class="popup popup_type_change-avatar">
       <div class="popup__container">
         <button type="button" class="popup__button-close hover"></button>
-        <form name="change-avatar" class="popup__form" >
-          <h3 class="popup__title"> Обновить аватар</h3>
-          <input type="url" id="link-input" name="link" placeholder="Ссылка на картинку" class="popup__inputs-item popup__inputs-item_type_link" required>
-          <span class="popup__inputs-error link-input-error"></span>
-          <button type="submit" class="popup__button-save" aria-label="Удалить">Сохранить</button>
-        </form>
+        
+          <form name="change-avatar" class="popup__form" >
+            <h3 class="popup__title"> Обновить аватар</h3>
+            <fieldset class="popup__inputs">
+              <input type="url" id="link-input" name="link" placeholder="Ссылка на картинку" class="popup__inputs-item popup__inputs-item_type_link" required>
+              <span class="popup__inputs-error link-input-error"></span>
+            </fieldset>
+            <button type="submit" class="popup__button-save" aria-label="Удалить">Сохранить</button>
+          </form>
+        
       </div>
     </section>
 
