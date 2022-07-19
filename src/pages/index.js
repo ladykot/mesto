@@ -26,13 +26,13 @@ import {
 
 let userId
 
-const editProfileValidator = new FormValidator(Settings, formElement);
-const createCardValidator = new FormValidator(Settings, formCreateElement);
-const editAvatarValidator = new FormValidator(Settings, formChangeAvatar);
+const profileEditValidator = new FormValidator(Settings, formElement);
+const cardCreateValidator = new FormValidator(Settings, formCreateElement);
+const avatarEditValidator = new FormValidator(Settings, formChangeAvatar);
 
-editProfileValidator.enableValidation();
-createCardValidator.enableValidation();
-editAvatarValidator.enableValidation();
+profileEditValidator.enableValidation();
+cardCreateValidator.enableValidation();
+avatarEditValidator.enableValidation();
 
 const popupImage = new PopupWithImage('.popup_type_big-image');
 
@@ -221,21 +221,21 @@ profileButtonEditElement.addEventListener('click', function() {
   nameInput.value = name; // записать в инпуты попапа
   jobInput.value = description;
   popupEdit.open();
-  editProfileValidator.resetErrors();
+  profileEditValidator.resetErrors();
 });
 
 
 // слушатель для открытия попапа Создания
 profileButtonCreateCard.addEventListener('click', function() { 
-  createCardValidator.disableSubmitButton();
+  cardCreateValidator.disableSubmitButton();
   popupCreate.open();
-  createCardValidator.resetErrors();
+  cardCreateValidator.resetErrors();
 });
 
 // слушатель для открытия попапа Смены Аватара
 avatarIcon.addEventListener('click', function() {
   popupChangeAvatar.open()
-  editAvatarValidator.resetErrors()
+  avatarEditValidator.resetErrors()
 })
 
 
