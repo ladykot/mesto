@@ -20,7 +20,8 @@ import {
   jobInput,
   formCreateElement,
   avatarIcon,
-  formChangeAvatar
+  formChangeAvatar,
+  buttonSubmitPopup
 } from "../utils/constants.js";
 
 let userId
@@ -65,6 +66,9 @@ const createCard = (item) => {
           popupDeleteCard.close()
           card.deleteCard()
         })
+        .catch(err => {
+          console.log(err)
+        })
       })
     },
 
@@ -75,12 +79,17 @@ const createCard = (item) => {
           console.log(res.likes)
           card.setLikes(res.likes)
         })
+        .catch(err => {
+          console.log(err)
+        })
       } else {
         api.addLike(id)
         .then(res => {
-        console.log(res.likes)
         card.setLikes(res.likes)
-      })
+        })
+        .catch(err => {
+          console.log(err)
+        })
       }
     }
   }, '#template-card');
@@ -92,12 +101,7 @@ const createCard = (item) => {
 popupImage.setEventListeners();
 
 
-
-
-
-
-// создаем класс с данными из профиля (переписать в функцию?)
-
+// создаем класс с данными из профиля
 const userInfo = new UserInfo({
   name: '.profile__name', 
   description: '.profile__description',
@@ -111,6 +115,9 @@ api.getProfileData()
   userInfo.setUserInfo(data) // вставим в профиль данные с сервера
   userInfo.setUserAvatar(data.avatar) // и в аватар
   userId = data._id
+})
+.catch(err => {
+  console.log(err)
 })
 
 
@@ -128,10 +135,9 @@ api.getInitialCards()
     })
   cardList.addItem(card)
   })
+}).catch(err => {
+  console.log(err)
 })
-
-
-
 
 
 // создаем место для карточек (пустое, чтобы загрузить данные с сервера)
@@ -142,16 +148,21 @@ const cardList = new Section({
 }}, cardsSection)
 
 
-
 // создаем попап редактирования (при клике на кнопку редактирования)
 const popupEdit = new PopupWithForm({
   handelSubmitForm: (data) => {
     const {name, description} = data;
     // функция изменения текста кнопки
+    buttonSubmitPopup.textContent = "Сохраняю..."
     api.editProfileData(name, description) // отправляем данные на сервер и ждем ответ
       .then(res => {
-        console.log(res)
         userInfo.setUserInfo(res); // запишем НОВЫЕ данные из инпутов в профиль
+      })
+      .finally(res => {
+        buttonSubmitPopup.textContent = "Сохранить"
+      })
+      .catch(err => {
+        console.log(err)
       })
     popupEdit.close();
   }, popupSelector: '.popup_type_edit-profile'
@@ -168,15 +179,14 @@ const popupChangeAvatar = new PopupWithForm({
         const avatar = res.avatar;
         userInfo.setUserAvatar(avatar); // передаем данные и ссылку на аватар
       popupChangeAvatar.close();
-    })
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }, popupSelector: '.popup_type_change-avatar'
 })
 
 popupChangeAvatar.setEventListeners();
-
-
-
-
 
 
 // создаем попап добавления новой карточки (при клике на кнопку плюсик)
@@ -194,6 +204,9 @@ const popupCreate = new PopupWithForm({
         });
       cardList.addItem(card);
       popupCreate.close();
+      })
+      .catch(err => {
+        console.log(err)
       })
   }, popupSelector: '.popup_type_create-card'
 });
@@ -228,7 +241,6 @@ avatarIcon.addEventListener('click', function() {
 
 // создать попап подтверждения удаления карточки
 const popupDeleteCard = new PopupWithSubmit('.popup_type_delete-card')
-
 
 popupDeleteCard.setEventListeners();
 

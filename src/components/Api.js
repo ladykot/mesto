@@ -1,4 +1,4 @@
-const errorHandler = (res) => res.ok ? res.json() : Promise.reject("ошибочка вышла", res.status) // перенести в utils?
+import {promiseReject} from "../utils/functions.js"
 
 export class Api {
     constructor({baseUrl, headers}) {
@@ -10,16 +10,14 @@ export class Api {
         return fetch(`${this._baseUrl}/users/me`, {
             headers: this._headers
         })
-        .then(errorHandler) // иначе выбрасывается ошибка и ловится с помощью cath
-        .catch(console.log())
+        .then(promiseReject);
     }
 
     getInitialCards() {
         return fetch(`${this._baseUrl}/cards`, {
             headers: this._headers
         })
-        .then(errorHandler)
-        .catch(console.log())
+        .then(promiseReject);
     }
 
     editProfileData(name, about) {
@@ -31,8 +29,7 @@ export class Api {
                 about
             })
         })
-        .then(errorHandler)
-        .catch(console.log())
+        .then(promiseReject);
     }
 
     addCard(name, link) {
@@ -44,8 +41,7 @@ export class Api {
                 link
             })
         })
-        .then(errorHandler)
-        .catch(console.log())
+        .then(promiseReject);
     }
 
     deleteCard(id) {
@@ -53,18 +49,15 @@ export class Api {
             method: "DELETE",
             headers: this._headers,
         })
-        .then(errorHandler)
-        .catch(console.log())
+        .then(promiseReject);
     }
-    // другие методы работы с API
 
     addLike(id) {
         return fetch(`${this._baseUrl}/cards/${id}/likes`, {
             method: "PUT",
             headers: this._headers,
         })
-        .then(errorHandler)
-        .catch(console.log())
+        .then(promiseReject);
     }
 
     deleteLike(id) {
@@ -72,8 +65,7 @@ export class Api {
             method: "DELETE",
             headers: this._headers,
         })
-        .then(errorHandler)
-        .catch(console.log())
+        .then(promiseReject);
     }
 
     changeAvatar = (avatar) => {
@@ -84,11 +76,7 @@ export class Api {
                 avatar,
             })
         })
-        .then(errorHandler)
-        .catch(console.log())
-    
+        .then(promiseReject);
     }
-
   }
-  
 ;
