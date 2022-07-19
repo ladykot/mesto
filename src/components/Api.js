@@ -1,6 +1,6 @@
 import {promiseReject} from "../utils/functions.js"
 
-export class Api {
+export default class Api {
     constructor({baseUrl, headers}) {
         this._headers = headers;
         this._baseUrl = baseUrl;

@@ -7,7 +7,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithSubmit from "../components/PopupWithSubmit.js";
 import UserInfo from "../components/UserInfo.js";
-import { Api } from '../components/Api.js';
+import Api  from '../components/Api.js';
 
 
 import { 
