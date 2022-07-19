@@ -11,7 +11,7 @@ export default class UserInfo {
         const userInfo = {
             name: this._name.textContent,
             description: this._description.textContent,
-            avatar: this._avatar.src
+            avatar: this._avatar.src,
         } 
         return userInfo;
     }
@@ -19,7 +19,7 @@ export default class UserInfo {
     setUserInfo(userInfo) {
         // новые данные подставить в профиль
         this._name.textContent = userInfo.name;
-        this._description.textContent = userInfo.description;
+        this._description.textContent = userInfo.about;
     }
 
     setUserAvatar(link) {

@@ -7,7 +7,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithSubmit from "../components/PopupWithSubmit.js";
 import UserInfo from "../components/UserInfo.js";
-import { Api } from '../components/Api.js'; // импортируем экземпляр
+import { Api } from '../components/Api.js';
 
 
 import { 
@@ -47,6 +47,7 @@ const api = new Api({
 })
 
 
+
 // создаем карточку
 const createCard = (item) => {
   const card = new Card(
@@ -55,6 +56,7 @@ const createCard = (item) => {
     handleCardClick: (item) => { // обработчик на картинку создает класс с большим фото
       popupImage.open(item); // получить фото по клику
     },
+
     handleDeleteClick: (id) => { // обработчик клика на Иконку Удаления конкретной карточки (отложенная ф-ция)
       popupDeleteCard.open();
       popupDeleteCard.setSumbitHandler(() => {
@@ -65,6 +67,7 @@ const createCard = (item) => {
         })
       })
     },
+
     handelLikeClick: (id) => { // обработчик клика на Лайк
       if (card.isliked()) {
         api.deleteLike(id)
@@ -79,7 +82,6 @@ const createCard = (item) => {
         card.setLikes(res.likes)
       })
       }
-
     }
   }, '#template-card');
 
@@ -99,22 +101,15 @@ popupImage.setEventListeners();
 const userInfo = new UserInfo({
   name: '.profile__name', 
   description: '.profile__description',
-  avatar: '.profile__pic'
+  avatar: '.profile__pic',
 });
 
 
 // вызываем метод класса Api для загрузки данных в профиль 
 api.getProfileData()
 .then((data) => {
-  const dataProfile = { 
-    // создать объект с данными для профиля
-      name: data.name,
-      description: data.about,
-      avatar: data.avatar,
-      id: data._id
-  };
-  userInfo.setUserInfo(dataProfile) // вставим в профиль)
-  userInfo.setUserAvatar(dataProfile.avatar) // и в аватар
+  userInfo.setUserInfo(data) // вставим в профиль данные с сервера
+  userInfo.setUserAvatar(data.avatar) // и в аватар
   userId = data._id
 })
 
@@ -155,7 +150,8 @@ const popupEdit = new PopupWithForm({
     // функция изменения текста кнопки
     api.editProfileData(name, description) // отправляем данные на сервер и ждем ответ
       .then(res => {
-        userInfo.setUserInfo(name, description); // запишем НОВЫЕ данные из инпутов в профиль
+        console.log(res)
+        userInfo.setUserInfo(res); // запишем НОВЫЕ данные из инпутов в профиль
       })
     popupEdit.close();
   }, popupSelector: '.popup_type_edit-profile'
@@ -171,8 +167,8 @@ const popupChangeAvatar = new PopupWithForm({
       .then(res => {
         const avatar = res.avatar;
         userInfo.setUserAvatar(avatar); // передаем данные и ссылку на аватар
+      popupChangeAvatar.close();
     })
-    popupChangeAvatar.close();
   }, popupSelector: '.popup_type_change-avatar'
 })
 
@@ -206,6 +202,7 @@ popupCreate.setEventListeners();
 
 
 // слушатель для открытия попапа Редактирования
+
 profileButtonEditElement.addEventListener('click', function() { 
   const {name, description} = userInfo.getUserInfo(); // взять данные из профиля
   nameInput.value = name; // записать в инпуты попапа
@@ -213,6 +210,7 @@ profileButtonEditElement.addEventListener('click', function() {
   popupEdit.open();
   editProfileValidator.resetErrors();
 });
+
 
 // слушатель для открытия попапа Создания
 profileButtonCreateCard.addEventListener('click', function() { 
@@ -224,6 +222,7 @@ profileButtonCreateCard.addEventListener('click', function() {
 // слушатель для открытия попапа Смены Аватара
 avatarIcon.addEventListener('click', function() {
   popupChangeAvatar.open()
+  editAvatarValidator.resetErrors()
 })
 
 
