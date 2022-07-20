@@ -1,23 +1,28 @@
-import {promiseReject} from "../utils/functions.js"
-
 export default class Api {
     constructor({baseUrl, headers}) {
         this._headers = headers;
         this._baseUrl = baseUrl;
     }
 
+    _promiseReject(data) {
+        if (data.ok) {
+            return data.json();
+          }
+        return Promise.reject(`Ошибка: ${data.status}`);
+    }
+
     getProfileData() {
         return fetch(`${this._baseUrl}/users/me`, {
             headers: this._headers
         })
-        .then(promiseReject);
+        .then(this._promiseReject);
     }
 
     getInitialCards() {
         return fetch(`${this._baseUrl}/cards`, {
             headers: this._headers
         })
-        .then(promiseReject);
+        .then(this._promiseReject);
     }
 
     editProfileData(name, about) {
@@ -29,7 +34,7 @@ export default class Api {
                 about
             })
         })
-        .then(promiseReject);
+        .then(this._promiseReject);
     }
 
     addCard(name, link) {
@@ -41,7 +46,7 @@ export default class Api {
                 link
             })
         })
-        .then(promiseReject);
+        .then(this._promiseReject);
     }
 
     deleteCard(id) {
@@ -49,7 +54,7 @@ export default class Api {
             method: "DELETE",
             headers: this._headers,
         })
-        .then(promiseReject);
+        .then(this._promiseReject);
     }
 
     addLike(id) {
@@ -57,7 +62,7 @@ export default class Api {
             method: "PUT",
             headers: this._headers,
         })
-        .then(promiseReject);
+        .then(this._promiseReject);
     }
 
     deleteLike(id) {
@@ -65,7 +70,7 @@ export default class Api {
             method: "DELETE",
             headers: this._headers,
         })
-        .then(promiseReject);
+        .then(this._promiseReject);
     }
 
     changeAvatar = (avatar) => {
@@ -76,7 +81,7 @@ export default class Api {
                 avatar,
             })
         })
-        .then(promiseReject);
+        .then(this._promiseReject);
     }
   }
 ;
