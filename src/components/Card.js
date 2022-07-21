@@ -43,8 +43,7 @@ export default class Card {
 
     setLikes(newLikes) { // метод ставит количество лайков
         this._likes = newLikes //  обновляем количество лайков после клика на сердечко
-        const likeCount = this._cardItem.querySelector('.cards__button-counter')
-        likeCount.textContent = this._likes.length;
+        this._likeCount.textContent = this._likes.length;
         if (this.isliked()) { // если есть мой лайк, то перекрасить, иначе - перекрасить
             this._addLike();
         } else {
@@ -62,6 +61,7 @@ export default class Card {
         this._increaseFoto.alt = this._data.name;
         this._likeButton = this._cardItem.querySelector('.cards__union');
         this._deleteButton = this._cardItem.querySelector('.cards__item-delete');
+        this._likeCount = this._cardItem.querySelector('.cards__button-counter')
         this._setEventListeners();
         this.setLikes(this._likes);
 

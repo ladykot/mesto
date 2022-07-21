@@ -24,3 +24,7 @@ export const Settings = {
 
 export const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 
+export const configButtonState = {
+  activeState : 'Сохраняю...',
+  defaultState: 'Сохранить'
+}

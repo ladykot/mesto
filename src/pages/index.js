@@ -21,7 +21,8 @@ import {
   formCreateElement,
   avatarIcon,
   formChangeAvatar,
-  buttonSubmitPopup
+  configButtonState,
+  popupEditProfile
 } from "../utils/constants.js";
 
 let userId
@@ -150,25 +151,51 @@ const cardList = new Section({
 
 // создаем попап редактирования (при клике на кнопку редактирования)
 const popupEdit = new PopupWithForm({
-  handelSubmitForm: (data) => {
+  handelSubmitForm: (data, toggleButtonState) => {
     const {name, description} = data;
-    // функция изменения текста кнопки
-    buttonSubmitPopup.textContent = "Сохраняю..."
+    // toggleButtonState(true);
     api.editProfileData(name, description) // отправляем данные на сервер и ждем ответ
       .then(res => {
         userInfo.setUserInfo(res); // запишем НОВЫЕ данные из инпутов в профиль
+        popupEdit.close();
       })
-      .finally(res => {
-        buttonSubmitPopup.textContent = "Сохранить"
+      .finally(() => {
+        // toggleButtonState(false);
       })
       .catch(err => {
-        console.log(err)
+        console.log(err);
       })
-    popupEdit.close();
-  }, popupSelector: '.popup_type_edit-profile'
+    
+  },
+  popupSelector: '.popup_type_edit-profile',
+  // configButtonState // Сохранить или Сохраняю
 });
 
 popupEdit.setEventListeners();
+
+// function handelSubmitForm(data, toggleButtonStateCallback, closePopupCallback, ) {
+//   const {name, description} = data;
+//     // toggleButtonState(true);
+//   api.editProfileData(name, description) // отправляем данные на сервер и ждем ответ
+//     .then(res => {
+//       userInfo.setUserInfo(res); // запишем НОВЫЕ данные из инпутов в профиль
+//       // popupEdit.close();
+//       closePopupCallback();
+//     })
+//     .finally(() => {
+//       // toggleButtonState(false);
+//     })
+//     .catch(err => {
+//       console.log(err);
+//     })
+    
+// }
+
+
+
+
+
+
 
 // создаем попап смены Аватара
 const popupChangeAvatar = new PopupWithForm({
