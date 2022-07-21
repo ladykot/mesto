@@ -125,6 +125,7 @@ api.getProfileData()
 // вызываем метод класса Api для загрузки карточек
 api.getInitialCards()
 .then((data) => {
+  
   data.forEach(element => {
     const card = createCard({
       name: element.name,
@@ -141,11 +142,11 @@ api.getInitialCards()
 })
 
 
-// создаем место для карточек (пустое, чтобы загрузить данные с сервера)
+// создаем место для карточек 
 const cardList = new Section({
-  items: [],
-  renderer: (item) => {
-    cardList.addItem(createCard(item));
+  // items: [],
+  renderer: (items) => {
+    cardList.addItem(createCard(items));
 }}, cardsSection)
 
 

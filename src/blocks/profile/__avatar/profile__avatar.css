@@ -1,8 +1,9 @@
 .profile__avatar {
-    position: relative;
-    /* width: 120px;
-    height: 120px; */
-
+    display: flex;
+    width: 120px;
+    height: 120px;
+    justify-content: flex-start;
 }
+
 
 

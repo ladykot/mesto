@@ -1,19 +1,14 @@
 .profile__icon {
     position: absolute;
-    border: 0;
-    width: 26px;
-    height: 26px;
-    background: url(../../../images/Vector.svg);
-    top: 87px;
-    left: 73px;
-}
-
-@media screen and (min-width: 768px) {
-    .profile__icon {
-        left: 47px;
-    }
+    object-fit: none;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    background: rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    transition: opacity 0.2s linear;
 }
 
 .profile__icon:hover {
-    cursor: pointer;
+    opacity: 1;
 }

@@ -8,6 +8,7 @@ export const formCreateElement = document.forms['create-card'];
 export const avatarIcon = profile.querySelector('.profile__icon')
 export const formChangeAvatar = document.forms['change-avatar'];
 export const buttonSubmitPopup = document.querySelector('.popup__button-save')
+export const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 
 
 // место для вставки карточек
@@ -22,7 +23,7 @@ export const Settings = {
     buttonDisableClass: 'popup__button-save_disable',
 }
 
-export const popupEditProfile = document.querySelector('.popup_type_edit-profile');
+
 
 export const configButtonState = {
   activeState : 'Сохраняю...',
