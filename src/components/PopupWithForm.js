@@ -8,6 +8,8 @@ export default class PopupWithForm extends Popup {
         this._buttonSave = this._form.querySelector('.popup__button-save')
         this._inputList = this._form.querySelectorAll(".popup__inputs-item");
         this._getInputValues = this.getInputValues.bind(this);
+        this.close = this.close.bind(this)
+
         // this._activeState = activeState;
         // this._defaultState = defaultState;
         // this._toggleButtonState = this.toggleButtonState.bind(this);

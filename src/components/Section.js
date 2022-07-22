@@ -1,15 +1,17 @@
 export default class Section {
-    constructor(renderer, containerSelector) {
-        // this._renderItems = items;
+    constructor({items,renderer}, containerSelector) {
         this._renderer = renderer;
         this._container = containerSelector;
-    } 
+        this.renderItems = this.renderItems.bind(this);
+        this.addItem = this.addItem.bind(this);
+        this._items = items;
+    }
 
     // отрисовка всех карточек
     renderItems(items) {
-        items.forEach(item => {
-            this._renderer(item);
-        }); 
+        items.forEach((item) => {
+            this.addItem(this._renderer(item))
+        });
     }
 
     // добавление карточек на страницу

@@ -13,6 +13,7 @@ export default class Card {
         this._id = data.id; // id карточки
         this._userId = data.userId; // id пользователя из профиля
         this._ownerId = data.ownerId // id того, кто добавил карточку
+        
     };
 
     _addLike = () => {
@@ -30,9 +31,8 @@ export default class Card {
 
     _setEventListeners() {
         this._likeButton.addEventListener('click', () => this._handelLikeClick(this._id));
-        this._deleteButton.addEventListener('click', () => this._handleDeleteClick(this._id));
+        this._deleteButton.addEventListener('click', () => this._handleDeleteClick(this._data));
         this._increaseFoto.addEventListener('click', () => this._handleCardClick(this._data)); // this._data
-
     };
 
     isliked() {

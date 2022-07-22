@@ -52,16 +52,20 @@ const api = new Api({
 
 // создаем карточку
 const createCard = (item) => {
+  
   const card = new Card(
   {
     data: item,
+    
     handleCardClick: (item) => { // обработчик на картинку создает класс с большим фото
       popupImage.open(item); // получить фото по клику
     },
 
-    handleDeleteClick: (id) => { // обработчик клика на Иконку Удаления конкретной карточки (отложенная ф-ция)
+    handleDeleteClick: (item) => { // обработчик клика на Иконку Удаления конкретной карточки (отложенная ф-ция)
+
       popupDeleteCard.open();
       popupDeleteCard.setSumbitHandler(() => {
+        const id = item["_id"]
         api.deleteCard(id)
         .then(res => {
           popupDeleteCard.close()
@@ -121,33 +125,53 @@ api.getProfileData()
   console.log(err)
 })
 
+// создаем место для карточек 
+const cardList = new Section({
+  item: [],
+  renderer: (item) => {
+    // debugger
+    return createCard(item);
+  }
+}, cardsSection)
 
 // вызываем метод класса Api для загрузки карточек
 api.getInitialCards()
 .then((data) => {
-  
-  data.forEach(element => {
-    const card = createCard({
-      name: element.name,
-      link: element.link,
-      likes: element.likes,
-      id: element._id,
-      userId: userId,
-      ownerId: element.owner._id
-    })
-  cardList.addItem(card)
-  })
+  cardList.renderItems(data); // отрисовка карточек
 }).catch(err => {
   console.log(err)
 })
 
+// // (copy)вызываем метод класса Api для загрузки карточек 
+// api.getInitialCards()
+// .then((data) => {
+//   debugger
+//   cardList.renderItems(data)
+//   // data.forEach(element => {
+//   //   const card = createCard({
+//   //     name: element.name,
+//   //     link: element.link,
+//   //     likes: element.likes,
+//   //     id: element._id,
+//   //     userId: userId,
+//   //     ownerId: element.owner._id
+//   //   })
+//   // cardList.addItem(card)
+//   // })
+// }).catch(err => {
+//   console.log(err)
+// })
 
-// создаем место для карточек 
-const cardList = new Section({
-  // items: [],
-  renderer: (items) => {
-    cardList.addItem(createCard(items));
-}}, cardsSection)
+
+
+
+
+
+
+
+
+
+
 
 
 // создаем попап редактирования (при клике на кнопку редактирования)
@@ -271,7 +295,6 @@ avatarIcon.addEventListener('click', function() {
 const popupDeleteCard = new PopupWithSubmit('.popup_type_delete-card')
 
 popupDeleteCard.setEventListeners();
-
 
 
 
