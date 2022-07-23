@@ -9,7 +9,7 @@ export default class Section {
 
     // отрисовка всех карточек
     renderItems(items) {
-        items.forEach((item) => {
+        items.reverse().forEach((item) => {
             this.addItem(this._renderer(item))
         });
     }

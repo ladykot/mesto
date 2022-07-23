@@ -56,18 +56,21 @@ const createCard = (item) => {
   const card = new Card(
   {
     data: item,
-    
-    handleCardClick: (item) => { // обработчик на картинку создает класс с большим фото
-      popupImage.open(item); // получить фото по клику
+    userId: userInfo.getUserId(),
+    handleCardClick: (data) => { // обработчик на картинку создает класс с большим фото
+      console.log(data)
+      popupImage.open(data); // получить фото по клику
     },
 
-    handleDeleteClick: (item) => { // обработчик клика на Иконку Удаления конкретной карточки (отложенная ф-ция)
+    handleDeleteClick: (id) => { // обработчик клика на Иконку Удаления конкретной карточки (отложенная ф-ция)
 
-      popupDeleteCard.open();
+      console.log(id)
+      // debugger
       popupDeleteCard.setSumbitHandler(() => {
-        const id = item["_id"]
+
         api.deleteCard(id)
         .then(res => {
+          console.log(res)
           popupDeleteCard.close()
           card.deleteCard()
         })
@@ -114,20 +117,11 @@ const userInfo = new UserInfo({
 });
 
 
-// вызываем метод класса Api для загрузки данных в профиль 
-api.getProfileData()
-.then((data) => {
-  userInfo.setUserInfo(data) // вставим в профиль данные с сервера
-  userInfo.setUserAvatar(data.avatar) // и в аватар
-  userId = data._id
-})
-.catch(err => {
-  console.log(err)
-})
 
 // создаем место для карточек 
+
 const cardList = new Section({
-  item: [],
+  // item: [],
   renderer: (item) => {
     // debugger
     return createCard(item);
@@ -135,12 +129,30 @@ const cardList = new Section({
 }, cardsSection)
 
 // вызываем метод класса Api для загрузки карточек
-api.getInitialCards()
-.then((data) => {
-  cardList.renderItems(data); // отрисовка карточек
+// api.getInitialCards()
+// .then((data) => {
+//   cardList.renderItems(data); // отрисовка карточек
+// }).catch(err => {
+//   console.log(err)
+// })
+
+
+
+// нужно сначала получить данные пользователя (вместе c id) c сервера, потом - отрисовывать карточки
+
+Promise.all([api.getProfileData(), api.getInitialCards()])
+.then(([info, initialCards]) => {
+  userInfo.setUserInfo(info) // вставим в профиль данные с сервера
+  userInfo.setUserAvatar(info.avatar) // и в аватар
+  userId = userInfo.getUserId(info) // получить userId
+  console.log(userId)
+  cardList.renderItems(initialCards); // отрисовка карточек
+  console.log(initialCards);
+  console.log(err)
 }).catch(err => {
   console.log(err)
 })
+
 
 // // (copy)вызываем метод класса Api для загрузки карточек 
 // api.getInitialCards()
@@ -198,29 +210,6 @@ const popupEdit = new PopupWithForm({
 
 popupEdit.setEventListeners();
 
-// function handelSubmitForm(data, toggleButtonStateCallback, closePopupCallback, ) {
-//   const {name, description} = data;
-//     // toggleButtonState(true);
-//   api.editProfileData(name, description) // отправляем данные на сервер и ждем ответ
-//     .then(res => {
-//       userInfo.setUserInfo(res); // запишем НОВЫЕ данные из инпутов в профиль
-//       // popupEdit.close();
-//       closePopupCallback();
-//     })
-//     .finally(() => {
-//       // toggleButtonState(false);
-//     })
-//     .catch(err => {
-//       console.log(err);
-//     })
-    
-// }
-
-
-
-
-
-
 
 // создаем попап смены Аватара
 const popupChangeAvatar = new PopupWithForm({
@@ -246,16 +235,9 @@ const popupCreate = new PopupWithForm({
   handelSubmitForm: (data) => { // обработчик создает новую карточку по данным пользователя
     api.addCard(data.name, data.link)
       .then(res => {
-        const card = createCard({
-          name: res.name,
-          link: res.link,
-          likes: res.likes,
-          id: res._id,
-          ownerId: res.owner._id,
-          userId: userId
-        });
-      cardList.addItem(card);
-      popupCreate.close();
+        console.log('получили данные для карточки', res)
+        cardList.addItem(createCard(res));
+        popupCreate.close();
       })
       .catch(err => {
         console.log(err)

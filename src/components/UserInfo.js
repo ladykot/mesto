@@ -17,13 +17,31 @@ export default class UserInfo {
         return userInfo;
     }
 
-    setUserInfo(userInfo) {
+
+    setUserInfo({name, about, _id}) {
         // новые данные подставить в профиль
-        this._name.textContent = userInfo.name;
-        this._description.textContent = userInfo.about;
+        this._name.textContent = name;
+        this._description.textContent = about;
+        // id получаем в первый раз после запроса на сервер.
+        this._id = _id;
     }
 
     setUserAvatar(link) {
         this._avatar.src = link;
-    }   
+    }
+
+    getUserAvatar() {
+        // получить аватар
+        return {
+            link: this._avatar.src
+        }
+    }
+
+    getUserId() {
+        // получить userId
+        // return {
+        //     userId: this._id
+        // }
+        return this._id
+    }
 }

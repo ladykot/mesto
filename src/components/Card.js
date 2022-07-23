@@ -1,5 +1,5 @@
 export default class Card {
-    constructor({data, handleCardClick, handleDeleteClick, handelLikeClick}, templateSelector) {// templateSelector = '#template-card'
+    constructor({data, userId, handleCardClick, handleDeleteClick, handelLikeClick}, templateSelector) {// templateSelector = '#template-card'
         this._templateSelector = templateSelector;
         this._templateCard = document
             .querySelector(this._templateSelector)
@@ -10,9 +10,9 @@ export default class Card {
         this._handleDeleteClick = handleDeleteClick;
         this._handelLikeClick = handelLikeClick;
         this._likes = data.likes;
-        this._id = data.id; // id карточки
-        this._userId = data.userId; // id пользователя из профиля
-        this._ownerId = data.ownerId // id того, кто добавил карточку
+        this._id = data._id; // id карточки
+        this._userId = userId; // id пользователя из профиля
+        this._ownerId = data.owner._id // id того, кто добавил карточку
         
     };
 
@@ -31,8 +31,8 @@ export default class Card {
 
     _setEventListeners() {
         this._likeButton.addEventListener('click', () => this._handelLikeClick(this._id));
-        this._deleteButton.addEventListener('click', () => this._handleDeleteClick(this._data));
-        this._increaseFoto.addEventListener('click', () => this._handleCardClick(this._data)); // this._data
+        this._deleteButton.addEventListener('click', () => this._handleDeleteClick(this._id));
+        this._increaseFoto.addEventListener('click', () => this._handleCardClick(this._data));
     };
 
     isliked() {
@@ -64,7 +64,6 @@ export default class Card {
         this._likeCount = this._cardItem.querySelector('.cards__button-counter')
         this._setEventListeners();
         this.setLikes(this._likes);
-
         if (this._userId !== this._ownerId) { // сравниваем id пользователей карточек
             this._deleteButton.style.display = 'none' // убираем иконку Удаления на чужих карточках
         }
