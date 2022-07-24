@@ -9,6 +9,7 @@ export default class PopupWithSubmit extends Popup {
     setEventListeners() {
         super.setEventListeners()
         this._form.addEventListener('submit', (event) => { // слушатель на кнопку Да
+            // debugger
             event.preventDefault()
             this._handelSubmitDeleteForm(event); // функция удаляет карточку на сервере
         });

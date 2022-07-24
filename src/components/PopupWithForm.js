@@ -1,6 +1,6 @@
 import Popup from "./Popup.js";
 export default class PopupWithForm extends Popup {
-    constructor({popupSelector, handelSubmitForm}) {
+    constructor({popupSelector, handelSubmitForm}, {defaultState, activeState}) {
         super(popupSelector);
         this._handelSubmitForm = handelSubmitForm;
         this._formElement = document.querySelector(this._popupSelector);
@@ -10,11 +10,9 @@ export default class PopupWithForm extends Popup {
         this._getInputValues = this.getInputValues.bind(this);
         this.close = this.close.bind(this)
 
-        // this._activeState = activeState;
-        // this._defaultState = defaultState;
-        // this._toggleButtonState = this.toggleButtonState.bind(this);
-        // this._configButtonState = configButtonState
-
+        this._activeState = activeState;
+        this._defaultState = defaultState;
+        this.toggleButtonState = this.toggleButtonState.bind(this);
     }
 
     getInputValues() {
@@ -29,7 +27,7 @@ export default class PopupWithForm extends Popup {
         super.setEventListeners();
         this._form.addEventListener('submit', (event) => {
             event.preventDefault();
-            this._handelSubmitForm(this.getInputValues());
+            this._handelSubmitForm(this.getInputValues(), this.toggleButtonState, this.close);
         });
     }
 
@@ -38,14 +36,11 @@ export default class PopupWithForm extends Popup {
         super.close();
     }
 
-
-
-
-    // toggleButtonState(isSaving) {
-    //     if (isSaving) {
-    //         this._buttonSave.textContent = this._configButtonState.activeState;
-    //     } else {
-    //         this._buttonSave.textContent = this._configButtonState.defaultState
-    //     }
-    // }
+    toggleButtonState(isSaving) {
+        if (isSaving) {
+            this._buttonSave.textContent = this._activeState;
+        } else {
+            this._buttonSave.textContent = this._defaultState;
+        }
+    }
 }

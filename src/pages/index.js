@@ -38,7 +38,6 @@ avatarEditValidator.enableValidation();
 const popupImage = new PopupWithImage('.popup_type_big-image');
 
 
-
 // экземпляр класса для работы с удаленным сервером
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-45', // ссылка на бэкенд
@@ -47,7 +46,6 @@ const api = new Api({
     'Content-Type': 'application/json'
   }
 })
-
 
 
 // создаем карточку
@@ -63,14 +61,10 @@ const createCard = (item) => {
     },
 
     handleDeleteClick: (id) => { // обработчик клика на Иконку Удаления конкретной карточки (отложенная ф-ция)
-
-      console.log(id)
-      // debugger
+      popupDeleteCard.open();
       popupDeleteCard.setSumbitHandler(() => {
-
         api.deleteCard(id)
-        .then(res => {
-          console.log(res)
+        .then(() => {
           popupDeleteCard.close()
           card.deleteCard()
         })
@@ -119,131 +113,93 @@ const userInfo = new UserInfo({
 
 
 // создаем место для карточек 
-
 const cardList = new Section({
-  // item: [],
   renderer: (item) => {
-    // debugger
     return createCard(item);
   }
 }, cardsSection)
 
-// вызываем метод класса Api для загрузки карточек
-// api.getInitialCards()
-// .then((data) => {
-//   cardList.renderItems(data); // отрисовка карточек
-// }).catch(err => {
-//   console.log(err)
-// })
-
 
 
 // нужно сначала получить данные пользователя (вместе c id) c сервера, потом - отрисовывать карточки
-
 Promise.all([api.getProfileData(), api.getInitialCards()])
 .then(([info, initialCards]) => {
   userInfo.setUserInfo(info) // вставим в профиль данные с сервера
   userInfo.setUserAvatar(info.avatar) // и в аватар
   userId = userInfo.getUserId(info) // получить userId
-  console.log(userId)
   cardList.renderItems(initialCards); // отрисовка карточек
-  console.log(initialCards);
-  console.log(err)
 }).catch(err => {
   console.log(err)
 })
 
 
-// // (copy)вызываем метод класса Api для загрузки карточек 
-// api.getInitialCards()
-// .then((data) => {
-//   debugger
-//   cardList.renderItems(data)
-//   // data.forEach(element => {
-//   //   const card = createCard({
-//   //     name: element.name,
-//   //     link: element.link,
-//   //     likes: element.likes,
-//   //     id: element._id,
-//   //     userId: userId,
-//   //     ownerId: element.owner._id
-//   //   })
-//   // cardList.addItem(card)
-//   // })
-// }).catch(err => {
-//   console.log(err)
-// })
-
-
-
-
-
-
-
-
-
-
-
-
 
 // создаем попап редактирования (при клике на кнопку редактирования)
 const popupEdit = new PopupWithForm({
-  handelSubmitForm: (data, toggleButtonState) => {
+  handelSubmitForm: (data, toggleButtonState, close) => {
     const {name, description} = data;
-    // toggleButtonState(true);
+    toggleButtonState(true);
     api.editProfileData(name, description) // отправляем данные на сервер и ждем ответ
       .then(res => {
         userInfo.setUserInfo(res); // запишем НОВЫЕ данные из инпутов в профиль
-        popupEdit.close();
+        close();
       })
       .finally(() => {
-        // toggleButtonState(false);
+        toggleButtonState(false);
       })
       .catch(err => {
         console.log(err);
       })
     
   },
-  popupSelector: '.popup_type_edit-profile',
-  // configButtonState // Сохранить или Сохраняю
-});
+  popupSelector: '.popup_type_edit-profile'},
+  configButtonState, // Сохранить или Сохраняю
+);
 
 popupEdit.setEventListeners();
 
 
 // создаем попап смены Аватара
 const popupChangeAvatar = new PopupWithForm({
-  handelSubmitForm: (data) => {
+  handelSubmitForm: (data, toggleButtonState, close) => {
+    toggleButtonState(true);
     const avatar = data.link;
     api.changeAvatar(avatar)
       .then(res => {
-        const avatar = res.avatar;
-        userInfo.setUserAvatar(avatar); // передаем данные и ссылку на аватар
-      popupChangeAvatar.close();
+        userInfo.setUserAvatar(res.avatar); // передаем данные и ссылку на аватар
+        close();
       })
       .catch(err => {
         console.log(err)
       })
-  }, popupSelector: '.popup_type_change-avatar'
-})
+      .finally(() => {
+        toggleButtonState(false);
+      })
+  }, popupSelector: '.popup_type_change-avatar'},
+  configButtonState
+)
 
 popupChangeAvatar.setEventListeners();
 
 
 // создаем попап добавления новой карточки (при клике на кнопку плюсик)
 const popupCreate = new PopupWithForm({
-  handelSubmitForm: (data) => { // обработчик создает новую карточку по данным пользователя
+  handelSubmitForm: (data, toggleButtonState, close) => { // обработчик создает новую карточку по данным пользователя
+    toggleButtonState(true);
     api.addCard(data.name, data.link)
       .then(res => {
-        console.log('получили данные для карточки', res)
         cardList.addItem(createCard(res));
-        popupCreate.close();
+        close();
       })
       .catch(err => {
         console.log(err)
       })
-  }, popupSelector: '.popup_type_create-card'
-});
+      .finally(() => {
+        toggleButtonState(false);
+      })
+  }, popupSelector: '.popup_type_create-card'},
+  configButtonState
+);
 
 popupCreate.setEventListeners();
 
