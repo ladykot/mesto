@@ -13,16 +13,7 @@ export default class Card {
         this._id = data._id; // id карточки
         this._userId = userId; // id пользователя из профиля
         this._ownerId = data.owner._id // id того, кто добавил карточку
-        
     };
-
-    _addLike = () => {
-        this._likeButton.classList.add('cards__union_active')
-    }
-
-    _removeLike = () => {
-        this._likeButton.classList.remove('cards__union_active')
-    }
 
     deleteCard = () => {
         this._cardItem.remove();
@@ -44,11 +35,7 @@ export default class Card {
     setLikes(newLikes) { // метод ставит количество лайков
         this._likes = newLikes //  обновляем количество лайков после клика на сердечко
         this._likeCount.textContent = this._likes.length;
-        if (this.isliked()) { // если есть мой лайк, то перекрасить, иначе - перекрасить
-            this._addLike();
-        } else {
-            this._removeLike();
-        }
+        this._likeButton.classList.toggle('cards__union_active', this.isliked())
     }
 
     getCard() {

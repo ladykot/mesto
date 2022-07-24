@@ -78,7 +78,6 @@ const createCard = (item) => {
       if (card.isliked()) {
         api.deleteLike(id)
         .then(res => {
-          console.log(res.likes)
           card.setLikes(res.likes)
         })
         .catch(err => {
