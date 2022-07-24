@@ -22,7 +22,7 @@ export default class UserInfo {
         // новые данные подставить в профиль
         this._name.textContent = name;
         this._description.textContent = about;
-        // id получаем в первый раз после запроса на сервер.
+        // id получаем в первый раз - после запроса на сервер при открытии страницы.
         this._id = _id;
     }
 

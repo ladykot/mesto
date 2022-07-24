@@ -207,8 +207,7 @@ popupCreate.setEventListeners();
 
 profileButtonEditElement.addEventListener('click', function() { 
   const {name, description} = userInfo.getUserInfo(); // взять данные из профиля
-  nameInput.value = name; // записать в инпуты попапа
-  jobInput.value = description;
+  popupEdit.setInputValues({name, description}) // записать в инпуты попапа
   popupEdit.open();
   profileEditValidator.resetErrors();
 });
