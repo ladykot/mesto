@@ -125,7 +125,6 @@ Promise.all([api.getProfileData(), api.getInitialCards()])
 .then(([info, initialCards]) => {
   userInfo.setUserInfo(info) // вставим в профиль данные с сервера
   userInfo.setUserAvatar(info.avatar) // и в аватар
-  userId = userInfo.getUserId(info) // получить userId
   cardList.renderItems(initialCards); // отрисовка карточек
 }).catch(err => {
   console.log(err)
@@ -204,7 +203,6 @@ popupCreate.setEventListeners();
 
 
 // слушатель для открытия попапа Редактирования
-
 profileButtonEditElement.addEventListener('click', function() { 
   const {name, description} = userInfo.getUserInfo(); // взять данные из профиля
   popupEdit.setInputValues({name, description}) // записать в инпуты попапа
@@ -222,6 +220,7 @@ profileButtonCreateCard.addEventListener('click', function() {
 
 // слушатель для открытия попапа Смены Аватара
 avatarIcon.addEventListener('click', function() {
+  cardCreateValidator.disableSubmitButton();
   popupChangeAvatar.open()
   avatarEditValidator.resetErrors()
 })

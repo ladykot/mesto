@@ -2,6 +2,7 @@ export default class FormValidator {
     constructor(settings, form) {
         this._form = form;
         this._settings = settings;
+
     }
 
     _showInputError = (inputElement, errorMessage) => {
@@ -17,6 +18,7 @@ export default class FormValidator {
 
     _hideInputError(inputElement, errorElement) {
         errorElement = this._getErrorElement(inputElement);
+        // debugger
         errorElement.textContent = '';
         errorElement.classList.remove(this._settings.errorClass);
         inputElement.classList.remove(this._settings.inputInvalidSelector);
@@ -46,6 +48,7 @@ export default class FormValidator {
     }
 
     disableSubmitButton = () => {
+        // debugger
         this._buttonElement.classList.add(this._settings.buttonDisableClass);
         this._buttonElement.disabled = true;
     }
