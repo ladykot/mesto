@@ -2,7 +2,9 @@ export default class FormValidator {
     constructor(settings, form) {
         this._form = form;
         this._settings = settings;
-
+        this.disableSubmitButton = this.disableSubmitButton.bind(this);
+        this.enableValidation = this.enableValidation.bind(this);
+        this.enableSubmitButton = this.enableSubmitButton.bind(this);
     }
 
     _showInputError = (inputElement, errorMessage) => {

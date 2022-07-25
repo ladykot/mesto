@@ -206,6 +206,7 @@ popupCreate.setEventListeners();
 profileButtonEditElement.addEventListener('click', function() { 
   const {name, description} = userInfo.getUserInfo(); // взять данные из профиля
   popupEdit.setInputValues({name, description}) // записать в инпуты попапа
+  profileEditValidator.disableSubmitButton();
   popupEdit.open();
   profileEditValidator.resetErrors();
 });
@@ -220,7 +221,7 @@ profileButtonCreateCard.addEventListener('click', function() {
 
 // слушатель для открытия попапа Смены Аватара
 avatarIcon.addEventListener('click', function() {
-  cardCreateValidator.disableSubmitButton();
+  avatarEditValidator.disableSubmitButton();
   popupChangeAvatar.open()
   avatarEditValidator.resetErrors()
 })
